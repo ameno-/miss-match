@@ -1,0 +1,3 @@
+rootProject.name = 'msMatch'
+
+include ':app'
