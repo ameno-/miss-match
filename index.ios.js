@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-//import getRandomIndex from './utils/helper';
+import { getRandomCollection } from './utils/helper';
 
 import {
   AppRegistry,
@@ -30,64 +30,17 @@ export default class msMatch extends Component {
       text: "my nigga, my nigga, my nigga"
     };
 
-    const getRandomCollection = (exclude, totalNumbers) => {
-      //dynamically generate based on numRepo size
-      let numbersRepository = [0,1,2,3,4,5],
-        randomNumbersCollection,
-        counter = totalNumbers,
-        generatedNumber = 0;
-
-      if (exclude != null) {
-        randomNumbersCollection = [exclude];
-        numbersRepository.splice(exclude, 1);
-        counter--;
-      }
-      else {
-        randomNumbersCollection = [];
-      }
-
-      while (counter--) {
-        generatedNumber = Math.floor(Math.random() * (numbersRepository.length));
-        randomNumbersCollection.push(numbersRepository[generatedNumber]);
-        numbersRepository.splice(generatedNumber, 1);
-      }
-
-      console.log(randomNumbersCollection);
-      return shuffle(randomNumbersCollection);
-    }
-
-    const shuffle = (array) => {
-      let currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-
-      return array;
-    }
-
     const buildSoundsIndex = (selectedIndex = null) =>  getRandomCollection(selectedIndex, 3);
 
-    setInterval(() => {
-      this.setState({ displayedSounds: buildSoundsIndex(1) });
-    }, 1000);
+    // this.setState({ displayedSounds: buildSoundsIndex(1) });
   }
   
   render() {
     const onButtonPress = (index) => {
-      Alert.alert(`Button has been pressed!${this} aaaaaand ${index}`);
+      Alert.alert(`Button has been pressed!${this.state.objects[index]} aaaaaand ${index}`);
     };
 
-    let test = this.state.displayedSounds.map(sound => {
+    let options = this.state.displayedSounds.map((sound) => {
           console.log(sound);
           return <Button
                   onPress={() => onButtonPress(sound)}
@@ -103,10 +56,10 @@ export default class msMatch extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-         {this.state.correctSoundIndex}
+         What sound am I making?
         </Text>
         <View style={styles.buttonsContainer}>
-        {test}
+        {options}
         </View>
       </View>
     );
@@ -116,19 +69,17 @@ export default class msMatch extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   buttonsContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection : 'row',
+    flex: 3,
+    flexDirection : 'column',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
-    margin: 10,
+    marginTop: 80,
+    flex: 1,
   },
   instructions: {
     textAlign: 'center',
