@@ -14,8 +14,10 @@ import {
   View,
   Button,
   Alert,
-  TouchableHighlight
+  NavigatorIOS
 } from 'react-native';
+
+import Home from './app/components/Home';
 
 export default class msMatch extends Component {
   constructor(props) {
@@ -31,13 +33,12 @@ export default class msMatch extends Component {
     };
 
     const buildSoundsIndex = (selectedIndex = null) =>  getRandomCollection(selectedIndex, 3);
-
-    // this.setState({ displayedSounds: buildSoundsIndex(1) });
+      this.setState({ displayedSounds: buildSoundsIndex(1) });
   }
   
   render() {
     const onButtonPress = (index) => {
-      Alert.alert(`Button has been pressed!${this.state.objects[index]} aaaaaand ${index}`);
+      Alert.alert(`You pressed: ${this.state.objects[index]}. This the index ${index}`);
     };
 
     let options = this.state.displayedSounds.map((sound) => {
@@ -55,6 +56,13 @@ export default class msMatch extends Component {
 
     return (
       <View style={styles.container}>
+        <NavigatorIOS
+         initialRoute= {{
+           component: Home,
+           title: 'Home'
+         }}
+         style={{flex: 1}}
+         />
         <Text style={styles.welcome}>
          What sound am I making?
         </Text>
