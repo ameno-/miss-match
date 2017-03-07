@@ -42,7 +42,7 @@ export const getRandomCollection = (exclude, totalNumbers) => {
         randomNumbersCollection.push(numbersRepository[generatedNumber]);
         numbersRepository.splice(generatedNumber, 1);
     }
-
-    console.log(randomNumbersCollection);
-    return shuffle(randomNumbersCollection);
+    let answerIndex = getRandomIndex(0,randomNumbersCollection.length);
+    console.log(answerIndex);
+    return {answerIndex: answerIndex, shuffledArray: shuffle(randomNumbersCollection)};
 }

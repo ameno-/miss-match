@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { getRandomCollection } from './utils/helper';
+import { Provider } from 'react-redux';
 
 import {
   AppRegistry,
@@ -18,58 +18,26 @@ import {
 } from 'react-native';
 
 import Home from './app/components/Home';
+import { configureStore } from './app/store';
 
 export default class msMatch extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sounds: ["ah", "ee", "oo", "m", "s", "sh"],
-      objects: ["airplane", "mouse", "train", "pizza", "snake", "baby"],
-      correctSoundIndex: 0,
-      displayedSounds: [0, 1, 2],
-      minIndex: 0,
-      maxIndex: 5,
-      text: "my nigga, my nigga, my nigga"
-    };
-
-    const buildSoundsIndex = (selectedIndex = null) =>  getRandomCollection(selectedIndex, 3);
-      this.setState({ displayedSounds: buildSoundsIndex(1) });
   }
   
   render() {
-    const onButtonPress = (index) => {
-      Alert.alert(`You pressed: ${this.state.objects[index]}. This the index ${index}`);
-    };
-
-    let options = this.state.displayedSounds.map((sound) => {
-          console.log(sound);
-          return <Button
-                  onPress={() => onButtonPress(sound)}
-                  title={this.state.objects[sound]}
-                  soundIndex={sound}
-                  key={sound}
-                  color="#841584"
-                  accessibilityLabel="Symbol select"
-                />
-              }
-           );
-
     return (
-      <View style={styles.container}>
-        <NavigatorIOS
-         initialRoute= {{
-           component: Home,
-           title: 'Home'
-         }}
-         style={{flex: 1}}
-         />
-        <Text style={styles.welcome}>
-         What sound am I making?
-        </Text>
-        <View style={styles.buttonsContainer}>
-        {options}
+      <Provider store={configureStore()}>
+        <View style={styles.container}>
+          <NavigatorIOS
+          initialRoute= {{
+            component: Home,
+            title: 'Home'
+          }}
+          style={{flex: 1}}
+          />
         </View>
-      </View>
+      </Provider>
     );
   }
 }
@@ -78,22 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-  },
-  buttonsContainer: {
-    flex: 3,
-    flexDirection : 'column',
-  },
-  welcome: {
-    fontSize: 30,
-    textAlign: 'center',
-    marginTop: 80,
-    flex: 1,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 AppRegistry.registerComponent('msMatch', () => msMatch);
