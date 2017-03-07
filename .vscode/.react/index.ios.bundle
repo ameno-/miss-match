@@ -70359,7 +70359,7 @@ _react2.default.createElement(_reactNative.View,{style:styles.buttonsContainer},
 optionsList),
 
 _react2.default.createElement(_reactNative.View,{style:styles.footer},
-_react2.default.createElement(_reactNative.Text,null,
+_react2.default.createElement(_reactNative.Text,{style:styles.footerContent},
 this.props.correctSoundIndex))));
 
 
@@ -70392,8 +70392,12 @@ marginBottom:5},
 footer:{
 flex:0,
 flexDirection:'row',
-alignSelf:'flex-end',
-padding:10}});
+alignSelf:'stretch',
+padding:10,
+backgroundColor:'red'},
+
+footerContent:{
+alignSelf:'flex-end'}});
 
 
 
@@ -70505,23 +70509,67 @@ var _reactNative=require(42 /* react-native */);var
 Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);return babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
 props));
-}babelHelpers.createClass(Options,[{key:'render',value:function render()
+}babelHelpers.createClass(Options,[{key:'getImageSrc',value:function getImageSrc(
+
+visualProp){
+switch(visualProp){
+case"baby":
+return require(447 /* ../../assets/baby.png */);
+case"mouse":
+return require(445 /* ../../assets/mouse.png */);
+case"train":
+return require(448 /* ../../assets/train.png */);
+case"pizza":
+return require(449 /* ../../assets/pizza.png */);
+case"airplane":
+return require(450 /* ../../assets/airplane.png */);
+case"snake":
+return require(446 /* ../../assets/snake.png */);}
+
+}},{key:'render',value:function render()
 {var _this2=this;
+var src=this.getImageSrc(this.props.visualProp);
 return(
 _react2.default.createElement(_reactNative.TouchableOpacity,{
 onPress:function onPress(){return _this2.props.onSelected(_this2.props.sound);},
 soundIndex:this.props.sound,
 key:this.props.sound,
 color:'#841584',
-accessibilityLabel:'Symbol select'},
-_react2.default.createElement(_reactNative.Text,null,' ',this.props.visualProp,' ')));
+accessibilityLabel:'Symbol select',
+style:styles.button},
+_react2.default.createElement(_reactNative.Image,{
+source:src,
+style:styles.imageButton})));
 
 
-}}]);return Options;}(_react.Component);exports.default=
+
+}}]);return Options;}(_react.Component);
+
+
+var styles=_reactNative.StyleSheet.create({
+imageButton:{
+width:140,
+height:100},
+
+button:{
+padding:10}});exports.default=
+
 
 
 Options;
 }, 444, null, "msMatch/app/components/Options.js");
+__d(/* msMatch/assets/baby.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":277,"height":297,"scales":[1],"hash":"9a441a599d6f18fe38364a45d3d60c1f","name":"baby","type":"png"});
+}, 447, null, "msMatch/assets/baby.png");
+__d(/* msMatch/assets/mouse.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":2834,"height":2150,"scales":[1],"hash":"fa72ecf71e17ec0b6982eb1f53a46fd1","name":"mouse","type":"png"});
+}, 445, null, "msMatch/assets/mouse.png");
+__d(/* msMatch/assets/train.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":1600,"height":783,"scales":[1],"hash":"1e622df4013d149b3369dc4d74238c8f","name":"train","type":"png"});
+}, 448, null, "msMatch/assets/train.png");
+__d(/* msMatch/assets/pizza.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":450,"height":357,"scales":[1],"hash":"ad804bab6d6409b8552498c0a3706435","name":"pizza","type":"png"});
+}, 449, null, "msMatch/assets/pizza.png");
+__d(/* msMatch/assets/airplane.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":1600,"height":1200,"scales":[1],"hash":"28ca2b39b1a3aedbd9a2c18d37e21d76","name":"airplane","type":"png"});
+}, 450, null, "msMatch/assets/airplane.png");
+__d(/* msMatch/assets/snake.png */function(global, require, module, exports) {module.exports = require(171 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":555,"height":392,"scales":[1],"hash":"8152c6fd8fa4ff2a6a04957f35f3cf52","name":"snake","type":"png"});
+}, 446, null, "msMatch/assets/snake.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(415 /* redux */);
 var _reducer=require(442 /* ../reducer */);var _reducer2=babelHelpers.interopRequireDefault(_reducer);
 

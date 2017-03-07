@@ -61,7 +61,7 @@ class Home extends Component {
                     {optionsList}
                 </View>
                 <View style={styles.footer}>
-                    <Text>
+                    <Text style={styles.footerContent}>
                         {this.props.correctSoundIndex}
                     </Text>
                 </View>
@@ -94,8 +94,12 @@ const styles = StyleSheet.create({
     footer: {
         flex: 0,
         flexDirection: 'row',
-        alignSelf: 'flex-end',
-        padding: 10
+        alignSelf: 'stretch',
+        padding: 10,
+        backgroundColor: 'red',
+    },
+    footerContent: {
+        alignSelf: 'flex-end'
     }
 });
 
