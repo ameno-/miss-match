@@ -14,7 +14,8 @@ import {
   View,
   Button,
   Alert,
-  NavigatorIOS
+  NavigatorIOS,
+  TabBarIOS
 } from 'react-native';
 
 import Home from './app/components/Home';
@@ -32,9 +33,10 @@ export default class msMatch extends Component {
           <NavigatorIOS
           initialRoute= {{
             component: Home,
-            title: 'Home'
+            title: 'ms match'
           }}
           style={{flex: 1}}
+          barTintColor='#93E5AB'
           />
         </View>
       </Provider>

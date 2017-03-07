@@ -19,6 +19,7 @@ class Home extends Component {
         super(props, context);
         this._navigateStudents = this._navigateStudents.bind(this);
         this.buildSoundsIndex = this.buildSoundsIndex.bind(this);
+        this.answerSelected = this.answerSelected.bind(this);
     }
 
     answerSelected(sound) {
@@ -34,42 +35,35 @@ class Home extends Component {
         this.props.navigator.push({
             component: Students,
             title: "Students",
+            barTintColor: '#996699'
         })
     }
 
     render() {
         //console.log(this.props);
-        // let optionsList = this.props.displayedSounds.map((sound, i) => {
-        //     //console.log(sound);
-        //     return <Options
-        //         answerSelected={this.answerSelected}
-        //         visualProp={this.props.visualProp[sound]}
-        //         sound={sound}
-        //         key={i}
-        //         accessibilityLabel="Symbol select"
-        //     />
         let optionsList = this.props.displayedSounds.map((sound, i) => {
-             return <Button
-                onPress={() => this.answerSelected(sound)}
-                title={this.props.visualProp[sound]}
-                soundIndex={i}
-                key={sound}
-                color="#841584"
+            //console.log(sound);
+            return <Options
+                onSelected={this.answerSelected}
+                visualProp={this.props.visualProp[sound]}
+                sound={sound}
+                key={i}
                 accessibilityLabel="Symbol select"
             />
         }
         );
         return (
-            <View style={{ flex: 1, justifyContent: 'space-around', alignItems: 'center', paddingTop: 200 }}>
-                <Text>{this.props.text}</Text>
+            <View style={styles.container}>
                 <TouchableHighlight onPress={this._navigateStudents}>
                     <Text>To students!</Text>
                 </TouchableHighlight>
-                <Text>
-                    Correct answer: {this.props.correctSoundIndex}
-                </Text>
                 <View style={styles.buttonsContainer}>
                     {optionsList}
+                </View>
+                <View style={styles.footer}>
+                    <Text>
+                        {this.props.correctSoundIndex}
+                    </Text>
                 </View>
             </View>
         );
@@ -77,20 +71,32 @@ class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttonsContainer: {
-    flex: 3,
-    flexDirection : 'column',
-  },
-  welcome: {
-    fontSize: 30,
-    textAlign: 'center',
-    flex: 1,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingTop: 200
+    },
+    buttonsContainer: {
+        flex: 2,
+        flexDirection: 'column',
+    },
+    welcome: {
+        fontSize: 30,
+        textAlign: 'center',
+        flex: 1,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
+    footer: {
+        flex: 0,
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        padding: 10
+    }
 });
 
 const mapStateToProps = (store) => {

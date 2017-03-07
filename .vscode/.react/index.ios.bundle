@@ -1609,6 +1609,7 @@ var _reactNative=require(42 /* react-native */);
 
 
 
+
 var _Home=require(401 /* ./app/components/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
 var _store=require(441 /* ./app/store */);var
 
@@ -1624,9 +1625,10 @@ _react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.NavigatorIOS,{
 initialRoute:{
 component:_Home2.default,
-title:'Home'},
+title:'ms match'},
 
-style:{flex:1}}))));
+style:{flex:1},
+barTintColor:'#93E5AB'}))));
 
 
 
@@ -70314,7 +70316,8 @@ Home=function(_Component){babelHelpers.inherits(Home,_Component);
 function Home(props,context){babelHelpers.classCallCheck(this,Home);var _this=babelHelpers.possibleConstructorReturn(this,(Home.__proto__||Object.getPrototypeOf(Home)).call(this,
 props,context));
 _this._navigateStudents=_this._navigateStudents.bind(_this);
-_this.buildSoundsIndex=_this.buildSoundsIndex.bind(_this);return _this;
+_this.buildSoundsIndex=_this.buildSoundsIndex.bind(_this);
+_this.answerSelected=_this.answerSelected.bind(_this);return _this;
 }babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
 
 sound){
@@ -70329,43 +70332,36 @@ this.props.dispatch((0,_actions.restart)((0,_helper.getRandomCollection)(selecte
 {
 this.props.navigator.push({
 component:_Students2.default,
-title:"Students"});
+title:"Students",
+barTintColor:'#996699'});
 
 }},{key:'render',value:function render()
 
 {var _this2=this;
 
-
-
-
-
-
-
-
-
-
 var optionsList=this.props.displayedSounds.map(function(sound,i){
-return _react2.default.createElement(_reactNative.Button,{
-onPress:function onPress(){return _this2.answerSelected(sound);},
-title:_this2.props.visualProp[sound],
-soundIndex:i,
-key:sound,
-color:'#841584',
+
+return _react2.default.createElement(_Options2.default,{
+onSelected:_this2.answerSelected,
+visualProp:_this2.props.visualProp[sound],
+sound:sound,
+key:i,
 accessibilityLabel:'Symbol select'});
 
 });
 
 return(
-_react2.default.createElement(_reactNative.View,{style:{flex:1,justifyContent:'space-around',alignItems:'center',paddingTop:200}},
-_react2.default.createElement(_reactNative.Text,null,this.props.text),
+_react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.TouchableHighlight,{onPress:this._navigateStudents},
 _react2.default.createElement(_reactNative.Text,null,'To students!')),
 
-_react2.default.createElement(_reactNative.Text,null,'Correct answer: ',
-this.props.correctSoundIndex),
-
 _react2.default.createElement(_reactNative.View,{style:styles.buttonsContainer},
-optionsList)));
+optionsList),
+
+_react2.default.createElement(_reactNative.View,{style:styles.footer},
+_react2.default.createElement(_reactNative.Text,null,
+this.props.correctSoundIndex))));
+
 
 
 
@@ -70373,8 +70369,14 @@ optionsList)));
 
 
 var styles=_reactNative.StyleSheet.create({
+container:{
+flex:1,
+justifyContent:'space-between',
+alignItems:'center',
+paddingTop:200},
+
 buttonsContainer:{
-flex:3,
+flex:2,
 flexDirection:'column'},
 
 welcome:{
@@ -70385,7 +70387,13 @@ flex:1},
 instructions:{
 textAlign:'center',
 color:'#333333',
-marginBottom:5}});
+marginBottom:5},
+
+footer:{
+flex:0,
+flexDirection:'row',
+alignSelf:'flex-end',
+padding:10}});
 
 
 
@@ -70500,13 +70508,13 @@ props));
 }babelHelpers.createClass(Options,[{key:'render',value:function render()
 {var _this2=this;
 return(
-_react2.default.createElement(_reactNative.Button,{
-onPress:function onPress(){return _this2.props.answerSelected(_this2.props.sound);},
-title:this.props.visualProp[this.props.sound],
+_react2.default.createElement(_reactNative.TouchableOpacity,{
+onPress:function onPress(){return _this2.props.onSelected(_this2.props.sound);},
 soundIndex:this.props.sound,
 key:this.props.sound,
 color:'#841584',
-accessibilityLabel:'Symbol select'}));
+accessibilityLabel:'Symbol select'},
+_react2.default.createElement(_reactNative.Text,null,' ',this.props.visualProp,' ')));
 
 
 }}]);return Options;}(_react.Component);exports.default=
