@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 import { 
     StyleSheet, 
     View, 
-    Text 
+    Text,
+    TouchableOpacity
 } from 'react-native';
 class StudentItem extends Component {
     render() {
+        let {studentName, teacherName, id} = this.props
+
         return (
-            <View style={styles.studentItemContainer}>
-                <Text style={styles.studentNameText}>
-                    {this.props.studentName}
-                </Text>
-                <Text style={styles.teacherNameText}>
-                    {this.props.teacherName}
-                </Text>
-            </View>
+            <TouchableOpacity onPress={this.props.select({studentName, teacherName, id})}>
+                <View style={styles.studentItemContainer}>
+                    <Text style={styles.studentNameText}>
+                        {studentName}
+                    </Text>
+                    <Text style={styles.teacherNameText}>
+                        {teacherName}
+                    </Text>
+                </View>
+            </TouchableOpacity>
         );
     }
 }

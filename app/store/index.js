@@ -9,7 +9,8 @@ const defaultState = {
     minIndex: 0,
     maxIndex: 5,
     text: "my nigga, my nigga, my nigga",
-    students: []
+    students: [],
+    currentStudent: {}
 }
 
 export const configureStore = (initialState = defaultState) => {

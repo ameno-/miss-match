@@ -60,7 +60,7 @@ class Home extends Component {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContent}>
-                        {this.props.correctSoundIndex}
+                       {this.props.correctSoundIndex} for
                     </Text>
                 </View>
             </View>
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     }
 });
 
+//use destructuring
 const mapStateToProps = (store) => {
     return {
         text: store.text,
@@ -110,6 +111,7 @@ const mapStateToProps = (store) => {
         displayedSounds: store.displayedSounds,
         minIndex: store.minIndex,
         maxIndex: store.maxIndex,
+        currentStudent: store.currentStudent
     }
 }
 

@@ -6,31 +6,35 @@ import {
     StyleSheet, 
     StatusBar, 
     TextInput, 
-    ScrollView 
+    ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 import { connect } from 'react-redux';
 
 import StudentItem from './StudentItem';
 
-import { addStudent } from '../actions';
+import { addStudent, setStudent } from '../actions';
 
 class Students extends Component {
     constructor(props, context) {
-    super(props, context);
-    this._navigateHome = this._navigateHome.bind(this);
-    this.addNewStudent = this.addNewStudent.bind(this);
-    this.state = {
-          studentName: "",
-          teacherName: ""
-      };
-  }
+        super(props, context);
+        this._navigateHome = this._navigateHome.bind(this);
+        this.addNewStudent = this.addNewStudent.bind(this);
+        this.selectStudent = this.selectStudent.bind(this);
+        this.state = {
+            studentName: "",
+            teacherName: ""
+        };
+    }
+  
     _navigateHome() {
         this.props.navigator.pop();
     }
+
     addNewStudent() {
         if(this.state.studentName && this.state.studentName != "") {
-            console.log(this.state.studentName)
+
             this.props.dispatch(addStudent({
                 studentName: this.state.studentName,
                 teacherName: "Yomna"
@@ -39,24 +43,34 @@ class Students extends Component {
             this.setState({
                 studentName: ""
             });
-
         }
+    }
+
+    selectStudent(selected) {
+        this.props.dispatch(setStudent({
+            student: selected
+        }));
+
+        //this.props.navigator.pop();
     }
     render() {
         const renderStudens = () => {
             return this.props.students.map(student => {
                 return (
-                    <StudentItem studentName={student.studentName} teacherName={student.teacherName} key={student.id} id={student.id}/>
+                    <StudentItem studentName={student.studentName} teacherName={student.teacherName} key={student.id} id={student.id} select={this.selectStudent}/>
                 )
             })
         }
         return (
             <View style={styles.container}>
                 <View style={styles.topBar}>
+                    <TouchableOpacity onPress={this._navigateHome}>
+                        <Text>Back Home</Text>
+                    </TouchableOpacity>
                     <Text style={styles.title}>Students</Text>
                 </View>
                 <View style={styles.inputContainer}>
-                    <TextInput 
+                    <TextInput
                         onSubmitEditing={this.addNewStudent}
                         onChange={(event) => {
                             this.setState({
@@ -69,7 +83,7 @@ class Students extends Component {
                         style={styles.input} />
                 </View>
                 <ScrollView automaticallyAdjustContentInsets={false}>
-                 {renderStudens()}
+                    {renderStudens()}
                 </ScrollView>
             </View>
         );

@@ -26,6 +26,11 @@ module.exports = (state={}, action) => {
                     }
                 ]
             }
+        case 'SET_STUDENT':
+            return {
+                ...state,
+                currentStudent: action.student
+            }
         default:
             return state;
     }

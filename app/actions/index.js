@@ -16,6 +16,13 @@ exports.restart = (randomizedData) => {
 exports.addStudent = (student) => {
     return {
         type: "NEW_STUDENT",
-        student: student,
+        student,
+    }
+}
+
+exports.setStudent = (student) => {
+    return {
+        type: "SET_STUDENT",
+        student,
     }
 }

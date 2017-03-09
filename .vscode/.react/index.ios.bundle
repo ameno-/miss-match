@@ -70358,7 +70358,7 @@ optionsList),
 
 _react2.default.createElement(_reactNative.View,{style:styles.footer},
 _react2.default.createElement(_reactNative.Text,{style:styles.footerContent},
-this.props.correctSoundIndex))));
+this.props.correctSoundIndex,' for'))));
 
 
 
@@ -70407,7 +70407,8 @@ visualProp:store.visualProp,
 correctSoundIndex:store.correctSoundIndex,
 displayedSounds:store.displayedSounds,
 minIndex:store.minIndex,
-maxIndex:store.maxIndex};
+maxIndex:store.maxIndex,
+currentStudent:store.currentStudent};
 
 };
 
@@ -70415,6 +70416,7 @@ module.exports=(0,_reactRedux.connect)(mapStateToProps)(Home);
 }, 401, null, "msMatch/app/components/Home.js");
 __d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(42 /* react-native */);
+
 
 
 
@@ -70435,17 +70437,20 @@ function Students(props,context){babelHelpers.classCallCheck(this,Students);var 
 props,context));
 _this._navigateHome=_this._navigateHome.bind(_this);
 _this.addNewStudent=_this.addNewStudent.bind(_this);
+_this.selectStudent=_this.selectStudent.bind(_this);
 _this.state={
 studentName:"",
 teacherName:""};return _this;
 
 }babelHelpers.createClass(Students,[{key:'_navigateHome',value:function _navigateHome()
+
 {
 this.props.navigator.pop();
 }},{key:'addNewStudent',value:function addNewStudent()
+
 {
 if(this.state.studentName&&this.state.studentName!=""){
-console.log(this.state.studentName);
+
 this.props.dispatch((0,_actions.addStudent)({
 studentName:this.state.studentName,
 teacherName:"Yomna"}));
@@ -70454,20 +70459,30 @@ teacherName:"Yomna"}));
 this.setState({
 studentName:""});
 
-
 }
+}},{key:'selectStudent',value:function selectStudent(
+
+selected){
+this.props.dispatch((0,_actions.setStudent)({
+student:selected}));
+
+
+
 }},{key:'render',value:function render()
 {var _this2=this;
 var renderStudens=function renderStudens(){
 return _this2.props.students.map(function(student){
 return(
-_react2.default.createElement(_StudentItem2.default,{studentName:student.studentName,teacherName:student.teacherName,key:student.id,id:student.id}));
+_react2.default.createElement(_StudentItem2.default,{studentName:student.studentName,teacherName:student.teacherName,key:student.id,id:student.id,select:_this2.selectStudent}));
 
 });
 };
 return(
 _react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.View,{style:styles.topBar},
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:this._navigateHome},
+_react2.default.createElement(_reactNative.Text,null,'Back Home')),
+
 _react2.default.createElement(_reactNative.Text,{style:styles.title},'Students')),
 
 _react2.default.createElement(_reactNative.View,{style:styles.inputContainer},
@@ -70538,15 +70553,20 @@ var _reactNative=require(42 /* react-native */);var
 
 
 
+
 StudentItem=function(_Component){babelHelpers.inherits(StudentItem,_Component);function StudentItem(){babelHelpers.classCallCheck(this,StudentItem);return babelHelpers.possibleConstructorReturn(this,(StudentItem.__proto__||Object.getPrototypeOf(StudentItem)).apply(this,arguments));}babelHelpers.createClass(StudentItem,[{key:'render',value:function render()
-{
+{var _props=
+this.props,studentName=_props.studentName,teacherName=_props.teacherName,id=_props.id;
+
 return(
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:this.props.select({studentName:studentName,teacherName:teacherName,id:id})},
 _react2.default.createElement(_reactNative.View,{style:styles.studentItemContainer},
 _react2.default.createElement(_reactNative.Text,{style:styles.studentNameText},
-this.props.studentName),
+studentName),
 
 _react2.default.createElement(_reactNative.Text,{style:styles.teacherNameText},
-this.props.teacherName)));
+teacherName))));
+
 
 
 
@@ -70594,6 +70614,13 @@ newSounds:randomizedData.shuffledArray};
 exports.addStudent=function(student){
 return{
 type:"NEW_STUDENT",
+student:student};
+
+};
+
+exports.setStudent=function(student){
+return{
+type:"SET_STUDENT",
 student:student};
 
 };
@@ -70724,14 +70751,16 @@ displayedSounds:[0,1,2],
 minIndex:0,
 maxIndex:5,
 text:"my nigga, my nigga, my nigga",
-students:[]};
+students:[],
+currentStudent:{}};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
 return(0,_redux.createStore)(_reducer2.default,initialState);
 };
 }, 441, null, "msMatch/app/store/index.js");
-__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {var uuidV4=require(458 /* uuid/v4 */);
+__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {
+var uuidV4=require(458 /* uuid/v4 */);
 
 module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
 switch(action.type){
@@ -70757,6 +70786,11 @@ teacherName:action.student.teacherName,
 id:uuidV4()}])});
 
 
+
+case'SET_STUDENT':
+return babelHelpers.extends({},
+state,{
+currentStudent:action.student});
 
 default:
 return state;}
