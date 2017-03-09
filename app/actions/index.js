@@ -5,10 +5,17 @@ exports.selection = (selection) => {
     }
 }
 
-exports.restart = (obj) => {
+exports.restart = (randomizedData) => {
     return {
         type: 'RESTART',
-        answerIndex: obj.answerIndex,
-        newSounds: obj.shuffledArray
+        answerIndex: randomizedData.answerIndex,
+        newSounds: randomizedData.shuffledArray
+    }
+}
+
+exports.addStudent = (student) => {
+    return {
+        type: "NEW_STUDENT",
+        student: student,
     }
 }

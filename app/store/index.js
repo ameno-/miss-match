@@ -8,7 +8,8 @@ const defaultState = {
     displayedSounds: [0, 1, 2],
     minIndex: 0,
     maxIndex: 5,
-    text: "my nigga, my nigga, my nigga"
+    text: "my nigga, my nigga, my nigga",
+    students: []
 }
 
 export const configureStore = (initialState = defaultState) => {

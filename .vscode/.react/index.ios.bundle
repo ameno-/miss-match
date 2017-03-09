@@ -70333,14 +70333,13 @@ this.props.dispatch((0,_actions.restart)((0,_helper.getRandomCollection)(selecte
 this.props.navigator.push({
 component:_Students2.default,
 title:"Students",
-barTintColor:'#996699'});
+barTintColor:'#996699',
+navigationBarHidden:true});
 
 }},{key:'render',value:function render()
 
 {var _this2=this;
-
 var optionsList=this.props.displayedSounds.map(function(sound,i){
-
 return _react2.default.createElement(_Options2.default,{
 onSelected:_this2.answerSelected,
 visualProp:_this2.props.visualProp[sound],
@@ -70349,7 +70348,6 @@ key:i,
 accessibilityLabel:'Symbol select'});
 
 });
-
 return(
 _react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.TouchableHighlight,{onPress:this._navigateStudents},
@@ -70415,31 +70413,191 @@ maxIndex:store.maxIndex};
 
 module.exports=(0,_reactRedux.connect)(mapStateToProps)(Home);
 }, 401, null, "msMatch/app/components/Home.js");
-__d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
-var _reactNative=require(42 /* react-native */);var
+__d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require(42 /* react-native */);
+
+
+
+
+
+
+
+
+
+var _reactRedux=require(404 /* react-redux */);
+
+var _StudentItem=require(451 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
+
+var _actions=require(443 /* ../actions */);var
 
 Students=function(_Component){babelHelpers.inherits(Students,_Component);
 function Students(props,context){babelHelpers.classCallCheck(this,Students);var _this=babelHelpers.possibleConstructorReturn(this,(Students.__proto__||Object.getPrototypeOf(Students)).call(this,
 props,context));
-_this._navigateHome=_this._navigateHome.bind(_this);return _this;
+_this._navigateHome=_this._navigateHome.bind(_this);
+_this.addNewStudent=_this.addNewStudent.bind(_this);
+_this.state={
+studentName:"",
+teacherName:""};return _this;
+
 }babelHelpers.createClass(Students,[{key:'_navigateHome',value:function _navigateHome()
 {
 this.props.navigator.pop();
+}},{key:'addNewStudent',value:function addNewStudent()
+{
+if(this.state.studentName&&this.state.studentName!=""){
+console.log(this.state.studentName);
+this.props.dispatch((0,_actions.addStudent)({
+studentName:this.state.studentName,
+teacherName:"Yomna"}));
+
+
+this.setState({
+studentName:""});
+
+
+}
 }},{key:'render',value:function render()
+{var _this2=this;
+var renderStudens=function renderStudens(){
+return _this2.props.students.map(function(student){
+return(
+_react2.default.createElement(_StudentItem2.default,{studentName:student.studentName,teacherName:student.teacherName,key:student.id,id:student.id}));
+
+});
+};
+return(
+_react2.default.createElement(_reactNative.View,{style:styles.container},
+_react2.default.createElement(_reactNative.View,{style:styles.topBar},
+_react2.default.createElement(_reactNative.Text,{style:styles.title},'Students')),
+
+_react2.default.createElement(_reactNative.View,{style:styles.inputContainer},
+_react2.default.createElement(_reactNative.TextInput,{
+onSubmitEditing:this.addNewStudent,
+onChange:function onChange(event){
+_this2.setState({
+studentName:event.nativeEvent.text});
+
+},
+value:this.state.studentName,
+placeholder:'Enter student name',
+returnKeyType:'done',
+style:styles.input})),
+
+_react2.default.createElement(_reactNative.ScrollView,{automaticallyAdjustContentInsets:false},
+renderStudens())));
+
+
+
+}}]);return Students;}(_react.Component);
+
+
+var styles=_reactNative.StyleSheet.create({
+container:{
+flex:1,
+justifyContent:'flex-start',
+alignItems:'stretch'},
+
+topBar:{
+padding:16,
+paddingTop:28,
+paddingBottom:8,
+flexDirection:'row',
+justifyContent:'center',
+alignItems:'center',
+backgroundColor:'#8DDCA4'},
+
+title:{
+color:'white',
+fontSize:30},
+
+inputContainer:{
+padding:8,
+paddingTop:10,
+backgroundColor:'#2ecc71'},
+
+input:{
+height:30,
+padding:4,
+paddingLeft:8,
+borderRadius:8,
+backgroundColor:'white'}});
+
+
+
+var mapStateToProps=function mapStateToProps(store){
+return{
+students:store.students};
+
+};
+
+module.exports=(0,_reactRedux.connect)(mapStateToProps)(Students);
+}, 402, null, "msMatch/app/components/Students.js");
+__d(/* msMatch/app/components/StudentItem.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require(42 /* react-native */);var
+
+
+
+
+StudentItem=function(_Component){babelHelpers.inherits(StudentItem,_Component);function StudentItem(){babelHelpers.classCallCheck(this,StudentItem);return babelHelpers.possibleConstructorReturn(this,(StudentItem.__proto__||Object.getPrototypeOf(StudentItem)).apply(this,arguments));}babelHelpers.createClass(StudentItem,[{key:'render',value:function render()
 {
 return(
-_react2.default.createElement(_reactNative.View,{style:{flex:1,justifyContent:'space-around',alignItems:'center'}},
-_react2.default.createElement(_reactNative.Text,null,' Welcome from Students'),
-_react2.default.createElement(_reactNative.TouchableHighlight,{onPress:this._navigateHome},
-_react2.default.createElement(_reactNative.Text,null,'Back Home'))));
+_react2.default.createElement(_reactNative.View,{style:styles.studentItemContainer},
+_react2.default.createElement(_reactNative.Text,{style:styles.studentNameText},
+this.props.studentName),
+
+_react2.default.createElement(_reactNative.Text,{style:styles.teacherNameText},
+this.props.teacherName)));
 
 
 
-}}]);return Students;}(_react.Component);exports.default=
+}}]);return StudentItem;}(_react.Component);
 
 
-Students;
-}, 402, null, "msMatch/app/components/Students.js");
+var styles=_reactNative.StyleSheet.create({
+studentItemContainer:{
+padding:16,
+borderTopWidth:1,
+borderBottomWidth:1,
+marginBottom:-1,
+borderColor:'#ccc',
+flexDirection:'column',
+justifyContent:'space-between',
+alignItems:'flex-start'},
+
+studentItemText:{
+fontSize:18,
+fontWeight:'bold'},
+
+
+teacherNameText:{
+color:'#808782'}});exports.default=
+
+
+
+StudentItem;
+}, 451, null, "msMatch/app/components/StudentItem.js");
+__d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
+return{
+type:'SELECTION',
+selection:selection};
+
+};
+
+exports.restart=function(randomizedData){
+return{
+type:'RESTART',
+answerIndex:randomizedData.answerIndex,
+newSounds:randomizedData.shuffledArray};
+
+};
+
+exports.addStudent=function(student){
+return{
+type:"NEW_STUDENT",
+student:student};
+
+};
+}, 443, null, "msMatch/app/actions/index.js");
 __d(/* msMatch/utils/helper.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getRandomIndex=getRandomIndex;function getRandomIndex(min,max){var exclude=arguments.length>2&&arguments[2]!==undefined?arguments[2]:null;
 return Math.ceil(Math.random()*(max-min)+min);
 }
@@ -70489,21 +70647,6 @@ console.log(answerIndex);
 return{answerIndex:answerIndex,shuffledArray:shuffle(randomNumbersCollection)};
 };
 }, 403, null, "msMatch/utils/helper.js");
-__d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
-return{
-type:'SELECTION',
-selection:selection};
-
-};
-
-exports.restart=function(obj){
-return{
-type:'RESTART',
-answerIndex:obj.answerIndex,
-newSounds:obj.shuffledArray};
-
-};
-}, 443, null, "msMatch/app/actions/index.js");
 __d(/* msMatch/app/components/Options.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(42 /* react-native */);var
 Options=function(_Component){babelHelpers.inherits(Options,_Component);
@@ -70580,14 +70723,17 @@ correctSoundIndex:0,
 displayedSounds:[0,1,2],
 minIndex:0,
 maxIndex:5,
-text:"my nigga, my nigga, my nigga"};
+text:"my nigga, my nigga, my nigga",
+students:[]};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
 return(0,_redux.createStore)(_reducer2.default,initialState);
 };
 }, 441, null, "msMatch/app/store/index.js");
-__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
+__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {var uuidV4=require(458 /* uuid/v4 */);
+
+module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
 switch(action.type){
 case'SELECTION':
 return babelHelpers.extends({},
@@ -70600,11 +70746,111 @@ state,{
 correctSoundIndex:action.answerIndex,
 displayedSounds:action.newSounds});
 
+case'NEW_STUDENT':
+return babelHelpers.extends({},
+state,{
+students:[].concat(babelHelpers.toConsumableArray(
+state.students),[
+{
+studentName:action.student.studentName,
+teacherName:action.student.teacherName,
+id:uuidV4()}])});
+
+
+
 default:
 return state;}
 
 };
 }, 442, null, "msMatch/app/reducer/index.js");
+__d(/* uuid/v4.js */function(global, require, module, exports) {var rng=require(456 /* ./lib/rng */);
+var bytesToUuid=require(457 /* ./lib/bytesToUuid */);
+
+function v4(options,buf,offset){
+var i=buf&&offset||0;
+
+if(typeof options=='string'){
+buf=options=='binary'?new Array(16):null;
+options=null;
+}
+options=options||{};
+
+var rnds=options.random||(options.rng||rng)();
+
+
+rnds[6]=rnds[6]&0x0f|0x40;
+rnds[8]=rnds[8]&0x3f|0x80;
+
+
+if(buf){
+for(var ii=0;ii<16;++ii){
+buf[i+ii]=rnds[ii];
+}
+}
+
+return buf||bytesToUuid(rnds);
+}
+
+module.exports=v4;
+}, 458, null, "uuid/v4.js");
+__d(/* uuid/lib/rng-browser.js */function(global, require, module, exports) {
+
+
+
+var rng;
+
+var crypto=global.crypto||global.msCrypto;
+if(crypto&&crypto.getRandomValues){
+
+var rnds8=new Uint8Array(16);
+rng=function whatwgRNG(){
+crypto.getRandomValues(rnds8);
+return rnds8;
+};
+}
+
+if(!rng){
+
+
+
+
+var rnds=new Array(16);
+rng=function rng(){
+for(var i=0,r;i<16;i++){
+if((i&0x03)===0)r=Math.random()*0x100000000;
+rnds[i]=r>>>((i&0x03)<<3)&0xff;
+}
+
+return rnds;
+};
+}
+
+module.exports=rng;
+}, 456, null, "uuid/lib/rng-browser.js");
+__d(/* uuid/lib/bytesToUuid.js */function(global, require, module, exports) {
+
+
+
+var byteToHex=[];
+for(var i=0;i<256;++i){
+byteToHex[i]=(i+0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf,offset){
+var i=offset||0;
+var bth=byteToHex;
+return bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]];
+}
+
+module.exports=bytesToUuid;
+}, 457, null, "uuid/lib/bytesToUuid.js");
 ;require(214);
 ;require(0);
 //# sourceMappingURL=index.ios.map

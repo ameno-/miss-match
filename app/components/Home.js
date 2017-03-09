@@ -35,14 +35,13 @@ class Home extends Component {
         this.props.navigator.push({
             component: Students,
             title: "Students",
-            barTintColor: '#996699'
+            barTintColor: '#996699',
+            navigationBarHidden: true
         })
     }
 
     render() {
-        //console.log(this.props);
         let optionsList = this.props.displayedSounds.map((sound, i) => {
-            //console.log(sound);
             return <Options
                 onSelected={this.answerSelected}
                 visualProp={this.props.visualProp[sound]}
@@ -50,8 +49,7 @@ class Home extends Component {
                 key={i}
                 accessibilityLabel="Symbol select"
             />
-        }
-        );
+        });
         return (
             <View style={styles.container}>
                 <TouchableHighlight onPress={this._navigateStudents}>
