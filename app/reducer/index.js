@@ -15,6 +15,7 @@ module.exports = (state={}, action) => {
                 displayedSounds: action.newSounds
             }
         case 'NEW_STUDENT':
+        console.log(action.student)
             return {
                 ...state,
                 students: [
@@ -27,9 +28,14 @@ module.exports = (state={}, action) => {
                 ]
             }
         case 'SET_STUDENT':
+        console.log(action.student)        
             return {
                 ...state,
-                currentStudent: action.student
+                currentStudent: {
+                    studentName : action.student.studentName,
+                    teacherName : action.student.teacherName,
+                    id : action.student.id,
+                }
             }
         default:
             return state;

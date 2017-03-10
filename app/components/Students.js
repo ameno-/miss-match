@@ -48,10 +48,12 @@ class Students extends Component {
 
     selectStudent(selected) {
         this.props.dispatch(setStudent({
-            student: selected
+           studentName: selected.studentName,
+           teacherName: selected.teacherName,
+           id: selected.id
         }));
 
-        //this.props.navigator.pop();
+        this.props.navigator.pop();
     }
     render() {
         const renderStudens = () => {
@@ -125,7 +127,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (store) => {
    return { 
-       students: store.students
+       students: store.students,
+       currentStudent: store.currentStudent
    }
 }
 

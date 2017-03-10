@@ -60,7 +60,7 @@ class Home extends Component {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContent}>
-                       {this.props.correctSoundIndex} for
+                       {this.props.correctSoundIndex}, current student: {this.props.currentStudent.studentName}, current teacher: {this.props.currentStudent.teacherName}
                     </Text>
                 </View>
             </View>
@@ -111,7 +111,8 @@ const mapStateToProps = (store) => {
         displayedSounds: store.displayedSounds,
         minIndex: store.minIndex,
         maxIndex: store.maxIndex,
-        currentStudent: store.currentStudent
+        currentStudent: store.currentStudent,
+        students: store.students
     }
 }
 

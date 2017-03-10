@@ -10,7 +10,7 @@ class StudentItem extends Component {
         let {studentName, teacherName, id} = this.props
 
         return (
-            <TouchableOpacity onPress={this.props.select({studentName, teacherName, id})}>
+            <TouchableOpacity onPress={() => this.props.select({studentName, teacherName, id})}>
                 <View style={styles.studentItemContainer}>
                     <Text style={styles.studentNameText}>
                         {studentName}
@@ -44,5 +44,12 @@ const styles = StyleSheet.create({
         color: '#808782'
     }
 })
+
+// const mapStateToProps = (store) => {
+//    return { 
+//        students: store.students
+//    }
+// }
+
 
 export default StudentItem;
