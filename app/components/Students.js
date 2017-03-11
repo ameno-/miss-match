@@ -7,10 +7,12 @@ import {
     StatusBar, 
     TextInput, 
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 
 import { connect } from 'react-redux';
+
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import StudentItem from './StudentItem';
 
@@ -63,13 +65,24 @@ class Students extends Component {
                 )
             })
         }
+
+        const chartIcon = (<Icon name="chart" size={20} color="white" />)
+        const homeIcon = (<Icon name="home" size={20} color="white" />)
+
         return (
             <View style={styles.container}>
                 <View style={styles.topBar}>
-                    <TouchableOpacity onPress={this._navigateHome}>
-                        <Text>Back Home</Text>
-                    </TouchableOpacity>
+                    <View style={styles.topBarLeft}>
+                        <TouchableOpacity onPress={this._navigateHome}>
+                            <Text>{homeIcon}</Text>
+                        </TouchableOpacity>
+                    </View>
+
                     <Text style={styles.title}>Students</Text>
+
+                    <View style={styles.topBarRight}>
+                        <Text>{chartIcon}</Text>
+                    </View>
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput
@@ -93,8 +106,8 @@ class Students extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex:1, 
+     container: {
+        flex: 1,
         justifyContent:'flex-start', 
         alignItems:'stretch',
     },
@@ -103,13 +116,29 @@ const styles = StyleSheet.create({
         paddingTop: 28,
         paddingBottom: 8,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#8DDCA4'
+        backgroundColor: '#3DC64F'
+    },
+    topBarRight: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    topBarLeft: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     title: {
         color: 'white',
         fontSize: 30
+    },
+    topBarText: {
+        color: 'white',
+        fontSize: 16
     },
     inputContainer: {
         padding: 8,
