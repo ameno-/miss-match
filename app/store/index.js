@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
+import { AsyncStorage } from 'react-native';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import reducer from '../reducer'
 
 const defaultState = {
@@ -8,11 +10,15 @@ const defaultState = {
     displayedSounds: [0, 1, 2],
     minIndex: 0,
     maxIndex: 5,
-    text: "my nigga, my nigga, my nigga",
     students: [],
     currentStudent: {}
 }
 
 export const configureStore = (initialState = defaultState) => {
-    return createStore(reducer, initialState);
+    let store = createStore(reducer, initialState, compose(
+        autoRehydrate()
+    ));
+
+    persistStore(store, {storage: AsyncStorage});
+    return store;
 }

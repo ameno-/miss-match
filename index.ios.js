@@ -33,10 +33,10 @@ export default class msMatch extends Component {
           <NavigatorIOS
           initialRoute= {{
             component: Home,
-            title: 'ms match'
+            title: 'Home',
+            navigationBarHidden: true
           }}
           style={{flex: 1}}
-          barTintColor='#93E5AB'
           />
         </View>
       </Provider>

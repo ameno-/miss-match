@@ -42,11 +42,12 @@ class Options extends Component {
 
 const styles = StyleSheet.create({
     imageButton: {
-        width: 140,
-        height: 100,
+        width: 180,
+        height: 140,
     },
     button: {
-        padding: 10
+        paddingLeft: 50,
+        paddingRight: 50,
     }
 })
 

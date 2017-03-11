@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { 
     Text, 
     View, 
-    TouchableHighlight, 
+    TouchableHighlight,
+    TouchableOpacity,
     StyleSheet,
     Button,
     Alert
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 import Students from './Students';
 import { getRandomCollection } from '../../utils/helper';
@@ -34,8 +37,6 @@ class Home extends Component {
     _navigateStudents() {
         this.props.navigator.push({
             component: Students,
-            title: "Students",
-            barTintColor: '#996699',
             navigationBarHidden: true
         })
     }
@@ -50,17 +51,33 @@ class Home extends Component {
                 accessibilityLabel="Symbol select"
             />
         });
+        const peopleIcon = (<Icon name="ios-people-outline" size={30} color="white" />)
+        const settingsIcon = (<Icon name="ios-settings-outline" size={30} color="white" />)
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={this._navigateStudents}>
-                    <Text>To students!</Text>
-                </TouchableHighlight>
+                <View style={styles.topBar}>
+                    <View style={styles.topBarLeft}>
+                        <TouchableOpacity onPress={this._navigateStudents}>
+                            <Text>{peopleIcon}</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.title}>Miss Match</Text>
+
+                    <View style={styles.topBarRight}>
+                        <Text>{settingsIcon}</Text>
+                    </View>
+                </View>
+                
                 <View style={styles.buttonsContainer}>
                     {optionsList}
                 </View>
                 <View style={styles.footer}>
-                    <Text style={styles.footerContent}>
-                       {this.props.correctSoundIndex}, current student: {this.props.currentStudent.studentName}, current teacher: {this.props.currentStudent.teacherName}
+                    <Text style={styles.footerContentLeft}>
+                       Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
+                    </Text>
+                    <Text style={styles.footerContentRight}>
+                        {this.props.correctSoundIndex}
                     </Text>
                 </View>
             </View>
@@ -71,13 +88,43 @@ class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent:'flex-start', 
+        alignItems:'stretch',
+    },
+    topBar: {
+        padding: 16,
+        paddingTop: 28,
+        paddingBottom: 8,
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: 200
+        backgroundColor: '#3DC64F'
+    },
+    topBarRight: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    topBarLeft: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    title: {
+        color: 'white',
+        fontSize: 30
+    },
+    topBarText: {
+        color: 'white',
+        fontSize: 16
     },
     buttonsContainer: {
         flex: 2,
-        flexDirection: 'column',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     welcome: {
         fontSize: 30,
@@ -93,11 +140,15 @@ const styles = StyleSheet.create({
         flex: 0,
         flexDirection: 'row',
         alignSelf: 'stretch',
+        justifyContent: 'space-between',
         padding: 10,
-        backgroundColor: 'red',
+        backgroundColor: '#3DC64F',
     },
-    footerContent: {
-        alignSelf: 'flex-end'
+    footerContentLeft: {
+        color: 'white'
+    },
+    footerContentRight: {
+        color: '#FFE74C'
     }
 });
 
