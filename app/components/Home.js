@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     StyleSheet,
     Button,
-    Alert
+    Alert,
+    AsyncStorage
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -25,8 +26,34 @@ class Home extends Component {
         this.answerSelected = this.answerSelected.bind(this);
     }
 
-    answerSelected(sound) {
+    async answerSelected(sound) {
+        let visualProp = this.props.visualProp;
         this.props.dispatch(selection(sound));
+        
+        try {
+            let previousValue = await AsyncStorage.getItem(this.props.currentStudent.id);
+
+            let displayedSounds = this.props.displayedSounds.map(item => {
+                return visualProp[item];
+            });
+
+            let data = [
+                ...JSON.parse(previousValue),
+                {
+                    displayedSounds: displayedSounds,
+                    selectedAnswer: visualProp[sound],
+                }
+            ];
+
+            await AsyncStorage.setItem(this.props.currentStudent.id, JSON.stringify(data));
+
+            //let newVal = await AsyncStorage.getItem(this.props.currentStudent.id)
+            //console.log(JSON.parse(newVal));
+
+            console.log('Saved answer to disk for student:' + this.props.currentStudent.id);
+        } catch (error) {
+            console.log('AsyncStorage error: ' + error.message);
+        }
         this.buildSoundsIndex();
     }
 
@@ -163,7 +190,8 @@ const mapStateToProps = (store) => {
         minIndex: store.minIndex,
         maxIndex: store.maxIndex,
         currentStudent: store.currentStudent,
-        students: store.students
+        students: store.students,
+        state: store
     }
 }
 
