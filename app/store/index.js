@@ -7,6 +7,7 @@ const defaultState = {
     sounds: ["ah", "ee", "oo", "m", "s", "sh"],
     visualProp: ["airplane", "mouse", "train", "pizza", "snake", "baby"],
     correctSoundIndex: 0,
+    selectedSoundIndex: 0,
     displayedSounds: [0, 1, 2],
     minIndex: 0,
     maxIndex: 5,

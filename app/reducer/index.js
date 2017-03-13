@@ -6,7 +6,7 @@ module.exports = (state={}, action) => {
         case 'SELECTION':
             return {
                 ...state,
-                text: action.selection
+                selectedSoundIndex: action.selection
             }
         case 'RESTART':
             return {
@@ -15,7 +15,6 @@ module.exports = (state={}, action) => {
                 displayedSounds: action.newSounds
             }
         case 'NEW_STUDENT':
-        console.log(action.student)
             return {
                 ...state,
                 students: [
@@ -27,8 +26,7 @@ module.exports = (state={}, action) => {
                     }
                 ]
             }
-        case 'SET_STUDENT':
-        console.log(action.student)        
+        case 'SET_STUDENT':      
             return {
                 ...state,
                 currentStudent: {
@@ -36,6 +34,10 @@ module.exports = (state={}, action) => {
                     teacherName : action.student.teacherName,
                     id : action.student.id,
                 }
+            }
+        case 'REDO':      
+            return {
+                ...state
             }
         default:
             return state;

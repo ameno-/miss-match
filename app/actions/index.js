@@ -26,3 +26,9 @@ exports.setStudent = (student) => {
         student,
     }
 }
+
+exports.redo = () => {
+    return {
+        type: "REDO",
+    }
+}
