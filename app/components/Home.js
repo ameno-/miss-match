@@ -28,14 +28,15 @@ class Home extends Component {
 
     async answerSelected(sound) {
         this.props.dispatch(selection(sound));
+        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: sound, testIndex: null});
         
         try {
             const props = this.props;
 
-            let previousValue = await AsyncStorage.getItem(prop.currentStudent.id);
+            let previousValue = await AsyncStorage.getItem(props.currentStudent.id);
             let visualProps = props.visualProp;
 
-            let displayedSounds = prop.displayedSounds.map(item => {
+            let displayedSounds = props.displayedSounds.map(item => {
                 return visualProps[item];
             });
 
@@ -57,8 +58,6 @@ class Home extends Component {
         } catch (error) {
             console.log('AsyncStorage error: ' + error.message);
         }
-        
-        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: sound, testIndex: null});
     }
 
     buildSoundsIndex (testIndex = null){
