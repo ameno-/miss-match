@@ -1,5 +1,5 @@
-export function getRandomIndex(min, max, exclude = null) {
-    return Math.ceil(Math.random() * (max - min) + min);
+export function getRandomIndex(numbers) {
+    return numbers[Math.floor(Math.random() * numbers.length)];
 }
 
 export const shuffle = (array) => {
@@ -42,7 +42,6 @@ export const getRandomCollection = (exclude, totalNumbers) => {
         randomNumbersCollection.push(numbersRepository[generatedNumber]);
         numbersRepository.splice(generatedNumber, 1);
     }
-    let answerIndex = getRandomIndex(0,randomNumbersCollection.length);
-    console.log(answerIndex);
+    let answerIndex = exclude ? exclude : getRandomIndex(randomNumbersCollection);
     return {answerIndex: answerIndex, shuffledArray: shuffle(randomNumbersCollection)};
 }

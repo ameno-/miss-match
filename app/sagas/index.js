@@ -2,7 +2,6 @@ import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 import { getRandomCollection } from '../../utils/helper'
 
 function * selectionChanged(action) {
-  console.log(action)
   try {
     if (action.selectedIndex === action.correctIndex) {
       yield put({
@@ -12,7 +11,6 @@ function * selectionChanged(action) {
     } else {
       yield put({type: "QUESTIONS_REDO"})
     }
-
   } catch (e) {
     yield console.log("done fucked up")
     yield console.log(e)
