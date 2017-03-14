@@ -1,7 +1,11 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { AsyncStorage } from 'react-native';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import createSagaMiddleware from 'redux-saga'
 import reducer from '../reducer'
+import selectionSaga from '../sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const defaultState = {
     sounds: ["ah", "ee", "oo", "m", "s", "sh"],
@@ -17,8 +21,10 @@ const defaultState = {
 
 export const configureStore = (initialState = defaultState) => {
     let store = createStore(reducer, initialState, compose(
-        autoRehydrate()
+        autoRehydrate(),
+        applyMiddleware(sagaMiddleware)
     ));
+    sagaMiddleware.run(selectionSaga)
 
     persistStore(store, {storage: AsyncStorage});
     return store;

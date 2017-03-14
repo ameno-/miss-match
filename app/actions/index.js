@@ -1,15 +1,7 @@
 exports.selection = (selection) => {
     return {
-        type: 'SELECTION',
+        type: ' ',
         selection
-    }
-}
-
-exports.restart = (randomizedData) => {
-    return {
-        type: 'RESTART',
-        answerIndex: randomizedData.answerIndex,
-        newSounds: randomizedData.shuffledArray
     }
 }
 

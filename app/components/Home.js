@@ -58,11 +58,12 @@ class Home extends Component {
             console.log('AsyncStorage error: ' + error.message);
         }
         
-        this.buildSoundsIndex();
+        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: sound, testIndex: null});
     }
 
-    buildSoundsIndex (selectedIndex = null){
-        this.props.dispatch(restart(getRandomCollection(selectedIndex, 3)));
+    buildSoundsIndex (testIndex = null){
+        console.log(this.props)
+        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: this.props.selectedSoundIndex, testIndex});
     }
 
     _navigateStudents() {

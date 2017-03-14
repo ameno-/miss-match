@@ -8,11 +8,11 @@ module.exports = (state={}, action) => {
                 ...state,
                 selectedSoundIndex: action.selection
             }
-        case 'RESTART':
+        case 'QUESTIONS_NEW':
             return {
                 ...state,
-                correctSoundIndex: action.answerIndex,
-                displayedSounds: action.newSounds
+                correctSoundIndex: action.payload.answerIndex,
+                displayedSounds: action.payload.shuffledArray
             }
         case 'NEW_STUDENT':
             return {
@@ -35,7 +35,7 @@ module.exports = (state={}, action) => {
                     id : action.student.id,
                 }
             }
-        case 'REDO':      
+        case 'QUESTIONS_REDO':      
             return {
                 ...state
             }
