@@ -1610,7 +1610,7 @@ var _reactNative=require(79 /* react-native */);
 
 
 
-var _Home=require(438 /* ./app/components/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
+var _Home=require(641 /* ./app/components/Home/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
 var _store=require(607 /* ./app/store */);var
 
 msMatch=function(_Component){babelHelpers.inherits(msMatch,_Component);
@@ -70296,7 +70296,7 @@ key+'\' from the \'react-native\' package. Perhaps you meant to access \'React.'
 
 module.exports=throwOnWrongReactAPI;
 }, 437, null, "throwOnWrongReactAPI");
-__d(/* msMatch/app/components/Home.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Home/Home.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactRedux=require(42 /* react-redux */);
 var _reactNative=require(79 /* react-native */);
 
@@ -70310,11 +70310,9 @@ var _reactNative=require(79 /* react-native */);
 
 var _Ionicons=require(439 /* react-native-vector-icons/Ionicons */);var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 
-var _db=require(594 /* ../db */);
-
-var _Students=require(595 /* ./Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
-var _actions=require(599 /* ../actions */);
-var _Options=require(600 /* ./Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);var
+var _Students=require(642 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
+var _actions=require(599 /* ../../actions */);
+var _Options=require(644 /* ../Options/Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);var
 
 Home=function(_Component){babelHelpers.inherits(Home,_Component);
 function Home(props,context){babelHelpers.classCallCheck(this,Home);var _this=babelHelpers.possibleConstructorReturn(this,(Home.__proto__||Object.getPrototypeOf(Home)).call(this,
@@ -70472,7 +70470,7 @@ state:store};
 };
 
 module.exports=(0,_reactRedux.connect)(mapStateToProps)(Home);
-}, 438, null, "msMatch/app/components/Home.js");
+}, 641, null, "msMatch/app/components/Home/Home.js");
 __d(/* react-native-vector-icons/Ionicons.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getImageSource=exports.ToolbarAndroid=exports.TabBarItemIOS=exports.TabBarItem=exports.Button=undefined;
 
 
@@ -75945,63 +75943,7 @@ __d(/* react-native-vector-icons/glyphmaps/Ionicons.json */function(global, requ
 "md-wine":62377,
 "md-woman":62378};
 }, 593, null, "react-native-vector-icons/glyphmaps/Ionicons.json");
-__d(/* msMatch/app/db/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.
-
-
-
-
-
-
-
-updateStudentDataAsync=updateStudentDataAsync;exports.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-saveStudentAsync=saveStudentAsync;exports.
-
-
-
-
-
-
-
-
-
-
-
-
-
-resetDB=resetDB;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds,selectedSoundIndex,correctSoundIndex){var previousValue,displayedSoundsNames,data,newVal;return regeneratorRuntime.async(function updateStudentDataAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 3:previousValue=_context.sent;console.log(previousValue);displayedSoundsNames=displayedSounds.map(function(item){return visualProp[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSoundsNames,selectedAnswer:visualProp[selectedSoundIndex],correctAnswer:visualProp[correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+currentStudent.id);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](0);console.log('AsyncStorage error: '+_context.t0.message);case 19:case'end':return _context.stop();}}},null,this,[[0,16]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context2.next=6;break;}_context2.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context2.next=7;break;case 6:throw"Invalid student object";case 7:_context2.next=12;break;case 9:_context2.prev=9;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 12:case'end':return _context2.stop();}}},null,this,[[0,9]]);}function resetDB(){
-
-}
-}, 594, null, "msMatch/app/db/index.js");
-__d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Students/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
 
 
@@ -76017,9 +75959,9 @@ var _reactRedux=require(42 /* react-redux */);
 
 var _SimpleLineIcons=require(596 /* react-native-vector-icons/SimpleLineIcons */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
 
-var _StudentItem=require(598 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
+var _StudentItem=require(643 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
 
-var _actions=require(599 /* ../actions */);var
+var _actions=require(599 /* ../../actions */);var
 
 Students=function(_Component){babelHelpers.inherits(Students,_Component);
 function Students(props,context){babelHelpers.classCallCheck(this,Students);var _this=babelHelpers.possibleConstructorReturn(this,(Students.__proto__||Object.getPrototypeOf(Students)).call(this,
@@ -76168,7 +76110,7 @@ currentStudent:store.currentStudent};
 };
 
 module.exports=(0,_reactRedux.connect)(mapStateToProps)(Students);
-}, 595, null, "msMatch/app/components/Students.js");
+}, 642, null, "msMatch/app/components/Students/Students.js");
 __d(/* react-native-vector-icons/SimpleLineIcons.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getImageSource=exports.ToolbarAndroid=exports.TabBarItemIOS=exports.TabBarItem=exports.Button=undefined;
 
 
@@ -76378,7 +76320,7 @@ __d(/* react-native-vector-icons/glyphmaps/SimpleLineIcons.json */function(globa
 "social-vkontakte":58904,
 "social-steam":58912};
 }, 597, null, "react-native-vector-icons/glyphmaps/SimpleLineIcons.json");
-__d(/* msMatch/app/components/StudentItem.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Students/StudentItem.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);var
 
 
@@ -76433,7 +76375,7 @@ color:'#808782'}});exports.default=
 
 
 StudentItem;
-}, 598, null, "msMatch/app/components/StudentItem.js");
+}, 643, null, "msMatch/app/components/Students/StudentItem.js");
 __d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
 return{
 type:' ',
@@ -76454,7 +76396,7 @@ type:"REDO"};
 
 };
 }, 599, null, "msMatch/app/actions/index.js");
-__d(/* msMatch/app/components/Options.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Options/Options.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);var
 Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);return babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
@@ -76464,17 +76406,17 @@ props));
 visualProp){
 switch(visualProp){
 case"baby":
-return require(601 /* ../../assets/baby.png */);
+return require(601 /* ../../../assets/baby.png */);
 case"mouse":
-return require(602 /* ../../assets/mouse.png */);
+return require(602 /* ../../../assets/mouse.png */);
 case"train":
-return require(603 /* ../../assets/train.png */);
+return require(603 /* ../../../assets/train.png */);
 case"pizza":
-return require(604 /* ../../assets/pizza.png */);
+return require(604 /* ../../../assets/pizza.png */);
 case"airplane":
-return require(605 /* ../../assets/airplane.png */);
+return require(605 /* ../../../assets/airplane.png */);
 case"snake":
-return require(606 /* ../../assets/snake.png */);}
+return require(606 /* ../../../assets/snake.png */);}
 
 }},{key:'render',value:function render()
 {var _this2=this;
@@ -76508,7 +76450,7 @@ paddingRight:50}});exports.default=
 
 
 Options;
-}, 600, null, "msMatch/app/components/Options.js");
+}, 644, null, "msMatch/app/components/Options/Options.js");
 __d(/* msMatch/assets/baby.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":277,"height":297,"scales":[1],"hash":"9a441a599d6f18fe38364a45d3d60c1f","name":"baby","type":"png"});
 }, 601, null, "msMatch/assets/baby.png");
 __d(/* msMatch/assets/mouse.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":2834,"height":2150,"scales":[1],"hash":"fa72ecf71e17ec0b6982eb1f53a46fd1","name":"mouse","type":"png"});
@@ -79691,6 +79633,62 @@ var answerIndex=exclude?exclude:getRandomIndex(randomNumbersCollection);
 return{answerIndex:answerIndex,shuffledArray:shuffle(randomNumbersCollection)};
 };
 }, 639, null, "msMatch/utils/helper.js");
+__d(/* msMatch/app/db/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+updateStudentDataAsync=updateStudentDataAsync;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+saveStudentAsync=saveStudentAsync;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+resetDB=resetDB;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds,selectedSoundIndex,correctSoundIndex){var previousValue,displayedSoundsNames,data,newVal;return regeneratorRuntime.async(function updateStudentDataAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 3:previousValue=_context.sent;console.log(previousValue);displayedSoundsNames=displayedSounds.map(function(item){return visualProp[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSoundsNames,selectedAnswer:visualProp[selectedSoundIndex],correctAnswer:visualProp[correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+currentStudent.id);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](0);console.log('AsyncStorage error: '+_context.t0.message);case 19:case'end':return _context.stop();}}},null,this,[[0,16]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context2.next=6;break;}_context2.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context2.next=7;break;case 6:throw"Invalid student object";case 7:_context2.next=12;break;case 9:_context2.prev=9;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 12:case'end':return _context2.stop();}}},null,this,[[0,9]]);}function resetDB(){
+
+}
+}, 594, null, "msMatch/app/db/index.js");
 __d(/* msMatch/app/sagas/userSaga.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _effects=require(637 /* redux-saga/effects */);
 var _helper=require(639 /* ../../utils/helper */);
 var _db=require(594 /* ../db */);var _marked=[

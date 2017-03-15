@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import StudentItem from './StudentItem';
 
-import { addStudent, setStudent } from '../actions';
+import { setStudent } from '../../actions';
 
 class Students extends Component {
     constructor(props, context) {

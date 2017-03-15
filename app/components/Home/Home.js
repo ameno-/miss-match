@@ -12,11 +12,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { getRecord } from '../db'
-
-import Students from './Students';
-import { selection } from '../actions';
-import Options from './Options';
+import Students from '../Students/Students';
+import { selection } from '../../actions';
+import Options from '../Options/Options';
 
 class Home extends Component {
     constructor(props, context) {

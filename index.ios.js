@@ -18,7 +18,7 @@ import {
   TabBarIOS
 } from 'react-native';
 
-import Home from './app/components/Home';
+import Home from './app/components/Home/Home';
 import { configureStore } from './app/store';
 
 export default class msMatch extends Component {

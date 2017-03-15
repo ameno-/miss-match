@@ -8,17 +8,17 @@ class Options extends Component {
     getImageSrc(visualProp){
         switch (visualProp) {
             case "baby":
-                return require('../../assets/baby.png');
+                return require('../../../assets/baby.png');
             case "mouse":
-                return require('../../assets/mouse.png');
+                return require('../../../assets/mouse.png');
             case "train":
-                return require('../../assets/train.png');
+                return require('../../../assets/train.png');
             case "pizza":
-                return require('../../assets/pizza.png');
+                return require('../../../assets/pizza.png');
             case "airplane":
-                return require('../../assets/airplane.png');
+                return require('../../../assets/airplane.png');
             case "snake":
-                return require('../../assets/snake.png');
+                return require('../../../assets/snake.png');
         }
     }
     render() {
