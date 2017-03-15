@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native';
 
 /**
- * save a student
+ * update student in DB
  * @param {object} current student - currently active student. Contains student id, name, and teacher name
  * @param {array} visual prop - the visual props being used.
  * @param {array} displayed sounds - sounds being displayed when selection was made
@@ -27,6 +27,7 @@ export async function updateStudentDataAsync(currentStudent, visualProp, display
         console.log(JSON.parse(newVal));
 
         console.log('Saved answer to disk for student:' + currentStudent.id);
+
     } catch (error) {
         console.log('AsyncStorage error: ' + error.message);
     }
@@ -39,7 +40,7 @@ export async function saveStudentAsync(currentStudent) {
     try {
         if (currentStudent && currentStudent.id && currentStudent.studentName && currentStudent.teacherName) {
 
-            await AsyncStorage.setItem(currentStudent.id, JSON.stringify(currentStudent));  
+            await AsyncStorage.setItem(currentStudent.id, JSON.stringify(currentStudent));
 
         } else {
             throw "Invalid student object";
@@ -49,10 +50,6 @@ export async function saveStudentAsync(currentStudent) {
     }
 }
 
-export function saveRecord(data) {
+export function resetDB() {
     //await AsyncStorage.setItem()
 }
-
-export function deleteRecord() {}
-
-export function getManyRecords() {}

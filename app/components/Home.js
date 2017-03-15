@@ -22,27 +22,29 @@ class Home extends Component {
     constructor(props, context) {
         super(props, context);
         this._navigateStudents = this._navigateStudents.bind(this);
-        this.buildSoundsIndex = this.buildSoundsIndex.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
     }
 
-    answerSelected(sound) {
-        let props = this.props;
-        props.dispatch(selection(sound));
-        props.dispatch({type:"SUBMIT", correctSoundIndex: props.correctSoundIndex, selectedSoundIndex: sound, testIndex: null, currentStudent: props.currentStudent, visualProp: props.visualProp, displayedSounds: props.displayedSounds});
-    }
+answerSelected(sound) {
+    let props = this.props;
+    props.dispatch(selection(sound));
+    props.dispatch({
+        type: "SUBMIT",
+        correctSoundIndex: props.correctSoundIndex,
+        selectedSoundIndex: sound,
+        testIndex: null,
+        currentStudent: props.currentStudent,
+        visualProp: props.visualProp,
+        displayedSounds: props.displayedSounds
+    });
+}
 
-    buildSoundsIndex (testIndex = null){
-        console.log(this.props)
-        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: this.props.selectedSoundIndex, testIndex});
-    }
-
-    _navigateStudents() {
-        this.props.navigator.push({
-            component: Students,
-            navigationBarHidden: true
-        })
-    }
+_navigateStudents() {
+    this
+        .props
+        .navigator
+        .push({component: Students, navigationBarHidden: true})
+}
 
     render() {
         let optionsList = this.props.displayedSounds.map((sound, i) => {

@@ -1,6 +1,6 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { getRandomCollection } from '../../utils/helper';
-import { updateStudentDataAsync } from '../db';
+import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {getRandomCollection} from '../../utils/helper';
+import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
   try {
@@ -25,4 +25,4 @@ function * selectionSaga() {
   yield takeEvery("SUBMIT", selectionChanged);
 }
 
-export default [selectionSaga];
+export default[selectionSaga];

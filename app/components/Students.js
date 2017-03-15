@@ -49,12 +49,14 @@ class Students extends Component {
     }
 
 selectStudent(selected) {
-    // this.props.dispatch({type: "CHANGE_STUDENT", studentName: selected.studentName, teacherName: selected.teacherName, id: selected.id});
+    let props = this.props;
+    
+    props.dispatch(setStudent({
+        studentName: selected.studentName, 
+        teacherName: selected.teacherName, 
+        id: selected.id}));
 
-    this.props.dispatch(setStudent({studentName: selected.studentName, teacherName: selected.teacherName, id: selected.id }));
-
-    this
-        .props
+    props
         .navigator
         .pop();
 }
