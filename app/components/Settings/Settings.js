@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Alert
-} from 'react-native';
+import {connect} from 'react-redux';
+import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
+
+import List from './List';
 
 class Settings extends Component {
     constructor() {
@@ -15,20 +12,33 @@ class Settings extends Component {
         this.onValueChange = this
             .onValueChange
             .bind(this);
-        this.onValueChange = this
-            .onValueChange
-            .bind(this);
         this.state = {
-            switchValue: false,
-            loggedIn: false
+            switchValue: false
         };
     }
-    toggleAuthView() {
-        this.setState({toggleAuthView: !this.state.toggleAuthView});
-    }
+
     onValueChange(value) {
         this.setState({switchValue: value});
+        console.log(state.switchValue)
     }
+
+    buildLingSoundProps() {
+        let maxSoundOptions = [1,2,3,4,5,6];
+        let itemListProps = {};
+
+        itemListProps.items = maxSoundOptions.map((item) => {
+            return {title: item}
+        })
+        return itemListProps;
+    }
+
+    _navigateToSubPage(pageName, props) {
+        this
+            .props
+            .navigator
+            .push({component: List, title: pageName, navigationBarHidden: true, passProps: props})
+    }
+
     render() {
         var bgColor = '#DCE3F4';
         return (
@@ -63,26 +73,16 @@ class Settings extends Component {
                             marginTop: 15
                         }}/>
                         <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {require('./images/airplane.png')} />}
                             hasSwitch={true}
                             switchState={this.state.switchValue}
                             switchOnValueChange={this.onValueChange}
                             hasNavArrow={false}
-                            title='Airplane Mode'/>
+                            title='Completely random?'/>
                         <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/wifi.png')
-                        } />}
-                            title='Wi-Fi'
-                            titleInfo='Bill Wi The Science Fi'
+                            title='Number of Ling sounds'
+                            titleInfo='3'
                             titleInfoStyle={styles.titleInfoStyle}
-                            onPress={() => Alert.alert('Route to Wifi Page')}/>
+                            onPress={() => this._navigateToSubPage("Number of Ling sounds", {lingSoundCount: this.props.lingSoundCount})}/>
                         <SettingsList.Item
                             icon={< Image style = {
                             styles.imageStyle
@@ -128,45 +128,8 @@ class Settings extends Component {
                             title='Notifications'
                             onPress={() => Alert.alert('Route To Notifications Page')}/>
                         <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/control.png')
-                        } />}
                             title='Control Center'
                             onPress={() => Alert.alert('Route To Control Center Page')}/>
-                        <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/dnd.png')
-                        } />}
-                            title='Do Not Disturb'
-                            onPress={() => Alert.alert('Route To Do Not Disturb Page')}/>
-                        <SettingsList.Header
-                            headerStyle={{
-                            marginTop: 15
-                        }}/>
-                        <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/general.png')
-                        } />}
-                            title='General'
-                            onPress={() => Alert.alert('Route To General Page')}/>
-                        <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/display.png')
-                        } />}
-                            title='Display & Brightness'
-                            onPress={() => Alert.alert('Route To Display Page')}/>
                     </SettingsList>
                 </View>
             </View>
@@ -175,16 +138,20 @@ class Settings extends Component {
 }
 
 const styles = StyleSheet.create({
-  imageStyle:{
-    marginLeft:15,
-    alignSelf:'center',
-    height:30,
-    width:30
-  },
-  titleInfoStyle:{
-    fontSize:16,
-    color: '#8e8e93'
-  }
+    imageStyle: {
+        marginLeft: 15,
+        alignSelf: 'center',
+        height: 30,
+        width: 30
+    },
+    titleInfoStyle: {
+        fontSize: 16,
+        color: '#8e8e93'
+    }
 });
 
-export default Settings;
+const mapStateToProps = (store) => {
+    return {visualProp: store.visualProp, displayedSounds: store.displayedSounds, manualTestIndex: store.manualTestIndex, lingSoundCount: store.lingSoundCount}
+}
+
+module.exports = connect(mapStateToProps)(Settings)

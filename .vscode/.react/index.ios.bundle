@@ -70308,6 +70308,7 @@ var _reactNative=require(79 /* react-native */);
 
 
 
+
 var _Ionicons=require(439 /* react-native-vector-icons/Ionicons */);var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 
 var _Students=require(642 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
@@ -70330,10 +70331,11 @@ props.dispatch({
 type:"SUBMIT",
 correctSoundIndex:props.correctSoundIndex,
 selectedSoundIndex:sound,
-testIndex:null,
+testIndex:props.manualTestIndex,
 currentStudent:props.currentStudent,
 visualProp:props.visualProp,
-displayedSounds:props.displayedSounds});
+displayedSounds:props.displayedSounds,
+lingSoundCount:props.lingSoundCount});
 
 }},{key:'_navigateStudents',value:function _navigateStudents()
 
@@ -70478,6 +70480,8 @@ minIndex:store.minIndex,
 maxIndex:store.maxIndex,
 currentStudent:store.currentStudent,
 students:store.students,
+manualTestIndex:store.manualTestIndex,
+lingSoundCount:store.lingSoundCount,
 state:store};
 
 };
@@ -76381,12 +76385,6 @@ color:'#808782'}});exports.default=
 
 
 
-
-
-
-
-
-
 StudentItem;
 }, 643, null, "msMatch/app/components/Students/StudentItem.js");
 __d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
@@ -76403,9 +76401,10 @@ student:student};
 
 };
 
-exports.redo=function(){
+exports.setLingSoundCount=function(count){
 return{
-type:"REDO"};
+type:"LING_SOUND_COUNT",
+count:count};
 
 };
 }, 599, null, "msMatch/app/actions/index.js");
@@ -76476,16 +76475,13 @@ __d(/* msMatch/assets/airplane.png */function(global, require, module, exports) 
 }, 605, null, "msMatch/assets/airplane.png");
 __d(/* msMatch/assets/snake.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":555,"height":392,"scales":[1],"hash":"8152c6fd8fa4ff2a6a04957f35f3cf52","name":"snake","type":"png"});
 }, 606, null, "msMatch/assets/snake.png");
-__d(/* msMatch/app/components/Settings/Settings.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Settings/Settings.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactRedux=require(42 /* react-redux */);
 var _reactNative=require(79 /* react-native */);
 
+var _reactNativeSettingsList=require(646 /* react-native-settings-list */);var _reactNativeSettingsList2=babelHelpers.interopRequireDefault(_reactNativeSettingsList);
 
-
-
-
-
-
-var _reactNativeSettingsList=require(646 /* react-native-settings-list */);var _reactNativeSettingsList2=babelHelpers.interopRequireDefault(_reactNativeSettingsList);var
+var _List=require(658 /* ./List */);var _List2=babelHelpers.interopRequireDefault(_List);var
 
 Settings=function(_Component){babelHelpers.inherits(Settings,_Component);
 function Settings(){babelHelpers.classCallCheck(this,Settings);var _this=babelHelpers.possibleConstructorReturn(this,(Settings.__proto__||Object.getPrototypeOf(Settings)).call(this));
@@ -76493,21 +76489,34 @@ function Settings(){babelHelpers.classCallCheck(this,Settings);var _this=babelHe
 _this.onValueChange=_this.
 onValueChange.
 bind(_this);
-_this.onValueChange=_this.
-onValueChange.
-bind(_this);
 _this.state={
-switchValue:false,
-loggedIn:false};return _this;
+switchValue:false};return _this;
 
-}babelHelpers.createClass(Settings,[{key:'toggleAuthView',value:function toggleAuthView()
-{
-this.setState({toggleAuthView:!this.state.toggleAuthView});
-}},{key:'onValueChange',value:function onValueChange(
+}babelHelpers.createClass(Settings,[{key:'onValueChange',value:function onValueChange(
+
 value){
 this.setState({switchValue:value});
-}},{key:'render',value:function render()
+console.log(state.switchValue);
+}},{key:'buildLingSoundProps',value:function buildLingSoundProps()
+
 {
+var maxSoundOptions=[1,2,3,4,5,6];
+var itemListProps={};
+
+itemListProps.items=maxSoundOptions.map(function(item){
+return{title:item};
+});
+return itemListProps;
+}},{key:'_navigateToSubPage',value:function _navigateToSubPage(
+
+pageName,props){
+this.
+props.
+navigator.
+push({component:_List2.default,title:pageName,navigationBarHidden:true,passProps:props});
+}},{key:'render',value:function render()
+
+{var _this2=this;
 var bgColor='#DCE3F4';
 return(
 _react2.default.createElement(_reactNative.View,{
@@ -76541,26 +76550,16 @@ headerStyle:{
 marginTop:15}}),
 
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:require(648 /* ./images/airplane.png */)}),
 hasSwitch:true,
 switchState:this.state.switchValue,
 switchOnValueChange:this.onValueChange,
 hasNavArrow:false,
-title:'Airplane Mode'}),
+title:'Completely random?'}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(649 /* ./images/wifi.png */)}),
-
-title:'Wi-Fi',
-titleInfo:'Bill Wi The Science Fi',
+title:'Number of Ling sounds',
+titleInfo:'3',
 titleInfoStyle:styles.titleInfoStyle,
-onPress:function onPress(){return _reactNative.Alert.alert('Route to Wifi Page');}}),
+onPress:function onPress(){return _this2._navigateToSubPage("Number of Ling sounds",{lingSoundCount:_this2.props.lingSoundCount});}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
 icon:_react2.default.createElement(_reactNative.Image,{style:
 styles.imageStyle,
@@ -76606,45 +76605,8 @@ require(653 /* ./images/notifications.png */)}),
 title:'Notifications',
 onPress:function onPress(){return _reactNative.Alert.alert('Route To Notifications Page');}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(654 /* ./images/control.png */)}),
-
 title:'Control Center',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Control Center Page');}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(655 /* ./images/dnd.png */)}),
-
-title:'Do Not Disturb',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Do Not Disturb Page');}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Header,{
-headerStyle:{
-marginTop:15}}),
-
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(656 /* ./images/general.png */)}),
-
-title:'General',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To General Page');}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(657 /* ./images/display.png */)}),
-
-title:'Display & Brightness',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Display Page');}})))));
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Control Center Page');}})))));
 
 
 
@@ -76661,11 +76623,15 @@ width:30},
 
 titleInfoStyle:{
 fontSize:16,
-color:'#8e8e93'}});exports.default=
+color:'#8e8e93'}});
 
 
 
-Settings;
+var mapStateToProps=function mapStateToProps(store){
+return{visualProp:store.visualProp,displayedSounds:store.displayedSounds,manualTestIndex:store.manualTestIndex,lingSoundCount:store.lingSoundCount};
+};
+
+module.exports=(0,_reactRedux.connect)(mapStateToProps)(Settings);
 }, 645, null, "msMatch/app/components/Settings/Settings.js");
 __d(/* react-native-settings-list/index.js */function(global, require, module, exports) {'use strict';
 
@@ -77000,10 +76966,50 @@ return null;
 }, 646, null, "react-native-settings-list/index.js");
 __d(/* react-native-settings-list/img/icon-arrow-settings.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-native-settings-list/img","width":8,"height":13,"scales":[1,2,3],"hash":"566f14091c335d8c556559639472f74e","name":"icon-arrow-settings","type":"png"});
 }, 647, null, "react-native-settings-list/img/icon-arrow-settings.png");
-__d(/* msMatch/app/components/Settings/images/airplane.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"0a3ce39bc8969272b80f19b6e024f584","name":"airplane","type":"png"});
-}, 648, null, "msMatch/app/components/Settings/images/airplane.png");
-__d(/* msMatch/app/components/Settings/images/wifi.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"8438ec043f922762a5b6bf2e6e7e0363","name":"wifi","type":"png"});
-}, 649, null, "msMatch/app/components/Settings/images/wifi.png");
+__d(/* msMatch/app/components/Settings/List.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require(79 /* react-native */);var
+List=function(_Component){babelHelpers.inherits(List,_Component);function List(){babelHelpers.classCallCheck(this,List);return babelHelpers.possibleConstructorReturn(this,(List.__proto__||Object.getPrototypeOf(List)).apply(this,arguments));}babelHelpers.createClass(List,[{key:'render',value:function render()
+{var _this2=this;var
+items=this.props.items;
+var listItems=items.map(function(item){
+return _react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},
+item.title);
+
+});
+
+return(
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress;}},
+_react2.default.createElement(_reactNative.View,{style:styles.listContainer},
+listItems)));
+
+
+
+}}]);return List;}(_react.Component);
+
+
+var styles=_reactNative.StyleSheet.create({
+listContainer:{
+padding:16,
+borderTopWidth:1,
+borderBottomWidth:1,
+marginBottom:-1,
+borderColor:'#ccc',
+flexDirection:'column',
+justifyContent:'space-between',
+alignItems:'flex-start'},
+
+listItemTitle:{
+fontSize:18,
+fontWeight:'bold'},
+
+
+listItemSubTitleText:{
+color:'#808782'}});exports.default=
+
+
+
+List;
+}, 658, null, "msMatch/app/components/Settings/List.js");
 __d(/* msMatch/app/components/Settings/images/blutooth.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"47255fe538e0ac5304666d4466500c71","name":"blutooth","type":"png"});
 }, 650, null, "msMatch/app/components/Settings/images/blutooth.png");
 __d(/* msMatch/app/components/Settings/images/cellular.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"eda0422ef5c4abb8cf738942f49b4ea9","name":"cellular","type":"png"});
@@ -77012,14 +77018,6 @@ __d(/* msMatch/app/components/Settings/images/hotspot.png */function(global, req
 }, 652, null, "msMatch/app/components/Settings/images/hotspot.png");
 __d(/* msMatch/app/components/Settings/images/notifications.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"0b5463062db6a4d66b16791f87dec37d","name":"notifications","type":"png"});
 }, 653, null, "msMatch/app/components/Settings/images/notifications.png");
-__d(/* msMatch/app/components/Settings/images/control.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"cc0a91928ec090899f71bab4582927ef","name":"control","type":"png"});
-}, 654, null, "msMatch/app/components/Settings/images/control.png");
-__d(/* msMatch/app/components/Settings/images/dnd.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"c715452639913e32c53ab920e6f69092","name":"dnd","type":"png"});
-}, 655, null, "msMatch/app/components/Settings/images/dnd.png");
-__d(/* msMatch/app/components/Settings/images/general.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"7b7a83458caa72491c27cda857ede687","name":"general","type":"png"});
-}, 656, null, "msMatch/app/components/Settings/images/general.png");
-__d(/* msMatch/app/components/Settings/images/display.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"cff3917223a4d2dd6f205b6f609b618b","name":"display","type":"png"});
-}, 657, null, "msMatch/app/components/Settings/images/display.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
 var _reduxPersist=require(608 /* redux-persist */);
@@ -77038,7 +77036,9 @@ displayedSounds:[0,1,2],
 minIndex:0,
 maxIndex:5,
 students:[],
-currentStudent:{}};
+currentStudent:{},
+manualTestIndex:null,
+lingSoundCount:3};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
@@ -80094,6 +80094,11 @@ case'QUESTIONS_REDO':
 return babelHelpers.extends({},
 state);
 
+case'LING_SOUND_COUNT':
+return babelHelpers.extends({},
+state,{
+lingSoundCount:action.lingSoundCount});
+
 default:
 return state;}
 
@@ -80136,7 +80141,8 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=6;break;}_context.next=4;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,3)});case 4:_context.next=8;break;case 6:_context.next=8;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 8:console.log(action);_context.next=11;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 11:_context.next=19;break;case 13:_context.prev=13;_context.t0=_context['catch'](0);_context.next=17;return console.log("done fucked up");case 17:_context.next=19;return console.log(_context.t0);case 19:case'end':return _context.stop();}}},_marked[0],this,[[0,13]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action.numberOfLingToTest);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=7;break;}_context.next=5;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,action.lingSoundCount)});case 5:_context.next=9;break;case 7:_context.next=9;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 9:console.log(action);_context.next=12;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 12:_context.next=20;break;case 14:_context.prev=14;_context.t0=_context['catch'](0);_context.next=18;return console.log("done fucked up");case 18:_context.next=20;return console.log(_context.t0);case 20:case'end':return _context.stop();}}},_marked[0],this,[[0,14]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

@@ -16,7 +16,9 @@ const defaultState = {
     minIndex: 0,
     maxIndex: 5,
     students: [],
-    currentStudent: {}
+    currentStudent: {},
+    manualTestIndex: null,
+    lingSoundCount: 3
 }
 
 export const configureStore = (initialState = defaultState) => {

@@ -36,6 +36,11 @@ module.exports = (state={}, action) => {
             return {
                 ...state
             }
+        case 'LING_SOUND_COUNT':
+            return {
+                ...state,
+                lingSoundCount: action.lingSoundCount
+            }
         default:
             return state;
     }

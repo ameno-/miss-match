@@ -12,8 +12,9 @@ exports.setStudent = (student) => {
     }
 }
 
-exports.redo = () => {
+exports.setLingSoundCount = (count) => {
     return {
-        type: "REDO",
+        type: "LING_SOUND_COUNT",
+        count
     }
 }

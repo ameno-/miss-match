@@ -43,13 +43,7 @@ const styles = StyleSheet.create({
     teacherNameText: {
         color: '#808782'
     }
-})
-
-// const mapStateToProps = (store) => {
-//    return { 
-//        students: store.students
-//    }
-// }
+});
 
 
 export default StudentItem;

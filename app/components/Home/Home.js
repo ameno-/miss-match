@@ -10,6 +10,7 @@ import {
     Alert,
     AsyncStorage
 } from 'react-native';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Students from '../Students/Students';
@@ -32,10 +33,11 @@ class Home extends Component {
             type: "SUBMIT",
             correctSoundIndex: props.correctSoundIndex,
             selectedSoundIndex: sound,
-            testIndex: null,
+            testIndex: props.manualTestIndex,
             currentStudent: props.currentStudent,
             visualProp: props.visualProp,
-            displayedSounds: props.displayedSounds
+            displayedSounds: props.displayedSounds,
+            lingSoundCount: props.lingSoundCount
         });
     }
 
@@ -180,6 +182,8 @@ const mapStateToProps = (store) => {
         maxIndex: store.maxIndex,
         currentStudent: store.currentStudent,
         students: store.students,
+        manualTestIndex: store.manualTestIndex,
+        lingSoundCount: store.lingSoundCount,
         state: store
     }
 }
