@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ScrollView} from 'react-native';
 class List extends Component {
     render() {
-        let {items} = this.props
-        let listItems = items.map((item) => {
-            return <Text style={styles.listItemTitle}>
-                {item.title}
-            </Text>
-        })
+        let {items} = this.props;
+
+        const renderList = () => {
+            return items.map((item, i) => {
+                return (
+                    <TouchableOpacity onPress={() => this.props.handlePress(i)} key={i}>
+                    <View style={styles.listContainer}>
+                        <Text style={styles.listItemTitle}>
+                            {item.title}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                )
+            })
+        }
 
         return (
-            <TouchableOpacity onPress={() => this.props.handlePress}>
-                <View style={styles.listContainer}>
-                    {listItems}
-                </View>
-            </TouchableOpacity>
+            <ScrollView automaticallyAdjustContentInsets={false}>
+                {renderList()}
+            </ScrollView>
         );
     }
 }

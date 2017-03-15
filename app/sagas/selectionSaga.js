@@ -4,7 +4,7 @@ import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
   try {
-    console.log(action.numberOfLingToTest)
+    console.log(action.lingSoundCount)
     if (action.selectedSoundIndex === action.correctSoundIndex) {
       yield put({
         type: "QUESTIONS_NEW",

@@ -4,14 +4,17 @@ import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
 
+import { setLingSoundCount } from '../../actions';
 import List from './List';
 
 class Settings extends Component {
-    constructor() {
-        super();
-        this.onValueChange = this
-            .onValueChange
-            .bind(this);
+    constructor(props, context) {
+        super(props, context);
+
+        this.onValueChange = this.onValueChange.bind(this);
+
+        this.updateLingSoundCount = this.updateLingSoundCount.bind(this);
+
         this.state = {
             switchValue: false
         };
@@ -19,24 +22,29 @@ class Settings extends Component {
 
     onValueChange(value) {
         this.setState({switchValue: value});
-        console.log(state.switchValue)
+        console.log(this.state.switchValue)
     }
 
-    buildLingSoundProps() {
+    updateLingSoundCount(newCount) {
+        console.log(newCount)
+        this.props.dispatch(setLingSoundCount(newCount));
+        this.props.navigator.pop();
+    }
+
+    _navigateToLingSoundsPage() {
+        //bad code. Improve it later my nigga.
         let maxSoundOptions = [1,2,3,4,5,6];
         let itemListProps = {};
-
         itemListProps.items = maxSoundOptions.map((item) => {
             return {title: item}
-        })
-        return itemListProps;
-    }
+        });
 
-    _navigateToSubPage(pageName, props) {
-        this
+        itemListProps.handlePress = this.updateLingSoundCount;
+
+         this
             .props
             .navigator
-            .push({component: List, title: pageName, navigationBarHidden: true, passProps: props})
+            .push({component: List, title: "Number of Ling sounds", navigationBarHidden: false, passProps: itemListProps})
     }
 
     render() {
@@ -80,9 +88,9 @@ class Settings extends Component {
                             title='Completely random?'/>
                         <SettingsList.Item
                             title='Number of Ling sounds'
-                            titleInfo='3'
+                            titleInfo={(this.props.lingSoundCount + 1).toString()}
                             titleInfoStyle={styles.titleInfoStyle}
-                            onPress={() => this._navigateToSubPage("Number of Ling sounds", {lingSoundCount: this.props.lingSoundCount})}/>
+                            onPress={() => this._navigateToLingSoundsPage()}/>
                         <SettingsList.Item
                             icon={< Image style = {
                             styles.imageStyle

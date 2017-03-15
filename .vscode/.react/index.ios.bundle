@@ -76481,14 +76481,17 @@ var _reactNative=require(79 /* react-native */);
 
 var _reactNativeSettingsList=require(646 /* react-native-settings-list */);var _reactNativeSettingsList2=babelHelpers.interopRequireDefault(_reactNativeSettingsList);
 
+var _actions=require(599 /* ../../actions */);
 var _List=require(658 /* ./List */);var _List2=babelHelpers.interopRequireDefault(_List);var
 
 Settings=function(_Component){babelHelpers.inherits(Settings,_Component);
-function Settings(){babelHelpers.classCallCheck(this,Settings);var _this=babelHelpers.possibleConstructorReturn(this,(Settings.__proto__||Object.getPrototypeOf(Settings)).call(this));
+function Settings(props,context){babelHelpers.classCallCheck(this,Settings);var _this=babelHelpers.possibleConstructorReturn(this,(Settings.__proto__||Object.getPrototypeOf(Settings)).call(this,
+props,context));
 
-_this.onValueChange=_this.
-onValueChange.
-bind(_this);
+_this.onValueChange=_this.onValueChange.bind(_this);
+
+_this.updateLingSoundCount=_this.updateLingSoundCount.bind(_this);
+
 _this.state={
 switchValue:false};return _this;
 
@@ -76496,24 +76499,29 @@ switchValue:false};return _this;
 
 value){
 this.setState({switchValue:value});
-console.log(state.switchValue);
-}},{key:'buildLingSoundProps',value:function buildLingSoundProps()
+console.log(this.state.switchValue);
+}},{key:'updateLingSoundCount',value:function updateLingSoundCount(
+
+newCount){
+console.log(newCount);
+this.props.dispatch((0,_actions.setLingSoundCount)(newCount));
+this.props.navigator.pop();
+}},{key:'_navigateToLingSoundsPage',value:function _navigateToLingSoundsPage()
 
 {
+
 var maxSoundOptions=[1,2,3,4,5,6];
 var itemListProps={};
-
 itemListProps.items=maxSoundOptions.map(function(item){
 return{title:item};
 });
-return itemListProps;
-}},{key:'_navigateToSubPage',value:function _navigateToSubPage(
 
-pageName,props){
+itemListProps.handlePress=this.updateLingSoundCount;
+
 this.
 props.
 navigator.
-push({component:_List2.default,title:pageName,navigationBarHidden:true,passProps:props});
+push({component:_List2.default,title:"Number of Ling sounds",navigationBarHidden:false,passProps:itemListProps});
 }},{key:'render',value:function render()
 
 {var _this2=this;
@@ -76557,9 +76565,9 @@ hasNavArrow:false,
 title:'Completely random?'}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
 title:'Number of Ling sounds',
-titleInfo:'3',
+titleInfo:(this.props.lingSoundCount+1).toString(),
 titleInfoStyle:styles.titleInfoStyle,
-onPress:function onPress(){return _this2._navigateToSubPage("Number of Ling sounds",{lingSoundCount:_this2.props.lingSoundCount});}}),
+onPress:function onPress(){return _this2._navigateToLingSoundsPage();}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
 icon:_react2.default.createElement(_reactNative.Image,{style:
 styles.imageStyle,
@@ -76971,17 +76979,24 @@ var _reactNative=require(79 /* react-native */);var
 List=function(_Component){babelHelpers.inherits(List,_Component);function List(){babelHelpers.classCallCheck(this,List);return babelHelpers.possibleConstructorReturn(this,(List.__proto__||Object.getPrototypeOf(List)).apply(this,arguments));}babelHelpers.createClass(List,[{key:'render',value:function render()
 {var _this2=this;var
 items=this.props.items;
-var listItems=items.map(function(item){
-return _react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},
-item.title);
+
+var renderList=function renderList(){
+return items.map(function(item,i){
+return(
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress(i);},key:i},
+_react2.default.createElement(_reactNative.View,{style:styles.listContainer},
+_react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},
+item.title))));
+
+
+
 
 });
+};
 
 return(
-_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress;}},
-_react2.default.createElement(_reactNative.View,{style:styles.listContainer},
-listItems)));
-
+_react2.default.createElement(_reactNative.ScrollView,{automaticallyAdjustContentInsets:false},
+renderList()));
 
 
 }}]);return List;}(_react.Component);
@@ -80097,7 +80112,7 @@ state);
 case'LING_SOUND_COUNT':
 return babelHelpers.extends({},
 state,{
-lingSoundCount:action.lingSoundCount});
+lingSoundCount:action.count});
 
 default:
 return state;}
@@ -80142,7 +80157,7 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action.numberOfLingToTest);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=7;break;}_context.next=5;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,action.lingSoundCount)});case 5:_context.next=9;break;case 7:_context.next=9;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 9:console.log(action);_context.next=12;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 12:_context.next=20;break;case 14:_context.prev=14;_context.t0=_context['catch'](0);_context.next=18;return console.log("done fucked up");case 18:_context.next=20;return console.log(_context.t0);case 20:case'end':return _context.stop();}}},_marked[0],this,[[0,14]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action.lingSoundCount);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=7;break;}_context.next=5;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,action.lingSoundCount)});case 5:_context.next=9;break;case 7:_context.next=9;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 9:console.log(action);_context.next=12;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 12:_context.next=20;break;case 14:_context.prev=14;_context.t0=_context['catch'](0);_context.next=18;return console.log("done fucked up");case 18:_context.next=20;return console.log(_context.t0);case 20:case'end':return _context.stop();}}},_marked[0],this,[[0,14]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

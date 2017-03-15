@@ -39,7 +39,7 @@ module.exports = (state={}, action) => {
         case 'LING_SOUND_COUNT':
             return {
                 ...state,
-                lingSoundCount: action.lingSoundCount
+                lingSoundCount: action.count
             }
         default:
             return state;
