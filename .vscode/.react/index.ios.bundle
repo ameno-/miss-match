@@ -70312,12 +70312,14 @@ var _Ionicons=require(439 /* react-native-vector-icons/Ionicons */);var _Ionicon
 
 var _Students=require(642 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
 var _actions=require(599 /* ../../actions */);
-var _Options=require(644 /* ../Options/Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);var
+var _Options=require(644 /* ../Options/Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);
+var _Settings=require(645 /* ../Settings/Settings */);var _Settings2=babelHelpers.interopRequireDefault(_Settings);var
 
 Home=function(_Component){babelHelpers.inherits(Home,_Component);
 function Home(props,context){babelHelpers.classCallCheck(this,Home);var _this=babelHelpers.possibleConstructorReturn(this,(Home.__proto__||Object.getPrototypeOf(Home)).call(this,
 props,context));
 _this._navigateStudents=_this._navigateStudents.bind(_this);
+_this._navigateSettings=_this._navigateSettings.bind(_this);
 _this.answerSelected=_this.answerSelected.bind(_this);return _this;
 }babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
 
@@ -70340,17 +70342,26 @@ this.
 props.
 navigator.
 push({component:_Students2.default,navigationBarHidden:true});
+}},{key:'_navigateSettings',value:function _navigateSettings()
+
+{
+this.
+props.
+navigator.
+push({component:_Settings2.default,title:"Settings",navigationBarHidden:false});
 }},{key:'render',value:function render()
 
 {var _this2=this;
-var optionsList=this.props.displayedSounds.map(function(sound,i){
+var optionsList=this.
+props.
+displayedSounds.
+map(function(sound,i){
 return _react2.default.createElement(_Options2.default,{
 onSelected:_this2.answerSelected,
 visualProp:_this2.props.visualProp[sound],
 sound:sound,
 key:i,
 accessibilityLabel:'Symbol select'});
-
 });
 var peopleIcon=_react2.default.createElement(_Ionicons2.default,{name:'ios-people-outline',size:30,color:'white'});
 var settingsIcon=_react2.default.createElement(_Ionicons2.default,{name:'ios-settings-outline',size:30,color:'white'});
@@ -70366,7 +70377,9 @@ _react2.default.createElement(_reactNative.Text,null,peopleIcon))),
 _react2.default.createElement(_reactNative.Text,{style:styles.title},'Miss Match'),
 
 _react2.default.createElement(_reactNative.View,{style:styles.topBarRight},
-_react2.default.createElement(_reactNative.Text,null,settingsIcon))),
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:this._navigateSettings},
+_react2.default.createElement(_reactNative.Text,null,settingsIcon)))),
+
 
 
 
@@ -76463,6 +76476,550 @@ __d(/* msMatch/assets/airplane.png */function(global, require, module, exports) 
 }, 605, null, "msMatch/assets/airplane.png");
 __d(/* msMatch/assets/snake.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":555,"height":392,"scales":[1],"hash":"8152c6fd8fa4ff2a6a04957f35f3cf52","name":"snake","type":"png"});
 }, 606, null, "msMatch/assets/snake.png");
+__d(/* msMatch/app/components/Settings/Settings.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+var _reactNative=require(79 /* react-native */);
+
+
+
+
+
+
+
+var _reactNativeSettingsList=require(646 /* react-native-settings-list */);var _reactNativeSettingsList2=babelHelpers.interopRequireDefault(_reactNativeSettingsList);var
+
+Settings=function(_Component){babelHelpers.inherits(Settings,_Component);
+function Settings(){babelHelpers.classCallCheck(this,Settings);var _this=babelHelpers.possibleConstructorReturn(this,(Settings.__proto__||Object.getPrototypeOf(Settings)).call(this));
+
+_this.onValueChange=_this.
+onValueChange.
+bind(_this);
+_this.onValueChange=_this.
+onValueChange.
+bind(_this);
+_this.state={
+switchValue:false,
+loggedIn:false};return _this;
+
+}babelHelpers.createClass(Settings,[{key:'toggleAuthView',value:function toggleAuthView()
+{
+this.setState({toggleAuthView:!this.state.toggleAuthView});
+}},{key:'onValueChange',value:function onValueChange(
+value){
+this.setState({switchValue:value});
+}},{key:'render',value:function render()
+{
+var bgColor='#DCE3F4';
+return(
+_react2.default.createElement(_reactNative.View,{
+style:{
+backgroundColor:'#EFEFF4',
+flex:1}},
+
+_react2.default.createElement(_reactNative.View,{
+style:{
+borderBottomWidth:1,
+backgroundColor:'#f7f7f8',
+borderColor:'#c8c7cc'}},
+
+_react2.default.createElement(_reactNative.Text,{
+style:{
+alignSelf:'center',
+marginTop:30,
+marginBottom:10,
+fontWeight:'bold',
+fontSize:16}},'Settings')),
+
+
+_react2.default.createElement(_reactNative.View,{
+style:{
+backgroundColor:'#EFEFF4',
+flex:1}},
+
+_react2.default.createElement(_reactNativeSettingsList2.default,{borderColor:'#c8c7cc',defaultItemSize:50},
+_react2.default.createElement(_reactNativeSettingsList2.default.Header,{
+headerStyle:{
+marginTop:15}}),
+
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:require(648 /* ./images/airplane.png */)}),
+hasSwitch:true,
+switchState:this.state.switchValue,
+switchOnValueChange:this.onValueChange,
+hasNavArrow:false,
+title:'Airplane Mode'}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(649 /* ./images/wifi.png */)}),
+
+title:'Wi-Fi',
+titleInfo:'Bill Wi The Science Fi',
+titleInfoStyle:styles.titleInfoStyle,
+onPress:function onPress(){return _reactNative.Alert.alert('Route to Wifi Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(650 /* ./images/blutooth.png */)}),
+
+title:'Blutooth',
+titleInfo:'Off',
+titleInfoStyle:styles.titleInfoStyle,
+onPress:function onPress(){return _reactNative.Alert.alert('Route to Blutooth Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(651 /* ./images/cellular.png */)}),
+
+title:'Cellular',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Cellular Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(652 /* ./images/hotspot.png */)}),
+
+title:'Personal Hotspot',
+titleInfo:'Off',
+titleInfoStyle:styles.titleInfoStyle,
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Hotspot Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Header,{
+headerStyle:{
+marginTop:15}}),
+
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(653 /* ./images/notifications.png */)}),
+
+title:'Notifications',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Notifications Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(654 /* ./images/control.png */)}),
+
+title:'Control Center',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Control Center Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(655 /* ./images/dnd.png */)}),
+
+title:'Do Not Disturb',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Do Not Disturb Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Header,{
+headerStyle:{
+marginTop:15}}),
+
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(656 /* ./images/general.png */)}),
+
+title:'General',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To General Page');}}),
+_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
+icon:_react2.default.createElement(_reactNative.Image,{style:
+styles.imageStyle,
+
+source:
+require(657 /* ./images/display.png */)}),
+
+title:'Display & Brightness',
+onPress:function onPress(){return _reactNative.Alert.alert('Route To Display Page');}})))));
+
+
+
+
+}}]);return Settings;}(_react.Component);
+
+
+var styles=_reactNative.StyleSheet.create({
+imageStyle:{
+marginLeft:15,
+alignSelf:'center',
+height:30,
+width:30},
+
+titleInfoStyle:{
+fontSize:16,
+color:'#8e8e93'}});exports.default=
+
+
+
+Settings;
+}, 645, null, "msMatch/app/components/Settings/Settings.js");
+__d(/* react-native-settings-list/index.js */function(global, require, module, exports) {'use strict';
+
+var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+
+var _reactNative=require(79 /* react-native */);
+
+
+
+
+
+
+
+
+
+
+var ARROW_ICON=require(647 /* ./img/icon-arrow-settings.png */);var
+
+SettingsList=function(_React$Component){babelHelpers.inherits(SettingsList,_React$Component);function SettingsList(){babelHelpers.classCallCheck(this,SettingsList);return babelHelpers.possibleConstructorReturn(this,(SettingsList.__proto__||Object.getPrototypeOf(SettingsList)).apply(this,arguments));}babelHelpers.createClass(SettingsList,[{key:'_getGroups',value:function _getGroups()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+var groupNumber=-1;
+var headers=[];
+var itemGroup=[];
+var result=[];
+var other=[];
+_react2.default.Children.forEach(this.props.children,function(child){
+
+if(!child)return;
+
+if(child.type.displayName==='Header'){
+if(groupNumber!=-1){
+result[groupNumber]={items:itemGroup,header:headers[groupNumber],other:other};
+itemGroup=[];
+other=[];
+}
+groupNumber++;
+headers[groupNumber]=child.props;
+}else if(child.type.displayName==='Item'){
+if(groupNumber==-1){
+groupNumber++;
+}
+itemGroup.push(child.props);
+}else{
+if(groupNumber==-1){
+groupNumber++;
+}
+other.push(child);
+}
+});
+result[groupNumber]={items:itemGroup,header:headers[groupNumber],other:other};
+return result;
+}},{key:'render',value:function render()
+
+{var _this2=this;
+return(
+_react2.default.createElement(_reactNative.ScrollView,null,
+this._getGroups().map(function(group,index){
+return _this2._groupView(group,index);
+})));
+
+
+}},{key:'_groupView',value:function _groupView(
+
+group,index){var _this3=this;
+if(group.header){
+return(
+_react2.default.createElement(_reactNative.View,{key:'group_'+index},
+group.other,
+_react2.default.createElement(_reactNative.Text,{style:[{margin:5},group.header.headerStyle]},group.header.headerText),
+_react2.default.createElement(_reactNative.View,{style:{borderTopWidth:1,borderBottomWidth:1,borderColor:this.props.borderColor}},
+group.items.map(function(item,index){
+return _this3._itemView(item,index,group.items.length);
+}))));
+
+
+
+}else{
+return(
+_react2.default.createElement(_reactNative.View,{key:'group_'+index},
+group.other,
+_react2.default.createElement(_reactNative.View,{style:{borderTopWidth:1,borderBottomWidth:1,borderColor:this.props.borderColor}},
+group.items.map(function(item,index){
+return _this3._itemView(item,index,group.items.length);
+}))));
+
+
+
+}
+}},{key:'_itemTitleBlock',value:function _itemTitleBlock(
+
+item,index,position){
+return[
+_react2.default.createElement(_reactNative.Text,{
+key:'itemTitle_'+index,
+style:[
+item.titleStyle?item.titleStyle:this.props.defaultTitleStyle,
+position==='Bottom'?null:styles.titleText]},
+
+item.title),
+
+item.titleInfo?
+_react2.default.createElement(_reactNative.Text,{
+key:'itemTitleInfo_'+index,
+style:[
+position==='Bottom'?null:styles.rightSideStyle,
+{color:'#B1B1B1'},
+item.titleInfoStyle]},
+
+item.titleInfo):
+
+null];
+
+}},{key:'_itemView',value:function _itemView(
+
+item,index,max){var _this4=this;
+var border;
+if(item.borderHide){
+switch(item.borderHide){
+case'Top':border={borderBottomWidth:1,borderColor:this.props.borderColor};break;
+case'Bottom':border={borderTopWidth:1,borderColor:this.props.borderColor};break;}
+
+}else{
+border=index===max-1?{borderWidth:0}:{borderBottomWidth:1,borderColor:this.props.borderColor};
+}
+
+var titleInfoPosition=item.titleInfoPosition?item.titleInfoPosition:this.props.defaultTitleInfoPosition;
+
+return(
+_react2.default.createElement(_reactNative.TouchableHighlight,{accessible:false,key:'item_'+index,underlayColor:item.underlayColor?item.underlayColor:this.props.underlayColor,onPress:item.onPress,onLongPress:item.onLongPress},
+_react2.default.createElement(_reactNative.View,{style:[styles.itemBox,{backgroundColor:item.backgroundColor?item.backgroundColor:this.props.backgroundColor}]},
+item.icon,
+item.isAuth?
+_react2.default.createElement(_reactNative.View,{style:[styles.titleBox,border]},
+_react2.default.createElement(_reactNative.View,{style:{paddingLeft:5,flexDirection:'column',flex:1}},
+_react2.default.createElement(_reactNative.View,{style:{borderBottomWidth:1,borderColor:this.props.borderColor}},
+_react2.default.createElement(_reactNative.TextInput,babelHelpers.extends({
+ref:'UserNameInputBlock',
+onSubmitEditing:function onSubmitEditing(){return _this4.refs.PasswordInputBlock.focus();},
+style:{flex:1,height:30,borderBottomWidth:1},
+placeholder:'username'},
+item.authPropsUser))),
+
+
+_react2.default.createElement(_reactNative.View,null,
+_react2.default.createElement(_reactNative.TextInput,babelHelpers.extends({
+ref:'PasswordInputBlock',
+style:{flex:1,height:30},
+placeholder:'password',
+secureTextEntry:true,
+returnKeyType:'go'},
+item.authPropsPW,{
+onSubmitEditing:function onSubmitEditing(){return item.onPress();}}))))):
+
+
+
+
+
+_react2.default.createElement(_reactNative.View,{style:[styles.titleBox,border,{height:item.itemWidth?item.itemWidth:this.props.defaultItemSize}]},
+titleInfoPosition==='Bottom'?
+_react2.default.createElement(_reactNative.View,{style:{flexDirection:'column',flex:1,justifyContent:'center'}},
+this._itemTitleBlock(item,index,'Bottom')):
+
+this._itemTitleBlock(item,index),
+
+item.rightSideContent?item.rightSideContent:null,
+item.hasSwitch?
+_react2.default.createElement(_reactNative.Switch,babelHelpers.extends({},
+item.switchProps,{
+style:styles.rightSideStyle,
+onValueChange:function onValueChange(value){return item.switchOnValueChange(value);},
+value:item.switchState})):
+null,
+item.hasNavArrow?item.arrowIcon?
+item.arrowIcon:
+
+_react2.default.createElement(_reactNative.Image,{style:[styles.rightSideStyle,item.arrowStyle],source:ARROW_ICON}):null))));
+
+
+
+
+
+
+}}]);return SettingsList;}(_react2.default.Component);SettingsList.propTypes={backgroundColor:_react2.default.PropTypes.string,borderColor:_react2.default.PropTypes.string,defaultItemSize:_react2.default.PropTypes.number,underlayColor:_react2.default.PropTypes.string,defaultTitleStyle:_reactNative.Text.propTypes.style,defaultTitleInfoPosition:_react2.default.PropTypes.string};SettingsList.defaultProps={backgroundColor:'white',borderColor:'black',defaultItemSize:50,underlayColor:'transparent',defaultTitleStyle:{fontSize:16}};
+
+module.exports=SettingsList;
+
+var styles=_reactNative.StyleSheet.create({
+itemBox:{
+flex:1,
+justifyContent:'center',
+flexDirection:'row'},
+
+titleBox:{
+flex:1,
+marginLeft:15,
+flexDirection:'row'},
+
+titleText:{
+flex:1,
+alignSelf:'center'},
+
+rightSideStyle:{
+marginRight:15,
+alignSelf:'center'}});
+
+
+
+
+
+
+SettingsList.Header=_react2.default.createClass({displayName:'Header',
+propTypes:{
+headerText:_react2.default.PropTypes.string,
+headerStyle:_reactNative.Text.propTypes.style},
+
+
+
+
+render:function render(){
+return null;
+}});
+
+
+
+
+
+SettingsList.Item=_react2.default.createClass({displayName:'Item',
+propTypes:{
+
+
+
+title:_react2.default.PropTypes.string,
+titleStyle:_reactNative.Text.propTypes.style,
+
+
+
+icon:_react2.default.PropTypes.node,
+
+
+
+itemWidth:_react2.default.PropTypes.number,
+
+
+
+isAuth:_react2.default.PropTypes.bool,
+authPropsUser:_react2.default.PropTypes.object,
+authPropsPW:_react2.default.PropTypes.object,
+
+
+
+backgroundColor:_react2.default.PropTypes.string,
+
+
+
+
+underlayColor:_react2.default.PropTypes.string,
+
+
+
+onPress:_react2.default.PropTypes.func,
+
+
+
+onLongPress:_react2.default.PropTypes.func,
+
+
+
+hasNavArrow:_react2.default.PropTypes.bool,
+arrowIcon:_react2.default.PropTypes.node,
+
+arrowStyle:_reactNative.Image.propTypes.style,
+
+
+
+hasSwitch:_react2.default.PropTypes.bool,
+
+
+
+switchState:_react2.default.PropTypes.bool,
+
+
+
+switchProps:_react2.default.PropTypes.object,
+
+
+
+switchOnValueChange:_react2.default.PropTypes.func,
+
+
+
+titleInfo:_react2.default.PropTypes.string,
+titleInfoStyle:_reactNative.Text.propTypes.style,
+
+
+
+titleInfoPosition:_react2.default.PropTypes.string,
+
+
+
+rightSideContent:_react2.default.PropTypes.node,
+
+borderHide:_react2.default.PropTypes.oneOf(['Top','Bottom','Both'])},
+
+getDefaultProps:function getDefaultProps(){
+return{
+hasNavArrow:true};
+
+},
+
+
+
+render:function render(){
+return null;
+}});
+}, 646, null, "react-native-settings-list/index.js");
+__d(/* react-native-settings-list/img/icon-arrow-settings.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-native-settings-list/img","width":8,"height":13,"scales":[1,2,3],"hash":"566f14091c335d8c556559639472f74e","name":"icon-arrow-settings","type":"png"});
+}, 647, null, "react-native-settings-list/img/icon-arrow-settings.png");
+__d(/* msMatch/app/components/Settings/images/airplane.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"0a3ce39bc8969272b80f19b6e024f584","name":"airplane","type":"png"});
+}, 648, null, "msMatch/app/components/Settings/images/airplane.png");
+__d(/* msMatch/app/components/Settings/images/wifi.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"8438ec043f922762a5b6bf2e6e7e0363","name":"wifi","type":"png"});
+}, 649, null, "msMatch/app/components/Settings/images/wifi.png");
+__d(/* msMatch/app/components/Settings/images/blutooth.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"47255fe538e0ac5304666d4466500c71","name":"blutooth","type":"png"});
+}, 650, null, "msMatch/app/components/Settings/images/blutooth.png");
+__d(/* msMatch/app/components/Settings/images/cellular.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"eda0422ef5c4abb8cf738942f49b4ea9","name":"cellular","type":"png"});
+}, 651, null, "msMatch/app/components/Settings/images/cellular.png");
+__d(/* msMatch/app/components/Settings/images/hotspot.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"9d7cd99831cc1a8343e10fc5a0207ccd","name":"hotspot","type":"png"});
+}, 652, null, "msMatch/app/components/Settings/images/hotspot.png");
+__d(/* msMatch/app/components/Settings/images/notifications.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"0b5463062db6a4d66b16791f87dec37d","name":"notifications","type":"png"});
+}, 653, null, "msMatch/app/components/Settings/images/notifications.png");
+__d(/* msMatch/app/components/Settings/images/control.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"cc0a91928ec090899f71bab4582927ef","name":"control","type":"png"});
+}, 654, null, "msMatch/app/components/Settings/images/control.png");
+__d(/* msMatch/app/components/Settings/images/dnd.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"c715452639913e32c53ab920e6f69092","name":"dnd","type":"png"});
+}, 655, null, "msMatch/app/components/Settings/images/dnd.png");
+__d(/* msMatch/app/components/Settings/images/general.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"7b7a83458caa72491c27cda857ede687","name":"general","type":"png"});
+}, 656, null, "msMatch/app/components/Settings/images/general.png");
+__d(/* msMatch/app/components/Settings/images/display.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"cff3917223a4d2dd6f205b6f609b618b","name":"display","type":"png"});
+}, 657, null, "msMatch/app/components/Settings/images/display.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
 var _reduxPersist=require(608 /* redux-persist */);

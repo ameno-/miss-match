@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { 
-    Text, 
-    View, 
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {
+    Text,
+    View,
     TouchableHighlight,
     TouchableOpacity,
     StyleSheet,
@@ -13,49 +13,60 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Students from '../Students/Students';
-import { selection } from '../../actions';
+import {selection} from '../../actions';
 import Options from '../Options/Options';
+import SettingsList from '../Settings/Settings';
 
 class Home extends Component {
     constructor(props, context) {
         super(props, context);
         this._navigateStudents = this._navigateStudents.bind(this);
+        this._navigateSettings = this._navigateSettings.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
     }
 
-answerSelected(sound) {
-    let props = this.props;
-    props.dispatch(selection(sound));
-    props.dispatch({
-        type: "SUBMIT",
-        correctSoundIndex: props.correctSoundIndex,
-        selectedSoundIndex: sound,
-        testIndex: null,
-        currentStudent: props.currentStudent,
-        visualProp: props.visualProp,
-        displayedSounds: props.displayedSounds
-    });
-}
+    answerSelected(sound) {
+        let props = this.props;
+        props.dispatch(selection(sound));
+        props.dispatch({
+            type: "SUBMIT",
+            correctSoundIndex: props.correctSoundIndex,
+            selectedSoundIndex: sound,
+            testIndex: null,
+            currentStudent: props.currentStudent,
+            visualProp: props.visualProp,
+            displayedSounds: props.displayedSounds
+        });
+    }
 
-_navigateStudents() {
-    this
-        .props
-        .navigator
-        .push({component: Students, navigationBarHidden: true})
-}
+    _navigateStudents() {
+        this
+            .props
+            .navigator
+            .push({component: Students, navigationBarHidden: true})
+    }
+
+    _navigateSettings() {
+        this
+            .props
+            .navigator
+            .push({component: SettingsList, title: "Settings", navigationBarHidden: false})
+    }
 
     render() {
-        let optionsList = this.props.displayedSounds.map((sound, i) => {
-            return <Options
-                onSelected={this.answerSelected}
-                visualProp={this.props.visualProp[sound]}
-                sound={sound}
-                key={i}
-                accessibilityLabel="Symbol select"
-            />
-        });
-        const peopleIcon = (<Icon name="ios-people-outline" size={30} color="white" />)
-        const settingsIcon = (<Icon name="ios-settings-outline" size={30} color="white" />)
+        let optionsList = this
+            .props
+            .displayedSounds
+            .map((sound, i) => {
+                return <Options
+                    onSelected={this.answerSelected}
+                    visualProp={this.props.visualProp[sound]}
+                    sound={sound}
+                    key={i}
+                    accessibilityLabel="Symbol select"/>
+            });
+        const peopleIcon = (<Icon name="ios-people-outline" size={30} color="white"/>)
+        const settingsIcon = (<Icon name="ios-settings-outline" size={30} color="white"/>)
         return (
             <View style={styles.container}>
                 <View style={styles.topBar}>
@@ -68,16 +79,18 @@ _navigateStudents() {
                     <Text style={styles.title}>Miss Match</Text>
 
                     <View style={styles.topBarRight}>
-                        <Text>{settingsIcon}</Text>
+                        <TouchableOpacity onPress={this._navigateSettings}>
+                            <Text>{settingsIcon}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                
+
                 <View style={styles.buttonsContainer}>
                     {optionsList}
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContentLeft}>
-                       Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
+                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
                     </Text>
                     <Text style={styles.footerContentRight}>
                         {this.props.correctSoundIndex + 1}
@@ -91,8 +104,8 @@ _navigateStudents() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent:'flex-start', 
-        alignItems:'stretch',
+        justifyContent: 'flex-start',
+        alignItems: 'stretch'
     },
     topBar: {
         padding: 16,
@@ -107,13 +120,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     topBarLeft: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     title: {
         color: 'white',
@@ -132,12 +145,12 @@ const styles = StyleSheet.create({
     welcome: {
         fontSize: 30,
         textAlign: 'center',
-        flex: 1,
+        flex: 1
     },
     instructions: {
         textAlign: 'center',
         color: '#333333',
-        marginBottom: 5,
+        marginBottom: 5
     },
     footer: {
         flex: 0,
@@ -145,7 +158,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'space-between',
         padding: 10,
-        backgroundColor: '#3DC64F',
+        backgroundColor: '#3DC64F'
     },
     footerContentLeft: {
         color: 'white'
