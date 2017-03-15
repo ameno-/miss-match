@@ -37,10 +37,10 @@ class Students extends Component {
     addNewStudent() {
         if(this.state.studentName && this.state.studentName != "") {
 
-            this.props.dispatch(addStudent({
+            this.props.dispatch({type: "ADD_STUDENT",
                 studentName: this.state.studentName,
                 teacherName: "Yomna"
-            }))
+            });
 
             this.setState({
                 studentName: ""
@@ -48,15 +48,16 @@ class Students extends Component {
         }
     }
 
-    selectStudent(selected) {
-        this.props.dispatch(setStudent({
-           studentName: selected.studentName,
-           teacherName: selected.teacherName,
-           id: selected.id
-        }));
+selectStudent(selected) {
+    // this.props.dispatch({type: "CHANGE_STUDENT", studentName: selected.studentName, teacherName: selected.teacherName, id: selected.id});
 
-        this.props.navigator.pop();
-    }
+    this.props.dispatch(setStudent({studentName: selected.studentName, teacherName: selected.teacherName, id: selected.id }));
+
+    this
+        .props
+        .navigator
+        .pop();
+}
     render() {
         const renderStudens = () => {
             return this.props.students.map(student => {

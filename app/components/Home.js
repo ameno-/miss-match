@@ -12,10 +12,10 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import { getRecord } from '../db'
 
 import Students from './Students';
-import { getRandomCollection } from '../../utils/helper';
-import { selection, restart } from '../actions';
+import { selection } from '../actions';
 import Options from './Options';
 
 class Home extends Component {
@@ -26,38 +26,10 @@ class Home extends Component {
         this.answerSelected = this.answerSelected.bind(this);
     }
 
-    async answerSelected(sound) {
+    answerSelected(sound) {
         this.props.dispatch(selection(sound));
         this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: sound, testIndex: null});
-        
-        try {
-            const props = this.props;
-
-            let previousValue = await AsyncStorage.getItem(props.currentStudent.id);
-            let visualProps = props.visualProp;
-
-            let displayedSounds = props.displayedSounds.map(item => {
-                return visualProps[item];
-            });
-
-            let data = [
-                ...JSON.parse(previousValue),
-                {
-                    displayedSounds: displayedSounds,
-                    selectedAnswer: visualProps[sound],
-                    correctAnswer: visualProps[props.correctSoundIndex]
-                }
-            ];
-
-            await AsyncStorage.setItem(this.props.currentStudent.id, JSON.stringify(data));
-
-            let newVal = await AsyncStorage.getItem(this.props.currentStudent.id)
-            console.log(JSON.parse(newVal));
-
-            console.log('Saved answer to disk for student:' + this.props.currentStudent.id);
-        } catch (error) {
-            console.log('AsyncStorage error: ' + error.message);
-        }
+        getRecord(this.props);
     }
 
     buildSoundsIndex (testIndex = null){
@@ -108,7 +80,7 @@ class Home extends Component {
                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
                     </Text>
                     <Text style={styles.footerContentRight}>
-                        {this.props.correctSoundIndex}
+                        {this.props.correctSoundIndex + 1}
                     </Text>
                 </View>
             </View>

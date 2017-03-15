@@ -70310,10 +70310,10 @@ var _reactNative=require(79 /* react-native */);
 
 var _Ionicons=require(439 /* react-native-vector-icons/Ionicons */);var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 
+var _db=require(594 /* ../db */);
 
-var _Students=require(594 /* ./Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
-var _helper=require(599 /* ../../utils/helper */);
-var _actions=require(598 /* ../actions */);
+var _Students=require(595 /* ./Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
+var _actions=require(599 /* ../actions */);
 var _Options=require(600 /* ./Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);var
 
 Home=function(_Component){babelHelpers.inherits(Home,_Component);
@@ -70324,39 +70324,11 @@ _this.buildSoundsIndex=_this.buildSoundsIndex.bind(_this);
 _this.answerSelected=_this.answerSelected.bind(_this);return _this;
 }babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
 
-sound){var _this2=this;return regeneratorRuntime.async(function answerSelected$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:
+sound){
 this.props.dispatch((0,_actions.selection)(sound));
-this.props.dispatch({type:"SUBMIT",correctIndex:this.props.correctSoundIndex,selectedIndex:sound,testIndex:null});_context2.prev=2;_context2.next=5;return regeneratorRuntime.awrap(function _callee(){var props,previousValue,visualProps,displayedSounds,data,newVal;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:
-
-
-props=_this2.props;_context.next=3;return regeneratorRuntime.awrap(
-
-_reactNative.AsyncStorage.getItem(props.currentStudent.id));case 3:previousValue=_context.sent;
-visualProps=props.visualProp;
-
-displayedSounds=props.displayedSounds.map(function(item){
-return visualProps[item];
-});
-
-data=[].concat(babelHelpers.toConsumableArray(
-JSON.parse(previousValue)),[
-{
-displayedSounds:displayedSounds,
-selectedAnswer:visualProps[sound],
-correctAnswer:visualProps[props.correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(
-
-
-
-_reactNative.AsyncStorage.setItem(_this2.props.currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(
-
-_reactNative.AsyncStorage.getItem(_this2.props.currentStudent.id));case 11:newVal=_context.sent;
-console.log(JSON.parse(newVal));
-
-console.log('Saved answer to disk for student:'+_this2.props.currentStudent.id);case 14:case'end':return _context.stop();}}},null,_this2);}());case 5:_context2.next=10;break;case 7:_context2.prev=7;_context2.t0=_context2['catch'](2);
-
-console.log('AsyncStorage error: '+_context2.t0.message);case 10:case'end':return _context2.stop();}}},null,this,[[2,7]]);}},{key:'buildSoundsIndex',value:function buildSoundsIndex()
-
-
+this.props.dispatch({type:"SUBMIT",correctIndex:this.props.correctSoundIndex,selectedIndex:sound,testIndex:null});
+(0,_db.getRecord)(this.props);
+}},{key:'buildSoundsIndex',value:function buildSoundsIndex()
 
 {var testIndex=arguments.length>0&&arguments[0]!==undefined?arguments[0]:null;
 console.log(this.props);
@@ -70370,11 +70342,11 @@ navigationBarHidden:true});
 
 }},{key:'render',value:function render()
 
-{var _this3=this;
+{var _this2=this;
 var optionsList=this.props.displayedSounds.map(function(sound,i){
 return _react2.default.createElement(_Options2.default,{
-onSelected:_this3.answerSelected,
-visualProp:_this3.props.visualProp[sound],
+onSelected:_this2.answerSelected,
+visualProp:_this2.props.visualProp[sound],
 sound:sound,
 key:i,
 accessibilityLabel:'Symbol select'});
@@ -70406,7 +70378,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.footerContentLeft}
 this.props.currentStudent.studentName,', Current teacher: ',this.props.currentStudent.teacherName),
 
 _react2.default.createElement(_reactNative.Text,{style:styles.footerContentRight},
-this.props.correctSoundIndex))));
+this.props.correctSoundIndex+1))));
 
 
 
@@ -75971,6 +75943,70 @@ __d(/* react-native-vector-icons/glyphmaps/Ionicons.json */function(global, requ
 "md-wine":62377,
 "md-woman":62378};
 }, 593, null, "react-native-vector-icons/glyphmaps/Ionicons.json");
+__d(/* msMatch/app/db/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.
+
+
+
+
+
+
+
+updateStudentDataAsync=updateStudentDataAsync;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+saveStudentAsync=saveStudentAsync;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+saveRecord=saveRecord;exports.
+
+
+
+deleteRecord=deleteRecord;exports.
+
+getManyRecords=getManyRecords;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds){var _this=this;return regeneratorRuntime.async(function updateStudentDataAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;_context2.next=3;return regeneratorRuntime.awrap(function _callee(){var previousValue,visualProps,displayedSounds,data,newVal;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(props.currentStudent.id));case 2:previousValue=_context.sent;console.log(previousValue);visualProps=props.visualProp;displayedSounds=props.displayedSounds.map(function(item){return visualProps[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSounds,selectedAnswer:visualProps[sound],correctAnswer:visualProps[props.correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(_this.props.currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(_this.props.currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+_this.props.currentStudent.id);case 14:case'end':return _context.stop();}}},null,_this);}());case 3:_context2.next=8;break;case 5:_context2.prev=5;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 8:case'end':return _context2.stop();}}},null,this,[[0,5]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_context3.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context3.next=6;break;}_context3.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context3.next=7;break;case 6:throw"Invalid student object";case 7:_context3.next=12;break;case 9:_context3.prev=9;_context3.t0=_context3['catch'](0);console.log('AsyncStorage error: '+_context3.t0.message);case 12:case'end':return _context3.stop();}}},null,this,[[0,9]]);}function saveRecord(data){}function deleteRecord(){}function getManyRecords(){}
+}, 594, null, "msMatch/app/db/index.js");
 __d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
 
@@ -75985,11 +76021,11 @@ var _reactNative=require(79 /* react-native */);
 
 var _reactRedux=require(42 /* react-redux */);
 
-var _SimpleLineIcons=require(595 /* react-native-vector-icons/SimpleLineIcons */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
+var _SimpleLineIcons=require(596 /* react-native-vector-icons/SimpleLineIcons */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
 
-var _StudentItem=require(597 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
+var _StudentItem=require(598 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
 
-var _actions=require(598 /* ../actions */);var
+var _actions=require(599 /* ../actions */);var
 
 Students=function(_Component){babelHelpers.inherits(Students,_Component);
 function Students(props,context){babelHelpers.classCallCheck(this,Students);var _this=babelHelpers.possibleConstructorReturn(this,(Students.__proto__||Object.getPrototypeOf(Students)).call(this,
@@ -76010,9 +76046,9 @@ this.props.navigator.pop();
 {
 if(this.state.studentName&&this.state.studentName!=""){
 
-this.props.dispatch((0,_actions.addStudent)({
+this.props.dispatch({type:"ADD_STUDENT",
 studentName:this.state.studentName,
-teacherName:"Yomna"}));
+teacherName:"Yomna"});
 
 
 this.setState({
@@ -76022,13 +76058,14 @@ studentName:""});
 }},{key:'selectStudent',value:function selectStudent(
 
 selected){
-this.props.dispatch((0,_actions.setStudent)({
-studentName:selected.studentName,
-teacherName:selected.teacherName,
-id:selected.id}));
 
 
-this.props.navigator.pop();
+this.props.dispatch((0,_actions.setStudent)({studentName:selected.studentName,teacherName:selected.teacherName,id:selected.id}));
+
+this.
+props.
+navigator.
+pop();
 }},{key:'render',value:function render()
 {var _this2=this;
 var renderStudens=function renderStudens(){
@@ -76135,14 +76172,14 @@ currentStudent:store.currentStudent};
 };
 
 module.exports=(0,_reactRedux.connect)(mapStateToProps)(Students);
-}, 594, null, "msMatch/app/components/Students.js");
+}, 595, null, "msMatch/app/components/Students.js");
 __d(/* react-native-vector-icons/SimpleLineIcons.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getImageSource=exports.ToolbarAndroid=exports.TabBarItemIOS=exports.TabBarItem=exports.Button=undefined;
 
 
 
 
 var _createIconSet=require(440 /* ./lib/create-icon-set */);var _createIconSet2=babelHelpers.interopRequireDefault(_createIconSet);
-var _SimpleLineIcons=require(596 /* ./glyphmaps/SimpleLineIcons.json */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
+var _SimpleLineIcons=require(597 /* ./glyphmaps/SimpleLineIcons.json */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
 
 var iconSet=(0,_createIconSet2.default)(_SimpleLineIcons2.default,'simple-line-icons','SimpleLineIcons.ttf');exports.default=
 
@@ -76153,7 +76190,7 @@ var TabBarItem=exports.TabBarItem=iconSet.TabBarItem;
 var TabBarItemIOS=exports.TabBarItemIOS=iconSet.TabBarItemIOS;
 var ToolbarAndroid=exports.ToolbarAndroid=iconSet.ToolbarAndroid;
 var getImageSource=exports.getImageSource=iconSet.getImageSource;
-}, 595, null, "react-native-vector-icons/SimpleLineIcons.js");
+}, 596, null, "react-native-vector-icons/SimpleLineIcons.js");
 __d(/* react-native-vector-icons/glyphmaps/SimpleLineIcons.json */function(global, require, module, exports) {module.exports = {
 "user":57349,
 "people":57345,
@@ -76344,7 +76381,7 @@ __d(/* react-native-vector-icons/glyphmaps/SimpleLineIcons.json */function(globa
 "social-dropbox":57356,
 "social-vkontakte":58904,
 "social-steam":58912};
-}, 596, null, "react-native-vector-icons/glyphmaps/SimpleLineIcons.json");
+}, 597, null, "react-native-vector-icons/glyphmaps/SimpleLineIcons.json");
 __d(/* msMatch/app/components/StudentItem.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);var
 
@@ -76400,7 +76437,7 @@ color:'#808782'}});exports.default=
 
 
 StudentItem;
-}, 597, null, "msMatch/app/components/StudentItem.js");
+}, 598, null, "msMatch/app/components/StudentItem.js");
 __d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
 return{
 type:' ',
@@ -76408,12 +76445,12 @@ selection:selection};
 
 };
 
-exports.addStudent=function(student){
-return{
-type:"NEW_STUDENT",
-student:student};
 
-};
+
+
+
+
+
 
 exports.setStudent=function(student){
 return{
@@ -76427,55 +76464,7 @@ return{
 type:"REDO"};
 
 };
-}, 598, null, "msMatch/app/actions/index.js");
-__d(/* msMatch/utils/helper.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getRandomIndex=getRandomIndex;function getRandomIndex(numbers){
-return numbers[Math.floor(Math.random()*numbers.length)];
-}
-
-var shuffle=exports.shuffle=function shuffle(array){
-var currentIndex=array.length,
-temporaryValue=void 0,randomIndex=void 0;
-
-
-while(0!==currentIndex){
-
-
-randomIndex=Math.floor(Math.random()*currentIndex);
-currentIndex-=1;
-
-
-temporaryValue=array[currentIndex];
-array[currentIndex]=array[randomIndex];
-array[randomIndex]=temporaryValue;
-}
-
-return array;
-};
-
-var getRandomCollection=exports.getRandomCollection=function getRandomCollection(exclude,totalNumbers){
-
-var numbersRepository=[0,1,2,3,4,5],
-randomNumbersCollection=void 0,
-counter=totalNumbers,
-generatedNumber=0;
-
-if(exclude!=null){
-randomNumbersCollection=[exclude];
-numbersRepository.splice(exclude,1);
-counter--;
-}else{
-randomNumbersCollection=[];
-}
-
-while(counter--){
-generatedNumber=Math.floor(Math.random()*numbersRepository.length);
-randomNumbersCollection.push(numbersRepository[generatedNumber]);
-numbersRepository.splice(generatedNumber,1);
-}
-var answerIndex=exclude?exclude:getRandomIndex(randomNumbersCollection);
-return{answerIndex:answerIndex,shuffledArray:shuffle(randomNumbersCollection)};
-};
-}, 599, null, "msMatch/utils/helper.js");
+}, 599, null, "msMatch/app/actions/index.js");
 __d(/* msMatch/app/components/Options.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);var
 Options=function(_Component){babelHelpers.inherits(Options,_Component);
@@ -76546,9 +76535,9 @@ __d(/* msMatch/assets/snake.png */function(global, require, module, exports) {mo
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
 var _reduxPersist=require(608 /* redux-persist */);
-var _reduxSaga=require(624 /* redux-saga */);var _reduxSaga2=babelHelpers.interopRequireDefault(_reduxSaga);
-var _reducer=require(620 /* ../reducer */);var _reducer2=babelHelpers.interopRequireDefault(_reducer);
-var _sagas=require(638 /* ../sagas */);var _sagas2=babelHelpers.interopRequireDefault(_sagas);
+var _reduxSaga=require(620 /* redux-saga */);var _reduxSaga2=babelHelpers.interopRequireDefault(_reduxSaga);
+var _reducer=require(632 /* ../reducer */);var _reducer2=babelHelpers.interopRequireDefault(_reducer);
+var _sagas=require(636 /* ../sagas */);var _sagas2=babelHelpers.interopRequireDefault(_sagas);
 
 var sagaMiddleware=(0,_reduxSaga2.default)();
 
@@ -77361,7 +77350,7 @@ value:true});
 
 exports.utils=exports.effects=exports.CANCEL=exports.delay=exports.throttle=exports.takeLatest=exports.takeEvery=exports.buffers=exports.channel=exports.eventChannel=exports.END=exports.runSaga=undefined;
 
-var _runSaga=require(625 /* ./internal/runSaga */);
+var _runSaga=require(621 /* ./internal/runSaga */);
 
 Object.defineProperty(exports,'runSaga',{
 enumerable:true,
@@ -77370,7 +77359,7 @@ return _runSaga.runSaga;
 }});
 
 
-var _channel=require(631 /* ./internal/channel */);
+var _channel=require(627 /* ./internal/channel */);
 
 Object.defineProperty(exports,'END',{
 enumerable:true,
@@ -77391,7 +77380,7 @@ return _channel.channel;
 }});
 
 
-var _buffers=require(632 /* ./internal/buffers */);
+var _buffers=require(628 /* ./internal/buffers */);
 
 Object.defineProperty(exports,'buffers',{
 enumerable:true,
@@ -77400,7 +77389,7 @@ return _buffers.buffers;
 }});
 
 
-var _sagaHelpers=require(630 /* ./internal/sagaHelpers */);
+var _sagaHelpers=require(626 /* ./internal/sagaHelpers */);
 
 Object.defineProperty(exports,'takeEvery',{
 enumerable:true,
@@ -77421,7 +77410,7 @@ return _sagaHelpers.throttle;
 }});
 
 
-var _utils=require(626 /* ./internal/utils */);
+var _utils=require(622 /* ./internal/utils */);
 
 Object.defineProperty(exports,'delay',{
 enumerable:true,
@@ -77436,15 +77425,15 @@ return _utils.CANCEL;
 }});
 
 
-var _middleware=require(633 /* ./internal/middleware */);
+var _middleware=require(629 /* ./internal/middleware */);
 
 var _middleware2=_interopRequireDefault(_middleware);
 
-var _effects=require(634 /* ./effects */);
+var _effects=require(630 /* ./effects */);
 
 var effects=_interopRequireWildcard(_effects);
 
-var _utils2=require(635 /* ./utils */);
+var _utils2=require(631 /* ./utils */);
 
 var utils=_interopRequireWildcard(_utils2);
 
@@ -77455,7 +77444,7 @@ function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj
 exports.default=_middleware2.default;
 exports.effects=effects;
 exports.utils=utils;
-}, 624, null, "redux-saga/lib/index.js");
+}, 620, null, "redux-saga/lib/index.js");
 __d(/* redux-saga/lib/internal/runSaga.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -77463,9 +77452,9 @@ value:true});
 
 exports.runSaga=runSaga;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _proc=require(627 /* ./proc */);
+var _proc=require(623 /* ./proc */);
 
 var _proc2=_interopRequireDefault(_proc);
 
@@ -77495,7 +77484,7 @@ sagaMonitor.effectResolved(effectId,task);
 
 return task;
 }
-}, 625, null, "redux-saga/lib/internal/runSaga.js");
+}, 621, null, "redux-saga/lib/internal/runSaga.js");
 __d(/* redux-saga/lib/internal/utils.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -77731,7 +77720,7 @@ var wrappedAction=Object.defineProperty(action,SAGA_ACTION,{value:true});
 return dispatch(wrappedAction);
 };
 }
-}, 626, null, "redux-saga/lib/internal/utils.js");
+}, 622, null, "redux-saga/lib/internal/utils.js");
 __d(/* redux-saga/lib/internal/proc.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -77740,15 +77729,15 @@ value:true});
 exports.TASK_CANCEL=exports.CHANNEL_END=exports.NOT_ITERATOR_ERROR=undefined;
 exports.default=proc;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _scheduler=require(628 /* ./scheduler */);
+var _scheduler=require(624 /* ./scheduler */);
 
-var _io=require(629 /* ./io */);
+var _io=require(625 /* ./io */);
 
-var _channel=require(631 /* ./channel */);
+var _channel=require(627 /* ./channel */);
 
-var _buffers=require(632 /* ./buffers */);
+var _buffers=require(628 /* ./buffers */);
 
 function _defineEnumerableProperties(obj,descs){for(var key in descs){var desc=descs[key];desc.configurable=desc.enumerable=true;if("value"in desc)desc.writable=true;Object.defineProperty(obj,key,desc);}return obj;}
 
@@ -78464,7 +78453,7 @@ return iterator._error;
 }),_defineEnumerableProperties(_ref9,_mutatorMap),_ref9;
 }
 }
-}, 627, null, "redux-saga/lib/internal/proc.js");
+}, 623, null, "redux-saga/lib/internal/proc.js");
 __d(/* redux-saga/lib/internal/scheduler.js */function(global, require, module, exports) {"use strict";
 
 Object.defineProperty(exports,"__esModule",{
@@ -78526,7 +78515,7 @@ if(!semaphore&&queue.length){
 exec(queue.shift());
 }
 }
-}, 628, null, "redux-saga/lib/internal/scheduler.js");
+}, 624, null, "redux-saga/lib/internal/scheduler.js");
 __d(/* redux-saga/lib/internal/io.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -78554,9 +78543,9 @@ exports.takeEvery=takeEvery;
 exports.takeLatest=takeLatest;
 exports.throttle=throttle;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _sagaHelpers=require(630 /* ./sagaHelpers */);
+var _sagaHelpers=require(626 /* ./sagaHelpers */);
 
 function _defineProperty(obj,key,value){if(key in obj){Object.defineProperty(obj,key,{value:value,enumerable:true,configurable:true,writable:true});}else{obj[key]=value;}return obj;}
 
@@ -78796,7 +78785,7 @@ select:createAsEffectType(SELECT),
 actionChannel:createAsEffectType(ACTION_CHANNEL),
 cancelled:createAsEffectType(CANCELLED),
 flush:createAsEffectType(FLUSH)};
-}, 629, null, "redux-saga/lib/internal/io.js");
+}, 625, null, "redux-saga/lib/internal/io.js");
 __d(/* redux-saga/lib/internal/sagaHelpers.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -78810,13 +78799,13 @@ exports.takeEveryHelper=takeEveryHelper;
 exports.takeLatestHelper=takeLatestHelper;
 exports.throttleHelper=throttleHelper;
 
-var _channel=require(631 /* ./channel */);
+var _channel=require(627 /* ./channel */);
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _io=require(629 /* ./io */);
+var _io=require(625 /* ./io */);
 
-var _buffers=require(632 /* ./buffers */);
+var _buffers=require(628 /* ./buffers */);
 
 var done={done:true,value:undefined};
 var qEnd={};
@@ -78973,7 +78962,7 @@ return'import '+helperName+' from \'redux-saga\' has been deprecated in favor of
 var takeEvery=exports.takeEvery=(0,_utils.deprecate)(takeEveryHelper,deprecationWarning('takeEvery'));
 var takeLatest=exports.takeLatest=(0,_utils.deprecate)(takeLatestHelper,deprecationWarning('takeLatest'));
 var throttle=exports.throttle=(0,_utils.deprecate)(throttleHelper,deprecationWarning('throttle'));
-}, 630, null, "redux-saga/lib/internal/sagaHelpers.js");
+}, 626, null, "redux-saga/lib/internal/sagaHelpers.js");
 __d(/* redux-saga/lib/internal/channel.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -78988,11 +78977,11 @@ exports.channel=channel;
 exports.eventChannel=eventChannel;
 exports.stdChannel=stdChannel;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _buffers=require(632 /* ./buffers */);
+var _buffers=require(628 /* ./buffers */);
 
-var _scheduler=require(628 /* ./scheduler */);
+var _scheduler=require(624 /* ./scheduler */);
 
 var CHANNEL_END_TYPE='@@redux-saga/CHANNEL_END';
 var END=exports.END={type:CHANNEL_END_TYPE};
@@ -79178,7 +79167,7 @@ chan.take(cb);
 }});
 
 }
-}, 631, null, "redux-saga/lib/internal/channel.js");
+}, 627, null, "redux-saga/lib/internal/channel.js");
 __d(/* redux-saga/lib/internal/buffers.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -79186,7 +79175,7 @@ value:true});
 
 exports.buffers=exports.BUFFER_OVERFLOW=undefined;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
 var BUFFER_OVERFLOW=exports.BUFFER_OVERFLOW='Channel\'s Buffer overflow!';
 
@@ -79286,7 +79275,7 @@ return ringBuffer(limit,ON_OVERFLOW_SLIDE);
 expanding:function expanding(initialSize){
 return ringBuffer(initialSize,ON_OVERFLOW_EXPAND);
 }};
-}, 632, null, "redux-saga/lib/internal/buffers.js");
+}, 628, null, "redux-saga/lib/internal/buffers.js");
 __d(/* redux-saga/lib/internal/middleware.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
@@ -79294,13 +79283,13 @@ value:true});
 
 exports.default=sagaMiddlewareFactory;
 
-var _utils=require(626 /* ./utils */);
+var _utils=require(622 /* ./utils */);
 
-var _proc=require(627 /* ./proc */);
+var _proc=require(623 /* ./proc */);
 
 var _proc2=_interopRequireDefault(_proc);
 
-var _channel=require(631 /* ./channel */);
+var _channel=require(627 /* ./channel */);
 
 function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}
 
@@ -79394,14 +79383,14 @@ return task;
 
 return sagaMiddleware;
 }
-}, 633, null, "redux-saga/lib/internal/middleware.js");
+}, 629, null, "redux-saga/lib/internal/middleware.js");
 __d(/* redux-saga/lib/effects.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
 value:true});
 
 
-var _io=require(629 /* ./internal/io */);
+var _io=require(625 /* ./internal/io */);
 
 Object.defineProperty(exports,'take',{
 enumerable:true,
@@ -79510,14 +79499,14 @@ enumerable:true,
 get:function get(){
 return _io.throttle;
 }});
-}, 634, null, "redux-saga/lib/effects.js");
+}, 630, null, "redux-saga/lib/effects.js");
 __d(/* redux-saga/lib/utils.js */function(global, require, module, exports) {'use strict';
 
 Object.defineProperty(exports,"__esModule",{
 value:true});
 
 
-var _utils=require(626 /* ./internal/utils */);
+var _utils=require(622 /* ./internal/utils */);
 
 Object.defineProperty(exports,'TASK',{
 enumerable:true,
@@ -79562,7 +79551,7 @@ return _utils.createMockTask;
 }});
 
 
-var _io=require(629 /* ./internal/io */);
+var _io=require(625 /* ./internal/io */);
 
 Object.defineProperty(exports,'asEffect',{
 enumerable:true,
@@ -79571,16 +79560,16 @@ return _io.asEffect;
 }});
 
 
-var _proc=require(627 /* ./internal/proc */);
+var _proc=require(623 /* ./internal/proc */);
 
 Object.defineProperty(exports,'CHANNEL_END',{
 enumerable:true,
 get:function get(){
 return _proc.CHANNEL_END;
 }});
-}, 635, null, "redux-saga/lib/utils.js");
+}, 631, null, "redux-saga/lib/utils.js");
 __d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {
-var uuidV4=require(621 /* uuid/v4 */);
+var uuidV4=require(633 /* uuid/v4 */);
 
 module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
 switch(action.type){
@@ -79603,7 +79592,7 @@ state.students),[
 {
 studentName:action.student.studentName,
 teacherName:action.student.teacherName,
-id:uuidV4()}])});
+id:action.student.id}])});
 
 
 
@@ -79624,9 +79613,9 @@ default:
 return state;}
 
 };
-}, 620, null, "msMatch/app/reducer/index.js");
-__d(/* uuid/v4.js */function(global, require, module, exports) {var rng=require(622 /* ./lib/rng */);
-var bytesToUuid=require(623 /* ./lib/bytesToUuid */);
+}, 632, null, "msMatch/app/reducer/index.js");
+__d(/* uuid/v4.js */function(global, require, module, exports) {var rng=require(634 /* ./lib/rng */);
+var bytesToUuid=require(635 /* ./lib/bytesToUuid */);
 
 function v4(options,buf,offset){
 var i=buf&&offset||0;
@@ -79654,7 +79643,7 @@ return buf||bytesToUuid(rnds);
 }
 
 module.exports=v4;
-}, 621, null, "uuid/v4.js");
+}, 633, null, "uuid/v4.js");
 __d(/* uuid/lib/rng-browser.js */function(global, require, module, exports) {
 
 
@@ -79688,7 +79677,7 @@ return rnds;
 }
 
 module.exports=rng;
-}, 622, null, "uuid/lib/rng-browser.js");
+}, 634, null, "uuid/lib/rng-browser.js");
 __d(/* uuid/lib/bytesToUuid.js */function(global, require, module, exports) {
 
 
@@ -79712,9 +79701,23 @@ bth[buf[i++]]+bth[buf[i++]];
 }
 
 module.exports=bytesToUuid;
-}, 623, null, "uuid/lib/bytesToUuid.js");
-__d(/* msMatch/app/sagas/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _effects=require(637 /* redux-saga/effects */);
-var _helper=require(599 /* ../../utils/helper */);var _marked=[
+}, 635, null, "uuid/lib/bytesToUuid.js");
+__d(/* msMatch/app/sagas/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.default=
+
+
+
+
+
+
+
+
+root;var _effects=require(637 /* redux-saga/effects */);var _selectionSaga=require(638 /* ./selectionSaga */);var _selectionSaga2=babelHelpers.interopRequireDefault(_selectionSaga);var _userSaga=require(640 /* ./userSaga */);var _userSaga2=babelHelpers.interopRequireDefault(_userSaga);var _marked=[root].map(regeneratorRuntime.mark);var sagas=[].concat(babelHelpers.toConsumableArray(_selectionSaga2.default),babelHelpers.toConsumableArray(_userSaga2.default));function root(){return regeneratorRuntime.wrap(function root$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return(
+sagas.map(function(saga){return(0,_effects.fork)(saga);}));case 2:case'end':return _context.stop();}}},_marked[0],this);}
+}, 636, null, "msMatch/app/sagas/index.js");
+__d(/* redux-saga/effects.js */function(global, require, module, exports) {module.exports=require(630 /* ./lib/effects */);
+}, 637, null, "redux-saga/effects.js");
+__d(/* msMatch/app/sagas/selectionSaga.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _effects=require(637 /* redux-saga/effects */);
+var _helper=require(639 /* ../../utils/helper */);var _marked=[
 
 selectionChanged,
 
@@ -79737,10 +79740,99 @@ selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){re
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 
-selectionSaga;
-}, 638, null, "msMatch/app/sagas/index.js");
-__d(/* redux-saga/effects.js */function(global, require, module, exports) {module.exports=require(634 /* ./lib/effects */);
-}, 637, null, "redux-saga/effects.js");
+[selectionSaga];
+}, 638, null, "msMatch/app/sagas/selectionSaga.js");
+__d(/* msMatch/utils/helper.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.getRandomIndex=getRandomIndex;function getRandomIndex(numbers){
+return numbers[Math.floor(Math.random()*numbers.length)];
+}
+
+var shuffle=exports.shuffle=function shuffle(array){
+var currentIndex=array.length,
+temporaryValue=void 0,randomIndex=void 0;
+
+
+while(0!==currentIndex){
+
+
+randomIndex=Math.floor(Math.random()*currentIndex);
+currentIndex-=1;
+
+
+temporaryValue=array[currentIndex];
+array[currentIndex]=array[randomIndex];
+array[randomIndex]=temporaryValue;
+}
+
+return array;
+};
+
+var getRandomCollection=exports.getRandomCollection=function getRandomCollection(exclude,totalNumbers){
+
+var numbersRepository=[0,1,2,3,4,5],
+randomNumbersCollection=void 0,
+counter=totalNumbers,
+generatedNumber=0;
+
+if(exclude!=null){
+randomNumbersCollection=[exclude];
+numbersRepository.splice(exclude,1);
+counter--;
+}else{
+randomNumbersCollection=[];
+}
+
+while(counter--){
+generatedNumber=Math.floor(Math.random()*numbersRepository.length);
+randomNumbersCollection.push(numbersRepository[generatedNumber]);
+numbersRepository.splice(generatedNumber,1);
+}
+var answerIndex=exclude?exclude:getRandomIndex(randomNumbersCollection);
+return{answerIndex:answerIndex,shuffledArray:shuffle(randomNumbersCollection)};
+};
+}, 639, null, "msMatch/utils/helper.js");
+__d(/* msMatch/app/sagas/userSaga.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _effects=require(637 /* redux-saga/effects */);
+var _helper=require(639 /* ../../utils/helper */);
+var _db=require(594 /* ../db */);var _marked=[
+
+
+saveStudent,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+changeActiveStudent,
+
+
+
+
+
+
+
+
+
+
+
+watchSaveNewStudent,
+
+
+
+watchChangeActiveStudent].map(regeneratorRuntime.mark);var uuidV4=require(633 /* uuid/v4 */);function saveStudent(action){var student;return regeneratorRuntime.wrap(function saveStudent$(_context){while(1){switch(_context.prev=_context.next){case 0:console.log(action);_context.prev=1;student={studentName:action.studentName,teacherName:action.teacherName,id:uuidV4()};_context.next=5;return(0,_effects.put)({type:"SAVING_NEW_STUDENT"});case 5:_context.next=7;return(0,_db.saveStudentAsync)(student);case 7:_context.next=9;return(0,_effects.put)({type:"SAVED_STUDENT"});case 9:_context.next=11;return(0,_effects.put)({type:"NEW_STUDENT",student:student});case 11:_context.next=19;break;case 13:_context.prev=13;_context.t0=_context['catch'](1);_context.next=17;return console.log("U dun fucked up");case 17:_context.next=19;return console.log(_context.t0);case 19:case'end':return _context.stop();}}},_marked[0],this,[[1,13]]);}function changeActiveStudent(action){return regeneratorRuntime.wrap(function changeActiveStudent$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;_context2.next=3;return(0,_effects.put)({type:"CHANGING_STUDENT"});case 3:_context2.next=11;break;case 5:_context2.prev=5;_context2.t0=_context2['catch'](0);_context2.next=9;return console.log("U dun fucked up");case 9:_context2.next=11;return console.log(_context2.t0);case 11:case'end':return _context2.stop();}}},_marked[1],this,[[0,5]]);}function watchSaveNewStudent(){return regeneratorRuntime.wrap(function watchSaveNewStudent$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_context3.next=2;return(0,_effects.takeEvery)("ADD_STUDENT",saveStudent);case 2:case'end':return _context3.stop();}}},_marked[2],this);}function watchChangeActiveStudent(){return regeneratorRuntime.wrap(function watchChangeActiveStudent$(_context4){while(1){switch(_context4.prev=_context4.next){case 0:_context4.next=2;return(
+(0,_effects.takeEvery)("CHANGE_STUDENT",changeActiveStudent));case 2:case'end':return _context4.stop();}}},_marked[3],this);}exports.default=
+
+
+[watchSaveNewStudent,watchChangeActiveStudent];
+}, 640, null, "msMatch/app/sagas/userSaga.js");
 ;require(251);
 ;require(0);
 //# sourceMappingURL=index.ios.map

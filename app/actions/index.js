@@ -5,12 +5,12 @@ exports.selection = (selection) => {
     }
 }
 
-exports.addStudent = (student) => {
-    return {
-        type: "NEW_STUDENT",
-        student,
-    }
-}
+// exports.addStudent = (student) => {
+//     return {
+//         type: "NEW_STUDENT",
+//         student,
+//     }
+// }
 
 exports.setStudent = (student) => {
     return {

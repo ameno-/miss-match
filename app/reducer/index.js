@@ -22,7 +22,7 @@ module.exports = (state={}, action) => {
                     {
                         studentName: action.student.studentName,
                         teacherName: action.student.teacherName,
-                        id: uuidV4()
+                        id: action.student.id
                     }
                 ]
             }

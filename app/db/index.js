@@ -1,49 +1,63 @@
+import {AsyncStorage} from 'react-native';
 
-// export function getRecord(props) {
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// }
+/**
+ * save a student
+ * @param {object} current student - currently active student. Contains student id, name, and teacher name
+ * @param {array} visual prop - the visual props being used.
+ * @param {array} displayed sounds - sounds being displayed when selection was made
+ */
+export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds) {
+    try {
+        let previousValue = await AsyncStorage.getItem(props.currentStudent.id);
+        console.log(previousValue);
+        let visualProps = props.visualProp;
 
-// export function saveRecord() {
+        let displayedSounds = props
+            .displayedSounds
+            .map(item => {
+                return visualProps[item];
+            });
 
-// }
+        let data = [
+            ...JSON.parse(previousValue), {
+                displayedSounds: displayedSounds,
+                selectedAnswer: visualProps[sound],
+                correctAnswer: visualProps[props.correctSoundIndex]
+            }
+        ];
 
-// export function deleteRecord() {
+        await AsyncStorage.setItem(this.props.currentStudent.id, JSON.stringify(data));
 
-// }
+        let newVal = await AsyncStorage.getItem(this.props.currentStudent.id)
+        console.log(JSON.parse(newVal));
 
-// export function getManyRecords(){
+        console.log('Saved answer to disk for student:' + this.props.currentStudent.id);
+    } catch (error) {
+        console.log('AsyncStorage error: ' + error.message);
+    }
+}
 
-// }
+/** Save new student to DB
+ * @param  {object} studentId
+ */
+export async function saveStudentAsync(currentStudent) {
+    try {
+        if (currentStudent && currentStudent.id && currentStudent.studentName && currentStudent.teacherName) {
 
-// try {
-//             const props = this.props;
+            await AsyncStorage.setItem(currentStudent.id, JSON.stringify(currentStudent));  
 
-//             let previousValue = await AsyncStorage.getItem(prop.currentStudent.id);
-//             let visualProps = props.visualProp;
+        } else {
+            throw "Invalid student object";
+        }
+    } catch (error) {
+        console.log('AsyncStorage error: ' + error.message);
+    }
+}
 
-//             let displayedSounds = prop.displayedSounds.map(item => {
-//                 return visualProps[item];
-//             });
+export function saveRecord(data) {
+    //await AsyncStorage.setItem()
+}
 
-//             let data = [
-//                 ...JSON.parse(previousValue),
-//                 {
-//                     displayedSounds: displayedSounds,
-//                     selectedAnswer: visualProps[sound],
-//                     correctAnswer: visualProps[props.correctSoundIndex]
-//                 }
-//             ];
+export function deleteRecord() {}
 
-//             await AsyncStorage.setItem(this.props.currentStudent.id, JSON.stringify(data));
-
-//             let newVal = await AsyncStorage.getItem(this.props.currentStudent.id)
-//             console.log(JSON.parse(newVal));
-
-//             console.log('Saved answer to disk for student:' + this.props.currentStudent.id);
-//         } catch (error) {
-//             console.log('AsyncStorage error: ' + error.message);
-//         }
+export function getManyRecords() {}

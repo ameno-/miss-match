@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga'
 import reducer from '../reducer'
-import selectionSaga from '../sagas';
+import Sagas from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,7 +24,7 @@ export const configureStore = (initialState = defaultState) => {
         autoRehydrate(),
         applyMiddleware(sagaMiddleware)
     ));
-    sagaMiddleware.run(selectionSaga)
+    sagaMiddleware.run(Sagas)
 
     persistStore(store, {storage: AsyncStorage});
     return store;
