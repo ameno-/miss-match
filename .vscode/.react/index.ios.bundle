@@ -76441,13 +76441,6 @@ selection:selection};
 
 };
 
-
-
-
-
-
-
-
 exports.setStudent=function(student){
 return{
 type:"SET_STUDENT",
@@ -79564,10 +79557,7 @@ get:function get(){
 return _proc.CHANNEL_END;
 }});
 }, 631, null, "redux-saga/lib/utils.js");
-__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {
-var uuidV4=require(633 /* uuid/v4 */);
-
-module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
+__d(/* msMatch/app/reducer/index.js */function(global, require, module, exports) {module.exports=function(){var state=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var action=arguments[1];
 switch(action.type){
 case'SELECTION':
 return babelHelpers.extends({},
@@ -79610,94 +79600,6 @@ return state;}
 
 };
 }, 632, null, "msMatch/app/reducer/index.js");
-__d(/* uuid/v4.js */function(global, require, module, exports) {var rng=require(634 /* ./lib/rng */);
-var bytesToUuid=require(635 /* ./lib/bytesToUuid */);
-
-function v4(options,buf,offset){
-var i=buf&&offset||0;
-
-if(typeof options=='string'){
-buf=options=='binary'?new Array(16):null;
-options=null;
-}
-options=options||{};
-
-var rnds=options.random||(options.rng||rng)();
-
-
-rnds[6]=rnds[6]&0x0f|0x40;
-rnds[8]=rnds[8]&0x3f|0x80;
-
-
-if(buf){
-for(var ii=0;ii<16;++ii){
-buf[i+ii]=rnds[ii];
-}
-}
-
-return buf||bytesToUuid(rnds);
-}
-
-module.exports=v4;
-}, 633, null, "uuid/v4.js");
-__d(/* uuid/lib/rng-browser.js */function(global, require, module, exports) {
-
-
-
-var rng;
-
-var crypto=global.crypto||global.msCrypto;
-if(crypto&&crypto.getRandomValues){
-
-var rnds8=new Uint8Array(16);
-rng=function whatwgRNG(){
-crypto.getRandomValues(rnds8);
-return rnds8;
-};
-}
-
-if(!rng){
-
-
-
-
-var rnds=new Array(16);
-rng=function rng(){
-for(var i=0,r;i<16;i++){
-if((i&0x03)===0)r=Math.random()*0x100000000;
-rnds[i]=r>>>((i&0x03)<<3)&0xff;
-}
-
-return rnds;
-};
-}
-
-module.exports=rng;
-}, 634, null, "uuid/lib/rng-browser.js");
-__d(/* uuid/lib/bytesToUuid.js */function(global, require, module, exports) {
-
-
-
-var byteToHex=[];
-for(var i=0;i<256;++i){
-byteToHex[i]=(i+0x100).toString(16).substr(1);
-}
-
-function bytesToUuid(buf,offset){
-var i=offset||0;
-var bth=byteToHex;
-return bth[buf[i++]]+bth[buf[i++]]+
-bth[buf[i++]]+bth[buf[i++]]+'-'+
-bth[buf[i++]]+bth[buf[i++]]+'-'+
-bth[buf[i++]]+bth[buf[i++]]+'-'+
-bth[buf[i++]]+bth[buf[i++]]+'-'+
-bth[buf[i++]]+bth[buf[i++]]+
-bth[buf[i++]]+bth[buf[i++]]+
-bth[buf[i++]]+bth[buf[i++]];
-}
-
-module.exports=bytesToUuid;
-}, 635, null, "uuid/lib/bytesToUuid.js");
 __d(/* msMatch/app/sagas/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.default=
 
 
@@ -79832,6 +79734,94 @@ watchChangeActiveStudent].map(regeneratorRuntime.mark);var uuidV4=require(633 /*
 
 [watchSaveNewStudent,watchChangeActiveStudent];
 }, 640, null, "msMatch/app/sagas/userSaga.js");
+__d(/* uuid/v4.js */function(global, require, module, exports) {var rng=require(634 /* ./lib/rng */);
+var bytesToUuid=require(635 /* ./lib/bytesToUuid */);
+
+function v4(options,buf,offset){
+var i=buf&&offset||0;
+
+if(typeof options=='string'){
+buf=options=='binary'?new Array(16):null;
+options=null;
+}
+options=options||{};
+
+var rnds=options.random||(options.rng||rng)();
+
+
+rnds[6]=rnds[6]&0x0f|0x40;
+rnds[8]=rnds[8]&0x3f|0x80;
+
+
+if(buf){
+for(var ii=0;ii<16;++ii){
+buf[i+ii]=rnds[ii];
+}
+}
+
+return buf||bytesToUuid(rnds);
+}
+
+module.exports=v4;
+}, 633, null, "uuid/v4.js");
+__d(/* uuid/lib/rng-browser.js */function(global, require, module, exports) {
+
+
+
+var rng;
+
+var crypto=global.crypto||global.msCrypto;
+if(crypto&&crypto.getRandomValues){
+
+var rnds8=new Uint8Array(16);
+rng=function whatwgRNG(){
+crypto.getRandomValues(rnds8);
+return rnds8;
+};
+}
+
+if(!rng){
+
+
+
+
+var rnds=new Array(16);
+rng=function rng(){
+for(var i=0,r;i<16;i++){
+if((i&0x03)===0)r=Math.random()*0x100000000;
+rnds[i]=r>>>((i&0x03)<<3)&0xff;
+}
+
+return rnds;
+};
+}
+
+module.exports=rng;
+}, 634, null, "uuid/lib/rng-browser.js");
+__d(/* uuid/lib/bytesToUuid.js */function(global, require, module, exports) {
+
+
+
+var byteToHex=[];
+for(var i=0;i<256;++i){
+byteToHex[i]=(i+0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf,offset){
+var i=offset||0;
+var bth=byteToHex;
+return bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+'-'+
+bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]]+
+bth[buf[i++]]+bth[buf[i++]];
+}
+
+module.exports=bytesToUuid;
+}, 635, null, "uuid/lib/bytesToUuid.js");
 ;require(251);
 ;require(0);
 //# sourceMappingURL=index.ios.map

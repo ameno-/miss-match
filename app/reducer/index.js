@@ -1,6 +1,3 @@
-//find a way to import the es6 way
-const uuidV4 = require('uuid/v4');
-
 module.exports = (state={}, action) => {
     switch (action.type) {
         case 'SELECTION':
