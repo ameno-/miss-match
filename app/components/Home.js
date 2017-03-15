@@ -27,9 +27,9 @@ class Home extends Component {
     }
 
     answerSelected(sound) {
-        this.props.dispatch(selection(sound));
-        this.props.dispatch({type:"SUBMIT", correctIndex: this.props.correctSoundIndex, selectedIndex: sound, testIndex: null});
-        getRecord(this.props);
+        let props = this.props;
+        props.dispatch(selection(sound));
+        props.dispatch({type:"SUBMIT", correctSoundIndex: props.correctSoundIndex, selectedSoundIndex: sound, testIndex: null, currentStudent: props.currentStudent, visualProp: props.visualProp, displayedSounds: props.displayedSounds});
     }
 
     buildSoundsIndex (testIndex = null){

@@ -6,32 +6,27 @@ import {AsyncStorage} from 'react-native';
  * @param {array} visual prop - the visual props being used.
  * @param {array} displayed sounds - sounds being displayed when selection was made
  */
-export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds) {
+export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds, selectedSoundIndex, correctSoundIndex) {
     try {
-        let previousValue = await AsyncStorage.getItem(props.currentStudent.id);
+        let previousValue = await AsyncStorage.getItem(currentStudent.id);
         console.log(previousValue);
-        let visualProps = props.visualProp;
 
-        let displayedSounds = props
-            .displayedSounds
-            .map(item => {
-                return visualProps[item];
-            });
+        let displayedSoundsNames = displayedSounds.map(item => visualProp[item]);
 
         let data = [
             ...JSON.parse(previousValue), {
-                displayedSounds: displayedSounds,
-                selectedAnswer: visualProps[sound],
-                correctAnswer: visualProps[props.correctSoundIndex]
+                displayedSounds: displayedSoundsNames,
+                selectedAnswer: visualProp[selectedSoundIndex],
+                correctAnswer: visualProp[correctSoundIndex]
             }
         ];
 
-        await AsyncStorage.setItem(this.props.currentStudent.id, JSON.stringify(data));
+        await AsyncStorage.setItem(currentStudent.id, JSON.stringify(data));
 
-        let newVal = await AsyncStorage.getItem(this.props.currentStudent.id)
+        let newVal = await AsyncStorage.getItem(currentStudent.id)
         console.log(JSON.parse(newVal));
 
-        console.log('Saved answer to disk for student:' + this.props.currentStudent.id);
+        console.log('Saved answer to disk for student:' + currentStudent.id);
     } catch (error) {
         console.log('AsyncStorage error: ' + error.message);
     }

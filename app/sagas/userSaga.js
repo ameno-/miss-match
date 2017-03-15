@@ -22,7 +22,7 @@ function * saveStudent(action) {
 function * changeActiveStudent(action) {
   try {
     yield put({type: "CHANGING_STUDENT"});
-    
+
 
   } catch (error) {
 

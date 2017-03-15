@@ -70325,9 +70325,9 @@ _this.answerSelected=_this.answerSelected.bind(_this);return _this;
 }babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
 
 sound){
-this.props.dispatch((0,_actions.selection)(sound));
-this.props.dispatch({type:"SUBMIT",correctIndex:this.props.correctSoundIndex,selectedIndex:sound,testIndex:null});
-(0,_db.getRecord)(this.props);
+var props=this.props;
+props.dispatch((0,_actions.selection)(sound));
+props.dispatch({type:"SUBMIT",correctSoundIndex:props.correctSoundIndex,selectedSoundIndex:sound,testIndex:null,currentStudent:props.currentStudent,visualProp:props.visualProp,displayedSounds:props.displayedSounds});
 }},{key:'buildSoundsIndex',value:function buildSoundsIndex()
 
 {var testIndex=arguments.length>0&&arguments[0]!==undefined?arguments[0]:null;
@@ -75980,11 +75980,6 @@ updateStudentDataAsync=updateStudentDataAsync;exports.
 
 
 
-
-
-
-
-
 saveStudentAsync=saveStudentAsync;exports.
 
 
@@ -76005,7 +76000,7 @@ saveRecord=saveRecord;exports.
 
 deleteRecord=deleteRecord;exports.
 
-getManyRecords=getManyRecords;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds){var _this=this;return regeneratorRuntime.async(function updateStudentDataAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;_context2.next=3;return regeneratorRuntime.awrap(function _callee(){var previousValue,visualProps,displayedSounds,data,newVal;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(props.currentStudent.id));case 2:previousValue=_context.sent;console.log(previousValue);visualProps=props.visualProp;displayedSounds=props.displayedSounds.map(function(item){return visualProps[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSounds,selectedAnswer:visualProps[sound],correctAnswer:visualProps[props.correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(_this.props.currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(_this.props.currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+_this.props.currentStudent.id);case 14:case'end':return _context.stop();}}},null,_this);}());case 3:_context2.next=8;break;case 5:_context2.prev=5;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 8:case'end':return _context2.stop();}}},null,this,[[0,5]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_context3.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context3.next=6;break;}_context3.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context3.next=7;break;case 6:throw"Invalid student object";case 7:_context3.next=12;break;case 9:_context3.prev=9;_context3.t0=_context3['catch'](0);console.log('AsyncStorage error: '+_context3.t0.message);case 12:case'end':return _context3.stop();}}},null,this,[[0,9]]);}function saveRecord(data){}function deleteRecord(){}function getManyRecords(){}
+getManyRecords=getManyRecords;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds,selectedSoundIndex,correctSoundIndex){var previousValue,displayedSoundsNames,data,newVal;return regeneratorRuntime.async(function updateStudentDataAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 3:previousValue=_context.sent;console.log(previousValue);displayedSoundsNames=displayedSounds.map(function(item){return visualProp[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSoundsNames,selectedAnswer:visualProp[selectedSoundIndex],correctAnswer:visualProp[correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+currentStudent.id);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](0);console.log('AsyncStorage error: '+_context.t0.message);case 19:case'end':return _context.stop();}}},null,this,[[0,16]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context2.next=6;break;}_context2.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context2.next=7;break;case 6:throw"Invalid student object";case 7:_context2.next=12;break;case 9:_context2.prev=9;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 12:case'end':return _context2.stop();}}},null,this,[[0,9]]);}function saveRecord(data){}function deleteRecord(){}function getManyRecords(){}
 }, 594, null, "msMatch/app/db/index.js");
 __d(/* msMatch/app/components/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
@@ -79717,7 +79712,8 @@ sagas.map(function(saga){return(0,_effects.fork)(saga);}));case 2:case'end':retu
 __d(/* redux-saga/effects.js */function(global, require, module, exports) {module.exports=require(630 /* ./lib/effects */);
 }, 637, null, "redux-saga/effects.js");
 __d(/* msMatch/app/sagas/selectionSaga.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _effects=require(637 /* redux-saga/effects */);
-var _helper=require(639 /* ../../utils/helper */);var _marked=[
+var _helper=require(639 /* ../../utils/helper */);
+var _db=require(594 /* ../db */);var _marked=[
 
 selectionChanged,
 
@@ -79736,7 +79732,9 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedIndex===action.correctIndex)){_context.next=6;break;}_context.next=4;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,3)});case 4:_context.next=8;break;case 6:_context.next=8;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 8:_context.next=16;break;case 10:_context.prev=10;_context.t0=_context['catch'](0);_context.next=14;return console.log("done fucked up");case 14:_context.next=16;return console.log(_context.t0);case 16:case'end':return _context.stop();}}},_marked[0],this,[[0,10]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+
+
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=6;break;}_context.next=4;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,3)});case 4:_context.next=8;break;case 6:_context.next=8;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 8:console.log(action);_context.next=11;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 11:_context.next=19;break;case 13:_context.prev=13;_context.t0=_context['catch'](0);_context.next=17;return console.log("done fucked up");case 17:_context.next=19;return console.log(_context.t0);case 19:case'end':return _context.stop();}}},_marked[0],this,[[0,13]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 
