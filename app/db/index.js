@@ -50,6 +50,17 @@ export async function saveStudentAsync(currentStudent) {
     }
 }
 
+/** Get student history
+ * @param  {string} studentId
+ */
+export async function getStudentHistoryAsync(studentId) {
+    try {
+        return await AsyncStorage.getItem(studentId);
+    } catch (error) {
+        console.log('AsyncStorage error: ' + error.message);
+    }
+}
+
 export function resetDB() {
     //await AsyncStorage.setItem()
 }

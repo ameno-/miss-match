@@ -28,7 +28,6 @@ class Settings extends Component {
     }
 
     updateLingSoundCount(newCount) {
-        console.log(newCount)
         this.props.dispatch(setLingSoundCount(newCount));
         this.props.navigator.pop();
     }
@@ -52,7 +51,7 @@ class Settings extends Component {
          this
             .props
             .navigator
-            .push({component: List, title: "Number of Ling sounds", navigationBarHidden: false, passProps: itemListProps})
+            .push({component: List, title: "Number of Ling sounds", navigationBarHidden: false, passProps: itemListProps});
     }
 
     _navigateVisualPropsPage() {

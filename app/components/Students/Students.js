@@ -16,12 +16,15 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import StudentItem from './StudentItem';
 
+import HistoryList from './History';
+
 import { setStudent } from '../../actions';
 
 class Students extends Component {
     constructor(props, context) {
         super(props, context);
         this._navigateHome = this._navigateHome.bind(this);
+        this._navigateHistory = this._navigateHistory.bind(this);
         this.addNewStudent = this.addNewStudent.bind(this);
         this.selectStudent = this.selectStudent.bind(this);
         this.state = {
@@ -32,6 +35,10 @@ class Students extends Component {
   
     _navigateHome() {
         this.props.navigator.pop();
+    }
+
+    _navigateHistory() {
+        this.props.navigator.push({component: HistoryList, title: "the homies", navigationBarHidden: true, passProps: 1})
     }
 
     addNewStudent() {
@@ -84,7 +91,9 @@ selectStudent(selected) {
                     <Text style={styles.title}>Students</Text>
 
                     <View style={styles.topBarRight}>
-                        <Text>{chartIcon}</Text>
+                        <TouchableOpacity onPress={this._navigateHistory}>
+                            <Text>{chartIcon}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.inputContainer}>
