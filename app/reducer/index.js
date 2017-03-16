@@ -41,6 +41,13 @@ module.exports = (state={}, action) => {
                 ...state,
                 lingSoundCount: action.count
             }
+        case 'RESET_STORE':
+        console.log(action);
+            return{
+                ...state,
+                displayedSounds: [0, 1, 2],
+                lingSoundCount: 3
+            }
         default:
             return state;
     }

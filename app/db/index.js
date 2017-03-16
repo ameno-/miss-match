@@ -9,7 +9,7 @@ import {AsyncStorage} from 'react-native';
 export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds, selectedSoundIndex, correctSoundIndex) {
     try {
         let previousValue = await AsyncStorage.getItem(currentStudent.id);
-        console.log(previousValue);
+        //console.log(previousValue);
 
         let displayedSoundsNames = displayedSounds.map(item => visualProp[item]);
 
@@ -24,7 +24,7 @@ export async function updateStudentDataAsync(currentStudent, visualProp, display
         await AsyncStorage.setItem(currentStudent.id, JSON.stringify(data));
 
         let newVal = await AsyncStorage.getItem(currentStudent.id)
-        console.log(JSON.parse(newVal));
+        //console.log(JSON.parse(newVal));
 
         console.log('Saved answer to disk for student:' + currentStudent.id);
 

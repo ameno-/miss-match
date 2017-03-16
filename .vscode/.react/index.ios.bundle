@@ -76388,23 +76388,33 @@ color:'#808782'}});exports.default=
 StudentItem;
 }, 643, null, "msMatch/app/components/Students/StudentItem.js");
 __d(/* msMatch/app/actions/index.js */function(global, require, module, exports) {exports.selection=function(selection){
-return{
-type:' ',
-selection:selection};
-
+return{type:' ',selection:selection};
 };
 
 exports.setStudent=function(student){
-return{
-type:"SET_STUDENT",
-student:student};
-
+return{type:"SET_STUDENT",student:student};
 };
 
 exports.setLingSoundCount=function(count){
+return{type:"LING_SOUND_COUNT",count:count};
+};
+
+exports.resetStore=function(){
 return{
-type:"LING_SOUND_COUNT",
-count:count};
+type:"RESET_STORE",
+payload:{
+sounds:["ah","ee","oo","m","s","sh"],
+visualProp:["airplane","mouse","train","pizza","snake","baby"],
+correctSoundIndex:0,
+selectedSoundIndex:0,
+displayedSounds:[0,1,2],
+minIndex:0,
+maxIndex:5,
+students:[],
+currentStudent:{},
+manualTestIndex:null,
+lingSoundCount:3}};
+
 
 };
 }, 599, null, "msMatch/app/actions/index.js");
@@ -76565,7 +76575,7 @@ hasNavArrow:false,
 title:'Completely random?'}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
 title:'Number of Ling sounds',
-titleInfo:(this.props.lingSoundCount+1).toString(),
+titleInfo:this.props.lingSoundCount.toString(),
 titleInfoStyle:styles.titleInfoStyle,
 onPress:function onPress(){return _this2._navigateToLingSoundsPage();}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
@@ -76610,8 +76620,8 @@ styles.imageStyle,
 source:
 require(653 /* ./images/notifications.png */)}),
 
-title:'Notifications',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Notifications Page');}}),
+title:'Reset options',
+onPress:function onPress(){return _this2.props.dispatch((0,_actions.resetStore)());}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
 title:'Control Center',
 onPress:function onPress(){return _reactNative.Alert.alert('Route To Control Center Page');}})))));
@@ -76983,7 +76993,7 @@ items=this.props.items;
 var renderList=function renderList(){
 return items.map(function(item,i){
 return(
-_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress(i);},key:i},
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress(item.title);},key:i},
 _react2.default.createElement(_reactNative.View,{style:styles.listContainer},
 _react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},
 item.title))));
@@ -80114,6 +80124,12 @@ return babelHelpers.extends({},
 state,{
 lingSoundCount:action.count});
 
+case'RESET_STORE':
+console.log(action);
+return babelHelpers.extends({},
+state,{
+displayedSounds:[0,1,2]});
+
 default:
 return state;}
 
@@ -80263,7 +80279,7 @@ saveStudentAsync=saveStudentAsync;exports.
 
 
 
-resetDB=resetDB;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds,selectedSoundIndex,correctSoundIndex){var previousValue,displayedSoundsNames,data,newVal;return regeneratorRuntime.async(function updateStudentDataAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 3:previousValue=_context.sent;console.log(previousValue);displayedSoundsNames=displayedSounds.map(function(item){return visualProp[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSoundsNames,selectedAnswer:visualProp[selectedSoundIndex],correctAnswer:visualProp[correctSoundIndex]}]);_context.next=9;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(data)));case 9:_context.next=11;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 11:newVal=_context.sent;console.log(JSON.parse(newVal));console.log('Saved answer to disk for student:'+currentStudent.id);_context.next=19;break;case 16:_context.prev=16;_context.t0=_context['catch'](0);console.log('AsyncStorage error: '+_context.t0.message);case 19:case'end':return _context.stop();}}},null,this,[[0,16]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context2.next=6;break;}_context2.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context2.next=7;break;case 6:throw"Invalid student object";case 7:_context2.next=12;break;case 9:_context2.prev=9;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 12:case'end':return _context2.stop();}}},null,this,[[0,9]]);}function resetDB(){
+resetDB=resetDB;var _reactNative=require(79 /* react-native */);function updateStudentDataAsync(currentStudent,visualProp,displayedSounds,selectedSoundIndex,correctSoundIndex){var previousValue,displayedSoundsNames,data,newVal;return regeneratorRuntime.async(function updateStudentDataAsync$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 3:previousValue=_context.sent;displayedSoundsNames=displayedSounds.map(function(item){return visualProp[item];});data=[].concat(babelHelpers.toConsumableArray(JSON.parse(previousValue)),[{displayedSounds:displayedSoundsNames,selectedAnswer:visualProp[selectedSoundIndex],correctAnswer:visualProp[correctSoundIndex]}]);_context.next=8;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(data)));case 8:_context.next=10;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem(currentStudent.id));case 10:newVal=_context.sent;console.log('Saved answer to disk for student:'+currentStudent.id);_context.next=17;break;case 14:_context.prev=14;_context.t0=_context['catch'](0);console.log('AsyncStorage error: '+_context.t0.message);case 17:case'end':return _context.stop();}}},null,this,[[0,14]]);}function saveStudentAsync(currentStudent){return regeneratorRuntime.async(function saveStudentAsync$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;if(!(currentStudent&&currentStudent.id&&currentStudent.studentName&&currentStudent.teacherName)){_context2.next=6;break;}_context2.next=4;return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem(currentStudent.id,JSON.stringify(currentStudent)));case 4:_context2.next=7;break;case 6:throw"Invalid student object";case 7:_context2.next=12;break;case 9:_context2.prev=9;_context2.t0=_context2['catch'](0);console.log('AsyncStorage error: '+_context2.t0.message);case 12:case'end':return _context2.stop();}}},null,this,[[0,9]]);}function resetDB(){
 
 }
 }, 594, null, "msMatch/app/db/index.js");

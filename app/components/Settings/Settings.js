@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
 
-import { setLingSoundCount } from '../../actions';
+import { setLingSoundCount, resetStore } from '../../actions';
 import List from './List';
 
 class Settings extends Component {
@@ -88,7 +88,7 @@ class Settings extends Component {
                             title='Completely random?'/>
                         <SettingsList.Item
                             title='Number of Ling sounds'
-                            titleInfo={(this.props.lingSoundCount + 1).toString()}
+                            titleInfo={(this.props.lingSoundCount).toString()}
                             titleInfoStyle={styles.titleInfoStyle}
                             onPress={() => this._navigateToLingSoundsPage()}/>
                         <SettingsList.Item
@@ -133,8 +133,8 @@ class Settings extends Component {
                         source = {
                             require('./images/notifications.png')
                         } />}
-                            title='Notifications'
-                            onPress={() => Alert.alert('Route To Notifications Page')}/>
+                            title='Reset options'
+                            onPress={() => this.props.dispatch(resetStore())}/>
                         <SettingsList.Item
                             title='Control Center'
                             onPress={() => Alert.alert('Route To Control Center Page')}/>

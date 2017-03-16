@@ -7,7 +7,7 @@ class List extends Component {
         const renderList = () => {
             return items.map((item, i) => {
                 return (
-                    <TouchableOpacity onPress={() => this.props.handlePress(i)} key={i}>
+                    <TouchableOpacity onPress={() => this.props.handlePress(item.title)} key={i}>
                     <View style={styles.listContainer}>
                         <Text style={styles.listItemTitle}>
                             {item.title}

@@ -19,7 +19,7 @@ const defaultState = {
     currentStudent: {},
     manualTestIndex: null,
     lingSoundCount: 3
-}
+};
 
 export const configureStore = (initialState = defaultState) => {
     let store = createStore(reducer, initialState, compose(
