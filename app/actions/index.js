@@ -10,6 +10,10 @@ exports.setLingSoundCount = (count) => {
     return {type: "SET_LING_SOUND_COUNT", count}
 }
 
+exports.setTestIndex = (testIndex) => {
+    return {type: "SET_TEST_INDEX", testIndex}
+}
+
 exports.resetStore = () => {
     return {
         type: "RESET_STORE",

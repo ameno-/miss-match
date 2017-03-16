@@ -41,6 +41,11 @@ module.exports = (state={}, action) => {
                 ...state,
                 lingSoundCount: action.count
             }
+        case 'SET_TEST_INDEX':
+            return {
+                ...state,
+                manualTestIndex: action.testIndex
+            }
         case 'RESET_STORE':
         console.log(action);
             return{

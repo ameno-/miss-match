@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
 
-import { setLingSoundCount, resetStore } from '../../actions';
+import { setLingSoundCount, resetStore, setTestIndex } from '../../actions';
 import List from './List';
 
 class Settings extends Component {
@@ -14,6 +14,8 @@ class Settings extends Component {
         this.onValueChange = this.onValueChange.bind(this);
 
         this.updateLingSoundCount = this.updateLingSoundCount.bind(this);
+
+        this.updateManualTestIndex = this.updateManualTestIndex.bind(this);
 
         this.state = {
             switchValue: false
@@ -31,6 +33,12 @@ class Settings extends Component {
         this.props.navigator.pop();
     }
 
+    updateManualTestIndex(newIndex) {
+        let i = this.props.visualProp.indexOf(newIndex);
+        this.props.dispatch(setTestIndex(i));
+        this.props.navigator.pop();
+    }
+
     _navigateToLingSoundsPage() {
         //bad code. Improve it later my nigga.
         let maxSoundOptions = [1,2,3,4,5,6];
@@ -45,6 +53,20 @@ class Settings extends Component {
             .props
             .navigator
             .push({component: List, title: "Number of Ling sounds", navigationBarHidden: false, passProps: itemListProps})
+    }
+
+    _navigateVisualPropsPage() {
+        let itemListProps = {};
+        itemListProps.items = this.props.visualProp.map((item) => {
+            return {title: item}
+        });
+
+        itemListProps.handlePress = this.updateManualTestIndex;
+
+         this
+            .props
+            .navigator
+            .push({component: List, title: "Available visual props", navigationBarHidden: false, passProps: itemListProps})
     }
 
     render() {
@@ -92,52 +114,17 @@ class Settings extends Component {
                             titleInfoStyle={styles.titleInfoStyle}
                             onPress={() => this._navigateToLingSoundsPage()}/>
                         <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/blutooth.png')
-                        } />}
-                            title='Blutooth'
-                            titleInfo='Off'
+                            title='Test specific sound'
+                            titleInfo={this.props.manualTestIndex != null ? this.props.visualProp[this.props.manualTestIndex] : "random"}
                             titleInfoStyle={styles.titleInfoStyle}
-                            onPress={() => Alert.alert('Route to Blutooth Page')}/>
-                        <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/cellular.png')
-                        } />}
-                            title='Cellular'
-                            onPress={() => Alert.alert('Route To Cellular Page')}/>
-                        <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/hotspot.png')
-                        } />}
-                            title='Personal Hotspot'
-                            titleInfo='Off'
-                            titleInfoStyle={styles.titleInfoStyle}
-                            onPress={() => Alert.alert('Route To Hotspot Page')}/>
+                            onPress={() => this._navigateVisualPropsPage()}/>
                         <SettingsList.Header
                             headerStyle={{
                             marginTop: 15
-                        }}/>
+                        }} />
                         <SettingsList.Item
-                            icon={< Image style = {
-                            styles.imageStyle
-                        }
-                        source = {
-                            require('./images/notifications.png')
-                        } />}
                             title='Reset options'
                             onPress={() => this.props.dispatch(resetStore())}/>
-                        <SettingsList.Item
-                            title='Control Center'
-                            onPress={() => Alert.alert('Route To Control Center Page')}/>
                     </SettingsList>
                 </View>
             </View>
@@ -159,7 +146,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (store) => {
-    return {visualProp: store.visualProp, displayedSounds: store.displayedSounds, manualTestIndex: store.manualTestIndex, lingSoundCount: store.lingSoundCount}
+    return {
+        visualProp: store.visualProp, 
+        displayedSounds: store.displayedSounds, 
+        manualTestIndex: store.manualTestIndex, 
+        lingSoundCount: store.lingSoundCount
+    }
 }
 
 module.exports = connect(mapStateToProps)(Settings)

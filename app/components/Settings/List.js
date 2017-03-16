@@ -7,13 +7,13 @@ class List extends Component {
         const renderList = () => {
             return items.map((item, i) => {
                 return (
-                    <TouchableOpacity onPress={() => this.props.handlePress(item.title)} key={i}>
-                    <View style={styles.listContainer}>
-                        <Text style={styles.listItemTitle}>
-                            {item.title}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.handlePress(item.title)} key={i} style={styles.buttonStyle}>
+                        <View style={styles.listContainer}>
+                            <Text style={styles.listItemTitle}>
+                                {item.title}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
                 )
             })
         }
@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
 
     listItemSubTitleText: {
         color: '#808782'
+    },
+    buttonStyle: {
+        marginTop: 40
     }
 });
 

@@ -76396,7 +76396,11 @@ return{type:"SET_STUDENT",student:student};
 };
 
 exports.setLingSoundCount=function(count){
-return{type:"LING_SOUND_COUNT",count:count};
+return{type:"SET_LING_SOUND_COUNT",count:count};
+};
+
+exports.setTestIndex=function(testIndex){
+return{type:"SET_TEST_INDEX",testIndex:testIndex};
 };
 
 exports.resetStore=function(){
@@ -76502,6 +76506,8 @@ _this.onValueChange=_this.onValueChange.bind(_this);
 
 _this.updateLingSoundCount=_this.updateLingSoundCount.bind(_this);
 
+_this.updateManualTestIndex=_this.updateManualTestIndex.bind(_this);
+
 _this.state={
 switchValue:false};return _this;
 
@@ -76515,6 +76521,12 @@ console.log(this.state.switchValue);
 newCount){
 console.log(newCount);
 this.props.dispatch((0,_actions.setLingSoundCount)(newCount));
+this.props.navigator.pop();
+}},{key:'updateManualTestIndex',value:function updateManualTestIndex(
+
+newIndex){
+var i=this.props.visualProp.indexOf(newIndex);
+this.props.dispatch((0,_actions.setTestIndex)(i));
 this.props.navigator.pop();
 }},{key:'_navigateToLingSoundsPage',value:function _navigateToLingSoundsPage()
 
@@ -76532,6 +76544,20 @@ this.
 props.
 navigator.
 push({component:_List2.default,title:"Number of Ling sounds",navigationBarHidden:false,passProps:itemListProps});
+}},{key:'_navigateVisualPropsPage',value:function _navigateVisualPropsPage()
+
+{
+var itemListProps={};
+itemListProps.items=this.props.visualProp.map(function(item){
+return{title:item};
+});
+
+itemListProps.handlePress=this.updateManualTestIndex;
+
+this.
+props.
+navigator.
+push({component:_List2.default,title:"Available visual props",navigationBarHidden:false,passProps:itemListProps});
 }},{key:'render',value:function render()
 
 {var _this2=this;
@@ -76579,52 +76605,17 @@ titleInfo:this.props.lingSoundCount.toString(),
 titleInfoStyle:styles.titleInfoStyle,
 onPress:function onPress(){return _this2._navigateToLingSoundsPage();}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(650 /* ./images/blutooth.png */)}),
-
-title:'Blutooth',
-titleInfo:'Off',
+title:'Test specific sound',
+titleInfo:this.props.manualTestIndex!=null?this.props.visualProp[this.props.manualTestIndex]:"random",
 titleInfoStyle:styles.titleInfoStyle,
-onPress:function onPress(){return _reactNative.Alert.alert('Route to Blutooth Page');}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(651 /* ./images/cellular.png */)}),
-
-title:'Cellular',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Cellular Page');}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(652 /* ./images/hotspot.png */)}),
-
-title:'Personal Hotspot',
-titleInfo:'Off',
-titleInfoStyle:styles.titleInfoStyle,
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Hotspot Page');}}),
+onPress:function onPress(){return _this2._navigateVisualPropsPage();}}),
 _react2.default.createElement(_reactNativeSettingsList2.default.Header,{
 headerStyle:{
 marginTop:15}}),
 
 _react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-icon:_react2.default.createElement(_reactNative.Image,{style:
-styles.imageStyle,
-
-source:
-require(653 /* ./images/notifications.png */)}),
-
 title:'Reset options',
-onPress:function onPress(){return _this2.props.dispatch((0,_actions.resetStore)());}}),
-_react2.default.createElement(_reactNativeSettingsList2.default.Item,{
-title:'Control Center',
-onPress:function onPress(){return _reactNative.Alert.alert('Route To Control Center Page');}})))));
+onPress:function onPress(){return _this2.props.dispatch((0,_actions.resetStore)());}})))));
 
 
 
@@ -76646,7 +76637,12 @@ color:'#8e8e93'}});
 
 
 var mapStateToProps=function mapStateToProps(store){
-return{visualProp:store.visualProp,displayedSounds:store.displayedSounds,manualTestIndex:store.manualTestIndex,lingSoundCount:store.lingSoundCount};
+return{
+visualProp:store.visualProp,
+displayedSounds:store.displayedSounds,
+manualTestIndex:store.manualTestIndex,
+lingSoundCount:store.lingSoundCount};
+
 };
 
 module.exports=(0,_reactRedux.connect)(mapStateToProps)(Settings);
@@ -76993,7 +76989,7 @@ items=this.props.items;
 var renderList=function renderList(){
 return items.map(function(item,i){
 return(
-_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress(item.title);},key:i},
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress(item.title);},key:i,style:styles.buttonStyle},
 _react2.default.createElement(_reactNative.View,{style:styles.listContainer},
 _react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},
 item.title))));
@@ -77029,20 +77025,15 @@ fontWeight:'bold'},
 
 
 listItemSubTitleText:{
-color:'#808782'}});exports.default=
+color:'#808782'},
+
+buttonStyle:{
+marginTop:40}});exports.default=
 
 
 
 List;
 }, 658, null, "msMatch/app/components/Settings/List.js");
-__d(/* msMatch/app/components/Settings/images/blutooth.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"47255fe538e0ac5304666d4466500c71","name":"blutooth","type":"png"});
-}, 650, null, "msMatch/app/components/Settings/images/blutooth.png");
-__d(/* msMatch/app/components/Settings/images/cellular.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"eda0422ef5c4abb8cf738942f49b4ea9","name":"cellular","type":"png"});
-}, 651, null, "msMatch/app/components/Settings/images/cellular.png");
-__d(/* msMatch/app/components/Settings/images/hotspot.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":44,"height":45,"scales":[1],"hash":"9d7cd99831cc1a8343e10fc5a0207ccd","name":"hotspot","type":"png"});
-}, 652, null, "msMatch/app/components/Settings/images/hotspot.png");
-__d(/* msMatch/app/components/Settings/images/notifications.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/app/components/Settings/images","width":60,"height":60,"scales":[1],"hash":"0b5463062db6a4d66b16791f87dec37d","name":"notifications","type":"png"});
-}, 653, null, "msMatch/app/components/Settings/images/notifications.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
 var _reduxPersist=require(608 /* redux-persist */);
@@ -80119,16 +80110,22 @@ case'QUESTIONS_REDO':
 return babelHelpers.extends({},
 state);
 
-case'LING_SOUND_COUNT':
+case'SET_LING_SOUND_COUNT':
 return babelHelpers.extends({},
 state,{
 lingSoundCount:action.count});
+
+case'SET_TEST_INDEX':
+return babelHelpers.extends({},
+state,{
+manualTestIndex:action.testIndex});
 
 case'RESET_STORE':
 console.log(action);
 return babelHelpers.extends({},
 state,{
-displayedSounds:[0,1,2]});
+displayedSounds:[0,1,2],
+lingSoundCount:3});
 
 default:
 return state;}
