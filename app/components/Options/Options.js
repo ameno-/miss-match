@@ -8,7 +8,7 @@ class Options extends Component {
     getImageSrc(visualProp){
         switch (visualProp) {
             case "baby":
-                return require('../../../assets/baby.png');
+                return require('../../../assets/cryingBaby.png');
             case "mouse":
                 return require('../../../assets/mouse.png');
             case "train":

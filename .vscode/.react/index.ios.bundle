@@ -76432,7 +76432,7 @@ props));
 visualProp){
 switch(visualProp){
 case"baby":
-return require(601 /* ../../../assets/baby.png */);
+return require(659 /* ../../../assets/cryingBaby.png */);
 case"mouse":
 return require(602 /* ../../../assets/mouse.png */);
 case"train":
@@ -76468,6 +76468,7 @@ resizeMode:"contain"}))));
 
 
 var styles=_reactNative.StyleSheet.create({
+
 container:{
 flex:1,
 flexDirection:"row",
@@ -76489,8 +76490,8 @@ paddingRight:50}});exports.default=
 
 Options;
 }, 644, null, "msMatch/app/components/Options/Options.js");
-__d(/* msMatch/assets/baby.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":277,"height":297,"scales":[1],"hash":"9a441a599d6f18fe38364a45d3d60c1f","name":"baby","type":"png"});
-}, 601, null, "msMatch/assets/baby.png");
+__d(/* msMatch/assets/cryingBaby.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":600,"height":550,"scales":[1],"hash":"2a473b3b2efb0ca59802269ac7b75ebf","name":"cryingBaby","type":"png"});
+}, 659, null, "msMatch/assets/cryingBaby.png");
 __d(/* msMatch/assets/mouse.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":2834,"height":2150,"scales":[1],"hash":"fa72ecf71e17ec0b6982eb1f53a46fd1","name":"mouse","type":"png"});
 }, 602, null, "msMatch/assets/mouse.png");
 __d(/* msMatch/assets/train.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":1600,"height":783,"scales":[1],"hash":"1e622df4013d149b3369dc4d74238c8f","name":"train","type":"png"});
