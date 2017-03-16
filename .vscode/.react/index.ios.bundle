@@ -76448,6 +76448,7 @@ return require(606 /* ../../../assets/snake.png */);}
 {var _this2=this;
 var src=this.getImageSrc(this.props.visualProp);
 return(
+_react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.TouchableOpacity,{
 onPress:function onPress(){return _this2.props.onSelected(_this2.props.sound);},
 soundIndex:this.props.sound,
@@ -76457,7 +76458,9 @@ accessibilityLabel:'Symbol select',
 style:styles.button},
 _react2.default.createElement(_reactNative.Image,{
 source:src,
-style:styles.imageButton})));
+style:styles.imageButton,
+resizeMode:"contain"}))));
+
 
 
 
@@ -76465,9 +76468,18 @@ style:styles.imageButton})));
 
 
 var styles=_reactNative.StyleSheet.create({
+container:{
+flex:1,
+flexDirection:"row",
+alignItems:"center",
+justifyContent:"space-between",
+flexWrap:'wrap'},
+
 imageButton:{
 width:180,
-height:140},
+height:140,
+flex:1,
+flexWrap:'wrap'},
 
 button:{
 paddingLeft:50,

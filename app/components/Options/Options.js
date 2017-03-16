@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, Image, StyleSheet, View } from 'react-native';
 class Options extends Component {
     constructor(props){
         super(props);
@@ -24,26 +24,39 @@ class Options extends Component {
     render() {
         let src = this.getImageSrc(this.props.visualProp);
         return (
-            <TouchableOpacity
-                onPress={() => this.props.onSelected(this.props.sound)}
-                soundIndex={this.props.sound}
-                key={this.props.sound}
-                color="#841584"
-                accessibilityLabel="Symbol select"
-                style={styles.button}>
-                <Image
-                    source={src}
-                    style={styles.imageButton}
-                />
+            <View style={styles.container}>
+                <TouchableOpacity
+                    onPress={() => this.props.onSelected(this.props.sound)}
+                    soundIndex={this.props.sound}
+                    key={this.props.sound}
+                    color="#841584"
+                    accessibilityLabel="Symbol select"
+                    style={styles.button}>
+                    <Image
+                        source={src}
+                        style={styles.imageButton}
+                        resizeMode={"contain"}
+                    />
                 </TouchableOpacity>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    //work harder to fix wrapping. Be responsive homie
+    container: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: 'wrap'
+    },
     imageButton: {
         width: 180,
         height: 140,
+        flex: 1,
+        flexWrap: 'wrap'
     },
     button: {
         paddingLeft: 50,
