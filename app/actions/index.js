@@ -7,7 +7,7 @@ exports.setStudent = (student) => {
 }
 
 exports.setLingSoundCount = (count) => {
-    return {type: "LING_SOUND_COUNT", count}
+    return {type: "SET_LING_SOUND_COUNT", count}
 }
 
 exports.resetStore = () => {
