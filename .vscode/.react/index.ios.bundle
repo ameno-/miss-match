@@ -76399,12 +76399,6 @@ StudentItem;
 __d(/* msMatch/app/components/Students/History.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
 
-
-
-
-
-
-
 var _reactNativeEasyGrid=require(646 /* react-native-easy-grid */);
 
 var _db=require(599 /* ../../db */);var
@@ -76418,26 +76412,80 @@ historyData:'Nothing found'};return _this;
 
 }babelHelpers.createClass(HistoryList,[{key:'componentDidMount',value:function componentDidMount()
 {var _this2=this;
-(0,_db.getStudentHistoryAsync)(this.props.student.id).then(function(result){return _this2.setState({
-historyData:JSON.parse(result)});});
+(0,_db.getStudentHistoryAsync)(this.props.student.id).then(function(result){
+console.log(result);
+_this2.setState({
+historyData:JSON.parse(result)});
 
+});
+}},{key:'buildGridGroups',value:function buildGridGroups()
+
+{
+var train=[];
+var airplane=[];
+var mouse=[];
+var baby=[];
+var snake=[];
+var train=[];
+var pizza=[];
+
+this.state.historyData.forEach(function(item){
+switch(item.correctAnswer){
+case"train":
+train.push(item);
+break;
+case"airplane":
+airplane.push(item);
+break;
+case"train":
+train.push(item);
+break;
+case"baby":
+baby.push(item);
+break;
+case"mouse":
+mouse.push(item);
+break;
+case"pizza":
+pizza.push(item);
+break;
+case"snake":
+snake.push(item);
+break;}
+
+});
 }},{key:'render',value:function render()
 
 {var _this3=this;var
 student=this.state.student;
 var renderHistory=function renderHistory(){
 if(_this3.state.historyData!='Nothing found'){
-return _this3.state.historyData.map(function(item,i){
+return _this3.
+state.
+historyData.
+map(function(item,i){
 return(
-_react2.default.createElement(_reactNativeEasyGrid.Grid,{key:i},
+_react2.default.createElement(_reactNativeEasyGrid.Grid,{key:i,style:styles.mainGrid},
 _react2.default.createElement(_reactNativeEasyGrid.Row,{style:styles.topRow},
 _react2.default.createElement(_reactNativeEasyGrid.Col,null),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 1')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 2')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 3')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 4')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 5')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'ling 6'))),
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 1')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 2')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 3')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 4')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 5')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 6'))),
+
 
 _react2.default.createElement(_reactNativeEasyGrid.Col,{style:styles.leftCol},
 _react2.default.createElement(_reactNativeEasyGrid.Row,null),
@@ -76445,19 +76493,39 @@ _react2.default.createElement(_reactNativeEasyGrid.Row,null,
 _react2.default.createElement(_reactNativeEasyGrid.Col,null,
 _react2.default.createElement(_reactNative.Text,null,'ling 1')),
 
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa2')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa3')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa4')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa5')),
-_react2.default.createElement(_reactNativeEasyGrid.Col,null,_react2.default.createElement(_reactNative.Text,null,'Da ansa6'))),
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa')),
 
-_react2.default.createElement(_reactNativeEasyGrid.Row,null,_react2.default.createElement(_reactNative.Text,null,'ling 2')),
-_react2.default.createElement(_reactNativeEasyGrid.Row,null,_react2.default.createElement(_reactNative.Text,null,'ling 3')),
-_react2.default.createElement(_reactNativeEasyGrid.Row,null,_react2.default.createElement(_reactNative.Text,null,'ling 4')),
-_react2.default.createElement(_reactNativeEasyGrid.Row,null,_react2.default.createElement(_reactNative.Text,null,'ling 5')),
-_react2.default.createElement(_reactNativeEasyGrid.Row,null,_react2.default.createElement(_reactNative.Text,null,'ling 6')))));
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa2')),
 
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa3')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa4')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa5')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Col,null,
+_react2.default.createElement(_reactNative.Text,null,'Da ansa6'))),
+
+
+_react2.default.createElement(_reactNativeEasyGrid.Row,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 2')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Row,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 3')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Row,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 4')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Row,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 5')),
+
+_react2.default.createElement(_reactNativeEasyGrid.Row,null,
+_react2.default.createElement(_reactNative.Text,null,'ling 6')))));
 
 
 
@@ -76479,11 +76547,15 @@ renderHistory()));
 
 
 var styles=_reactNative.StyleSheet.create({
+mainGrid:{
+marginTop:100},
+
 topRow:{
-backgroundColor:'red'},
+backgroundColor:'#D0D5E5',
+padding:10},
 
 leftCol:{
-backgroundColor:'blue'}});exports.default=
+backgroundColor:'white'}});exports.default=
 
 
 
