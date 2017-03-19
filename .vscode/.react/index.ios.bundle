@@ -75978,7 +75978,7 @@ var _SimpleLineIcons=require(595 /* react-native-vector-icons/SimpleLineIcons */
 
 var _StudentItem=require(597 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
 
-var _History=require(598 /* ./History */);var _History2=babelHelpers.interopRequireDefault(_History);
+var _History=require(652 /* ./History/ */);var _History2=babelHelpers.interopRequireDefault(_History);
 
 var _actions=require(600 /* ../../actions */);var
 
@@ -76000,7 +76000,7 @@ this.props.navigator.pop();
 }},{key:'_navigateHistory',value:function _navigateHistory()
 
 {
-this.props.navigator.push({component:_History2.default,title:"the homies",navigationBarHidden:false,passProps:{student:this.props.currentStudent}});
+this.props.navigator.push({component:_History2.default,title:this.props.currentStudent.studentName,navigationBarHidden:false,passProps:{student:this.props.currentStudent}});
 }},{key:'addNewStudent',value:function addNewStudent()
 
 {
@@ -76396,12 +76396,12 @@ color:'#808782'}});exports.default=
 
 StudentItem;
 }, 597, null, "msMatch/app/components/Students/StudentItem.js");
-__d(/* msMatch/app/components/Students/History.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Students/History/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
 
 var _reactNativeEasyGrid=require(646 /* react-native-easy-grid */);
 
-var _db=require(599 /* ../../db */);var
+var _db=require(599 /* ../../../db */);var
 
 HistoryList=function(_Component){babelHelpers.inherits(HistoryList,_Component);
 function HistoryList(){babelHelpers.classCallCheck(this,HistoryList);var _this=babelHelpers.possibleConstructorReturn(this,(HistoryList.__proto__||Object.getPrototypeOf(HistoryList)).call(this));
@@ -76491,10 +76491,11 @@ _react2.default.createElement(_reactNativeEasyGrid.Col,{style:styles.leftCol},
 _react2.default.createElement(_reactNativeEasyGrid.Row,null),
 _react2.default.createElement(_reactNativeEasyGrid.Row,null,
 _react2.default.createElement(_reactNativeEasyGrid.Col,null,
-_react2.default.createElement(_reactNative.Text,null,'ling 1')),
+_react2.default.createElement(_reactNative.Text,null,'Ling sound: "ah"')),
 
 _react2.default.createElement(_reactNativeEasyGrid.Col,null,
-_react2.default.createElement(_reactNative.Text,null,'Da ansa')),
+_react2.default.createElement(_reactNative.View,null)),
+
 
 _react2.default.createElement(_reactNativeEasyGrid.Col,null,
 _react2.default.createElement(_reactNative.Text,null,'Da ansa2')),
@@ -76560,7 +76561,7 @@ backgroundColor:'white'}});exports.default=
 
 
 HistoryList;
-}, 598, null, "msMatch/app/components/Students/History.js");
+}, 652, null, "msMatch/app/components/Students/History/index.js");
 __d(/* react-native-easy-grid/index.js */function(global, require, module, exports) {
 'use strict';
 

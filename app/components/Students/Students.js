@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import StudentItem from './StudentItem';
 
-import HistoryList from './History';
+import HistoryList from './History/';
 
 import { setStudent } from '../../actions';
 
@@ -38,7 +38,7 @@ class Students extends Component {
     }
 
     _navigateHistory() {
-        this.props.navigator.push({component: HistoryList, title: "the homies", navigationBarHidden: false, passProps: {student: this.props.currentStudent}})
+        this.props.navigator.push({component: HistoryList, title: this.props.currentStudent.studentName, navigationBarHidden: false, passProps: {student: this.props.currentStudent}})
     }
 
     addNewStudent() {

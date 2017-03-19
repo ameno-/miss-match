@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, TouchableOpacity, ScrollView} from 'react-native
 
 import {Col, Row, Grid} from "react-native-easy-grid";
 
-import {getStudentHistoryAsync} from '../../db';
+import {getStudentHistoryAsync} from '../../../db';
 
 class HistoryList extends Component {
     constructor() {
@@ -96,7 +96,8 @@ class HistoryList extends Component {
                                             <Text>Ling sound: "ah"</Text>
                                         </Col>
                                         <Col>
-                                            <Text>Da ansa</Text>
+                                            <View>
+                                            </View>
                                         </Col>
                                         <Col>
                                             <Text>Da ansa2</Text>
