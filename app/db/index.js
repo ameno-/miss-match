@@ -6,7 +6,7 @@ import {AsyncStorage} from 'react-native';
  * @param {array} visual prop - the visual props being used.
  * @param {array} displayed sounds - sounds being displayed when selection was made
  */
-export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds, selectedSoundIndex, correctSoundIndex) {
+export async function updateStudentDataAsync(currentStudent, visualProp, displayedSounds, selectedSoundIndex, correctSoundIndex, date) {
     try {
         let previousValue = await AsyncStorage.getItem(currentStudent.id);
         //console.log(previousValue);
@@ -17,13 +17,14 @@ export async function updateStudentDataAsync(currentStudent, visualProp, display
             ...JSON.parse(previousValue), {
                 displayedSounds: displayedSoundsNames,
                 selectedAnswer: visualProp[selectedSoundIndex],
-                correctAnswer: visualProp[correctSoundIndex]
+                correctAnswer: visualProp[correctSoundIndex],
+                date: date
             }
         ];
 
         await AsyncStorage.setItem(currentStudent.id, JSON.stringify(data));
 
-        let newVal = await AsyncStorage.getItem(currentStudent.id)
+        // let newVal = await AsyncStorage.getItem(currentStudent.id)
         //console.log(JSON.parse(newVal));
 
         console.log('Saved answer to disk for student:' + currentStudent.id);

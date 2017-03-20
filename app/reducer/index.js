@@ -58,6 +58,13 @@ module.exports = (state={}, action) => {
                 ...state,
                 sequenceIndex: action.payload
             }
+        case 'BUILD_NEW_SEQUENCE':
+            console.log(action)
+            return {
+                ...state,
+                sequenceIndex: action.sequenceIndex,
+                sequence: action.sequence,
+            }
         default:
             return state;
     }
