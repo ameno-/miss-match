@@ -7,24 +7,30 @@ function * selectionChanged(action) {
     if (action.selectedSoundIndex === action.correctSoundIndex) {
       let nextIndex = action.sequenceIndex + 1;
 
-      if (nextIndex >= 6) {
+      if (action.manualTestIndex != null) {
+        if (nextIndex >= 6) {
+          yield put({
+            type: "BUILD_NEW_SEQUENCE",
+            sequenceIndex: 0,
+            sequence: shuffle(action.sequence)
+          })
+        } else {
+          yield put({type: "INCREMENT_SEQUENCE_INDEX", payload: nextIndex});
+        }
+
         yield put({
-          type: "BUILD_NEW_SEQUENCE",
-          sequenceIndex: 0,
-          sequence: shuffle(action.sequence),
+          type: "QUESTIONS_NEW",
+          payload: getRandomCollection(action.sequence[nextIndex], action.lingSoundCount)
         })
-      } else {        
-        yield put({
-          type: "INCREMENT_SEQUENCE_INDEX",
-          payload: nextIndex,
-        });
+
       }
 
       yield put({
         type: "QUESTIONS_NEW",
-        payload: getRandomCollection(action.sequence[nextIndex], action.lingSoundCount)
+        payload: getRandomCollection(action.manualTestIndex, action.lingSoundCount)
       });
-    console.log("end of saga: ", nextIndex)
+
+      console.log("end of saga: ", nextIndex)
     } else {
       yield put({type: "QUESTIONS_REDO"})
     }

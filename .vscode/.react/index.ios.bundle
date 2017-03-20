@@ -94163,7 +94163,7 @@ this.props.navigator.pop();
 }},{key:'updateManualTestIndex',value:function updateManualTestIndex(
 
 newIndex){
-var i=this.props.visualProp.indexOf(newIndex);
+var i=newIndex==="sequence"?null:this.props.visualProp.indexOf(newIndex);
 this.props.dispatch((0,_actions.setTestIndex)(i));
 this.props.navigator.pop();
 }},{key:'_navigateToLingSoundsPage',value:function _navigateToLingSoundsPage()
@@ -94640,7 +94640,14 @@ item.title))));
 
 return(
 _react2.default.createElement(_reactNative.ScrollView,{automaticallyAdjustContentInsets:false},
-renderList()));
+renderList(),
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this2.props.handlePress("sequence");},style:styles.buttonStyle},
+_react2.default.createElement(_reactNative.View,{style:styles.listContainer},
+_react2.default.createElement(_reactNative.Text,{style:styles.listItemTitle},'Sequence')))));
+
+
+
+
 
 
 }}]);return List;}(_react.Component);
@@ -97838,7 +97845,13 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=15;break;}nextIndex=action.sequenceIndex+1;if(!(nextIndex>=6)){_context.next=8;break;}_context.next=6;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 6:_context.next=10;break;case 8:_context.next=10;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 10:_context.next=12;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 12:console.log("end of saga: ",nextIndex);_context.next=17;break;case 15:_context.next=17;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 17:_context.next=19;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 19:_context.next=27;break;case 21:_context.prev=21;_context.t0=_context['catch'](0);_context.next=25;return console.log("done fucked up");case 25:_context.next=27;return console.log(_context.t0);case 27:case'end':return _context.stop();}}},_marked[0],this,[[0,21]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+
+
+
+
+
+
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=18;break;}nextIndex=action.sequenceIndex+1;if(!(action.manualTestIndex!=null)){_context.next=13;break;}if(!(nextIndex>=6)){_context.next=9;break;}_context.next=7;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 7:_context.next=11;break;case 9:_context.next=11;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 11:_context.next=13;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 13:_context.next=15;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.manualTestIndex,action.lingSoundCount)});case 15:console.log("end of saga: ",nextIndex);_context.next=20;break;case 18:_context.next=20;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 20:_context.next=22;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 22:_context.next=30;break;case 24:_context.prev=24;_context.t0=_context['catch'](0);_context.next=28;return console.log("done fucked up");case 28:_context.next=30;return console.log(_context.t0);case 30:case'end':return _context.stop();}}},_marked[0],this,[[0,24]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

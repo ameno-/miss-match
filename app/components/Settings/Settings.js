@@ -33,7 +33,7 @@ class Settings extends Component {
     }
 
     updateManualTestIndex(newIndex) {
-        let i = this.props.visualProp.indexOf(newIndex);
+        let i = newIndex === "sequence" ? null : this.props.visualProp.indexOf(newIndex);
         this.props.dispatch(setTestIndex(i));
         this.props.navigator.pop();
     }

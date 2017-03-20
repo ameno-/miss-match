@@ -21,6 +21,13 @@ class List extends Component {
         return (
             <ScrollView automaticallyAdjustContentInsets={false}>
                 {renderList()}
+                <TouchableOpacity onPress={() => this.props.handlePress("sequence")} style={styles.buttonStyle}>
+                        <View style={styles.listContainer}>
+                            <Text style={styles.listItemTitle}>
+                                Sequence
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
             </ScrollView>
         );
     }
