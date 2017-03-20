@@ -38,7 +38,7 @@ class Students extends Component {
     }
 
     _navigateHistory() {
-        this.props.navigator.push({component: HistoryList, title: this.props.currentStudent.studentName, navigationBarHidden: false, passProps: {student: this.props.currentStudent}})
+        this.props.navigator.push({component: HistoryList, title: this.props.currentStudent.studentName, navigationBarHidden: false, passProps: {student: this.props.currentStudent, visualProps: this.props.visualProps}})
     }
 
     addNewStudent() {

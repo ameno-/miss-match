@@ -10,12 +10,14 @@ class HistoryList extends Component {
         super();
 
         this.state = {
-            historyData: 'Nothing found'
+            historyData: 'Nothing found',
+            correctCellStyle: [styles.cellDefault, styles.cellCorrect],
+            wrongCellStyle: [styles.cellDefault, styles.cellWrong],
         }
     }
     componentDidMount() {
         getStudentHistoryAsync(this.props.student.id).then(result => {
-            console.log(result);
+            //console.log(result);
             this.setState({
                 historyData: JSON.parse(result)
             })
@@ -23,13 +25,12 @@ class HistoryList extends Component {
     }
 
     buildGridGroups() {
-        var train = [];
-        var airplane = [];
-        var mouse = [];
-        var baby = [];
-        var snake = [];
-        var train = [];
-        var pizza = [];
+        let train = [];
+        let airplane = [];
+        let mouse = [];
+        let baby = [];
+        let snake = [];
+        let pizza = [];
 
         this.state.historyData.forEach(function (item) {
             switch (item.correctAnswer) {
@@ -59,34 +60,66 @@ class HistoryList extends Component {
     }
 
     render() {
+        // if (answerIndex === correctIndex) && answerIndex === i : return correct cell
+        // else if answerIndex === i : return wrongCell style
+        // else do Nothing
+
+        const renderRow = (rowData) => {
+            return rowData.map((item, i) => {
+                if ((item.correctAnswer === item.selectedAnswer) && this.props.visualProps.indexOf(item.selectedAnswer) === i) {
+                    return(
+                        <Col>
+                            <View style={styles.cellCorrect}>
+                            </View>
+                        </Col>
+                    )
+                } else if(this.props.visualProps.indexOf(item.selectedAnswer) === i) {
+                    return(
+                        <Col>
+                            <View style={styles.cellWrong}>
+                            </View>
+                        </Col>
+                    )
+                } else {
+                    return(
+                        <Col>
+                            <View style={styles.cellDefault}>
+                            </View>
+                        </Col>
+                    )
+                }
+            })
+        }
         const {student} = this.state;
         const renderHistory = () => {
+            console.log(this.state.historyData);
             if (this.state.historyData != 'Nothing found') {
                 return this
                     .state
                     .historyData
                     .map((item, i) => {
+                        //ounds: ["ah", "ee", "oo", "m", "s", "sh"],
                         return (
                             <Grid key={i} style={styles.mainGrid}>
                                 <Row style={styles.topRow}>
                                     <Col></Col>
                                     <Col>
-                                        <Text>ling 1</Text>
+                                        <Text style={{textAlign: 'center'}}>Ling sound: "ah"</Text>
                                     </Col>
                                     <Col>
-                                        <Text>ling 2</Text>
+                                        <Text>Ling sound: "ee"</Text>
                                     </Col>
                                     <Col>
-                                        <Text>ling 3</Text>
+                                        <Text>Ling sound: "oo"</Text>
                                     </Col>
                                     <Col>
-                                        <Text>ling 4</Text>
+                                        <Text>Ling sound: "m"</Text>
                                     </Col>
                                     <Col>
-                                        <Text>ling 5</Text>
+                                        <Text>Ling sound: "s"</Text>
                                     </Col>
                                     <Col>
-                                        <Text>ling 6</Text>
+                                        <Text>Ling sound: "sh"</Text>
                                     </Col>
                                 </Row>
                                 <Col style={styles.leftCol}>
@@ -95,28 +128,30 @@ class HistoryList extends Component {
                                         <Col>
                                             <Text>Ling sound: "ah"</Text>
                                         </Col>
-                                        <Col>
-                                            <View>
-                                            </View>
-                                        </Col>
-                                        <Col>
-                                            <Text>Da ansa2</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text>Da ansa3</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text>Da ansa4</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text>Da ansa5</Text>
-                                        </Col>
-                                        <Col>
-                                            <Text>Da ansa6</Text>
-                                        </Col>
+                                        {renderRow([this.state.historyData])}
                                     </Row>
                                     <Row>
-                                        <Text>ling 2</Text>
+                                        <Col>
+                                            <Text>ling 2</Text>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
+                                        <Col style={styles.colBorder}>
+                                            <View style={styles.cell}></View>
+                                        </Col>
                                     </Row>
                                     <Row>
                                         <Text>ling 3</Text>
@@ -155,11 +190,30 @@ const styles = StyleSheet.create({
     },
     topRow: {
         backgroundColor: '#D0D5E5',
-        padding: 10
+        padding: 10,
+        
     },
     leftCol: {
-        backgroundColor: 'white'
-    }
+        backgroundColor: 'white',
+        borderRightWidth: 0.5,
+        borderRightColor: 'black' 
+    },
+    colBorder: {
+        borderRightWidth: 0.5,
+        borderRightColor: 'black',
+    },
+    cellWrong: {
+        height: 10,
+        backgroundColor: 'red',
+    },
+    cellCorrect: {
+        height: 10,
+        backgroundColor: 'green',
+    },
+    cellDefault: {
+        height: 10,
+        backgroundColor: 'white',
+    },
 })
 
 export default HistoryList;
