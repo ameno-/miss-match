@@ -53,10 +53,10 @@ module.exports = (state={}, action) => {
                 lingSoundCount: 3
             }
         case 'INCREMENT_SEQUENCE_INDEX':
-        console.log(action)
+            console.log(action)
             return {
                 ...state,
-                sequenceIndex: action.sequenceIndex++
+                sequenceIndex: action.payload
             }
         default:
             return state;
