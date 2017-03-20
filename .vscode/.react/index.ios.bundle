@@ -70331,11 +70331,14 @@ props.dispatch({
 type:"SUBMIT",
 correctSoundIndex:props.correctSoundIndex,
 selectedSoundIndex:sound,
-testIndex:props.manualTestIndex,
+manualTestIndex:props.manualTestIndex,
 currentStudent:props.currentStudent,
 visualProp:props.visualProp,
 displayedSounds:props.displayedSounds,
-lingSoundCount:props.lingSoundCount});
+lingSoundCount:props.lingSoundCount,
+date:props.date,
+sequence:props.testSequence,
+sequenceIndex:props.sequenceIndex});
 
 }},{key:'_navigateStudents',value:function _navigateStudents()
 
@@ -70365,8 +70368,10 @@ sound:sound,
 key:i,
 accessibilityLabel:'Symbol select'});
 });
+
 var peopleIcon=_react2.default.createElement(_Ionicons2.default,{name:'ios-people-outline',size:30,color:'white'});
 var settingsIcon=_react2.default.createElement(_Ionicons2.default,{name:'ios-settings-outline',size:30,color:'white'});
+
 return(
 _react2.default.createElement(_reactNative.View,{style:styles.container},
 _react2.default.createElement(_reactNative.View,{style:styles.topBar},
@@ -70482,6 +70487,9 @@ currentStudent:store.currentStudent,
 students:store.students,
 manualTestIndex:store.manualTestIndex,
 lingSoundCount:store.lingSoundCount,
+date:store.date,
+testSequence:store.testSequence,
+sequenceIndex:store.sequenceIndex,
 state:store};
 
 };
@@ -94683,7 +94691,10 @@ maxIndex:5,
 students:[],
 currentStudent:{},
 manualTestIndex:null,
-lingSoundCount:3};
+lingSoundCount:3,
+testSequence:[0,1,2,3,4,5],
+date:Date.now(),
+sequenceIndex:0};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
@@ -97750,11 +97761,16 @@ state,{
 manualTestIndex:action.testIndex});
 
 case'RESET_STORE':
-console.log(action);
 return babelHelpers.extends({},
 state,{
 displayedSounds:[0,1,2],
 lingSoundCount:3});
+
+case'INCREMENT_SEQUENCE_INDEX':
+console.log(action);
+return babelHelpers.extends({},
+state,{
+sequenceIndex:action.sequenceIndex++});
 
 default:
 return state;}
@@ -97799,7 +97815,11 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action.lingSoundCount);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=7;break;}_context.next=5;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.testIndex,action.lingSoundCount)});case 5:_context.next=9;break;case 7:_context.next=9;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 9:console.log(action);_context.next=12;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 12:_context.next=20;break;case 14:_context.prev=14;_context.t0=_context['catch'](0);_context.next=18;return console.log("done fucked up");case 18:_context.next=20;return console.log(_context.t0);case 20:case'end':return _context.stop();}}},_marked[0],this,[[0,14]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+
+
+
+
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:console.log(action.sequenceIndex);_context.prev=1;if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=9;break;}_context.next=5;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:action.sequenceIndex});case 5:_context.next=7;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[action.sequenceIndex++],action.lingSoundCount)});case 7:_context.next=11;break;case 9:_context.next=11;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 11:_context.next=13;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex);case 13:_context.next=21;break;case 15:_context.prev=15;_context.t0=_context['catch'](1);_context.next=19;return console.log("done fucked up");case 19:_context.next=21;return console.log(_context.t0);case 21:case'end':return _context.stop();}}},_marked[0],this,[[1,15]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

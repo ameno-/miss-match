@@ -47,11 +47,16 @@ module.exports = (state={}, action) => {
                 manualTestIndex: action.testIndex
             }
         case 'RESET_STORE':
-        console.log(action);
-            return{
+            return {
                 ...state,
                 displayedSounds: [0, 1, 2],
                 lingSoundCount: 3
+            }
+        case 'INCREMENT_SEQUENCE_INDEX':
+        console.log(action)
+            return {
+                ...state,
+                sequenceIndex: action.sequenceIndex++
             }
         default:
             return state;

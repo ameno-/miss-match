@@ -3,12 +3,16 @@ import {getRandomCollection} from '../../utils/helper';
 import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
+  console.log(action.sequenceIndex);
   try {
     if (action.selectedSoundIndex === action.correctSoundIndex) {
-
+      yield put({
+        type: "INCREMENT_SEQUENCE_INDEX",
+        payload: action.sequenceIndex
+      });
       yield put({
         type: "QUESTIONS_NEW",
-        payload: getRandomCollection(action.testIndex, action.lingSoundCount)
+        payload: getRandomCollection(action.sequence[action.sequenceIndex++], action.lingSoundCount)
       });
     } else {
       yield put({type: "QUESTIONS_REDO"})

@@ -33,11 +33,14 @@ class Home extends Component {
             type: "SUBMIT",
             correctSoundIndex: props.correctSoundIndex,
             selectedSoundIndex: sound,
-            testIndex: props.manualTestIndex,
+            manualTestIndex: props.manualTestIndex,
             currentStudent: props.currentStudent,
             visualProp: props.visualProp,
             displayedSounds: props.displayedSounds,
-            lingSoundCount: props.lingSoundCount
+            lingSoundCount: props.lingSoundCount,
+            date: props.date,
+            sequence: props.testSequence,
+            sequenceIndex: props.sequenceIndex
         });
     }
 
@@ -67,8 +70,10 @@ class Home extends Component {
                     key={i}
                     accessibilityLabel="Symbol select"/>
             });
+
         const peopleIcon = (<Icon name="ios-people-outline" size={30} color="white"/>)
         const settingsIcon = (<Icon name="ios-settings-outline" size={30} color="white"/>)
+
         return (
             <View style={styles.container}>
                 <View style={styles.topBar}>
@@ -184,6 +189,9 @@ const mapStateToProps = (store) => {
         students: store.students,
         manualTestIndex: store.manualTestIndex,
         lingSoundCount: store.lingSoundCount,
+        date: store.date,
+        testSequence: store.testSequence,
+        sequenceIndex: store.sequenceIndex,
         state: store
     }
 }
