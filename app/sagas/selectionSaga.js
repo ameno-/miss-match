@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {put, takeEvery} from 'redux-saga/effects';
 import {getRandomCollection} from '../../utils/helper';
 import {updateStudentDataAsync} from '../db';
 
