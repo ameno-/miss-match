@@ -94089,17 +94089,6 @@ props));
 _this.handleClick=_this.handleClick.bind(_this);return _this;
 }babelHelpers.createClass(Options,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps(
 
-
-
-
-
-
-
-
-
-
-
-
 nextProps){
 if(nextProps.shouldAnimate){
 this.refs.mainContainer.bounceInDown(700);

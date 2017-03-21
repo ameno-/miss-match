@@ -29,24 +29,8 @@ class Home extends Component {
         this.answerSelected = this.answerSelected.bind(this);
     }
 
-    // spring() {
-    //     this.springValue.setValue(0.3)
-    //     Animated.spring(
-    //         this.springValue,
-    //         {
-    //             toValue: 1,
-    //             friction: 1,
-    //             tension: 1
-    //         }
-    //     ).start()
-    // }
-
     answerSelected(sound) {
         let props = this.props;
-
-        if (props.correctSoundIndex === sound) {
-            // this.spring();
-        }
 
         props.dispatch(selection(sound));
         props.dispatch({

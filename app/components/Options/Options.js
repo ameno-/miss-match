@@ -15,18 +15,7 @@ class Options extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if (this) {
-    //         console.log(this);
-    //         console.log(nextState);
-    //         this.refs.mainContainer.bounceInDown(1000);
-    //         return false;
-    //     }
-        
-    //     return true;
-    // }
-
+    
     componentWillReceiveProps(nextProps){
         if (nextProps.shouldAnimate) {
             this.refs.mainContainer.bounceInDown(700);
