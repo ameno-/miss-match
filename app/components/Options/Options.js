@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, Text, Image, StyleSheet, View, Animated } from 'react-native';
+import React, {Component} from 'react';
+import {
+    TouchableOpacity,
+    Text,
+    Image,
+    StyleSheet,
+    View,
+    Animated
+} from 'react-native';
+
+import * as Animatable from 'react-native-animatable';
+
 class Options extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.springValue = new Animated.Value(1);
-        this.spring = this.spring.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.spring = this
+            .spring
+            .bind(this);
+        this.handleClick = this
+            .handleClick
+            .bind(this);
     }
 
     spring() {
-        Animated.spring(
-            this.springValue,
-            {
-                toValue: 1.5,
-                friction: 1,
-                tension: 1
-            }
-        ).start()
+        Animated
+            .spring(this.springValue, {
+            toValue: 1.5,
+            friction: 1,
+            tension: 1
+        })
+            .start()
     }
 
-    getImageSrc(visualProp){
+    getImageSrc(visualProp) {
         switch (visualProp) {
             case "baby":
                 return require('../../../assets/cryingBaby.png');
@@ -36,29 +49,35 @@ class Options extends Component {
         }
     }
 
-    handleClick() {
-        // this.props.onSelected(this.props.sound);
-        this.spring();
+    handleClick(visualProp) {
+    this.refs[visualProp]
+        .bounce(800)
+        .then((endState) => console.log(endState.finished? 'bounce finished': 'bounce cancelled'));
     }
 
     render() {
         let src = this.getImageSrc(this.props.visualProp);
         return (
-            <View style={styles.container}>
+            <Animatable.View style={styles.container}>
                 <TouchableOpacity
-                    onPress={() => this.handleClick()}
+                    onPress={() => this.handleClick(this.props.visualProp)}
                     soundIndex={this.props.sound}
                     key={this.props.sound}
                     color="#841584"
                     accessibilityLabel="Symbol select"
                     style={styles.button}>
-                    <Animated.Image
+                    <Animatable.Image
+                        ref={this.props.visualProp}
                         source={src}
-                        style={{width: 180, height: 140, flex: 1, flexWrap: 'wrap', transform: [{scale: this.springValue}]}}
-                        resizeMode={"contain"}
-                    />
+                        style={{
+                        width: 180,
+                        height: 140,
+                        flex: 1,
+                        flexWrap: 'wrap',
+                    }}
+                        resizeMode={"contain"}/>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
         );
     }
 }
@@ -77,11 +96,15 @@ const styles = StyleSheet.create({
         height: 140,
         flex: 1,
         flexWrap: 'wrap',
-        transform: [{scale: this.springValue}]
+        transform: [
+            {
+                scale: this.springValue
+            }
+        ]
     },
     button: {
         paddingLeft: 50,
-        paddingRight: 50,
+        paddingRight: 50
     }
 })
 
