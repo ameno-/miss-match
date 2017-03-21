@@ -53,7 +53,7 @@ class Options extends Component {
     handleClick(visualProp, sound) {
         if (visualProp === this.props.correctSound) {
             this.refs[visualProp]
-                .bounce(1000)
+                .bounce(500)
                 .then((endState) => {
                     endState.finished ? this.props.onSelected(sound) : 'correct answer animation cancelled';
                 });

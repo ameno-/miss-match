@@ -94126,7 +94126,7 @@ return require(607 /* ../../../assets/snake.png */);}
 visualProp,sound){var _this2=this;
 if(visualProp===this.props.correctSound){
 this.refs[visualProp].
-bounce(1000).
+bounce(500).
 then(function(endState){
 endState.finished?_this2.props.onSelected(sound):'correct answer animation cancelled';
 });
