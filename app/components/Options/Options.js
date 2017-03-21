@@ -27,8 +27,10 @@ class Options extends Component {
     //     return true;
     // }
 
-    componentWillReceiveProps(){
-        this.refs.mainContainer.bounceInDown(1000);
+    componentWillReceiveProps(nextProps){
+        if (nextProps.shouldAnimate) {
+            this.refs.mainContainer.bounceInDown(1000);
+        }
     }
 
     getImageSrc(visualProp) {

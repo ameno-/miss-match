@@ -88,6 +88,7 @@ class Home extends Component {
                     visualProp={this.props.visualProp[sound]}
                     sound={sound}
                     correctSound={this.props.visualProp[this.props.correctSoundIndex]}
+                    shouldAnimate={this.props.shouldAnimate}
                     key={i}
                     accessibilityLabel="Symbol select"/>
             });
@@ -213,6 +214,7 @@ const mapStateToProps = (store) => {
         date: store.date,
         testSequence: store.testSequence,
         sequenceIndex: store.sequenceIndex,
+        shouldAnimate: store.shouldAnimate,
         state: store
     }
 }

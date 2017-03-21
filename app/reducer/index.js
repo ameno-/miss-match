@@ -9,7 +9,8 @@ module.exports = (state={}, action) => {
             return {
                 ...state,
                 correctSoundIndex: action.payload.answerIndex,
-                displayedSounds: action.payload.shuffledArray
+                displayedSounds: action.payload.shuffledArray,
+                shouldAnimate: true
             }
         case 'NEW_STUDENT':
             return {
@@ -34,7 +35,8 @@ module.exports = (state={}, action) => {
             }
         case 'QUESTIONS_REDO':      
             return {
-                ...state
+                ...state,
+                shouldAnimate: false
             }
         case 'SET_LING_SOUND_COUNT':
             return {

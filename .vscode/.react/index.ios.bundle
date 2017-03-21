@@ -70386,6 +70386,7 @@ onSelected:_this2.answerSelected,
 visualProp:_this2.props.visualProp[sound],
 sound:sound,
 correctSound:_this2.props.visualProp[_this2.props.correctSoundIndex],
+shouldAnimate:_this2.props.shouldAnimate,
 key:i,
 accessibilityLabel:'Symbol select'});
 });
@@ -70511,6 +70512,7 @@ lingSoundCount:store.lingSoundCount,
 date:store.date,
 testSequence:store.testSequence,
 sequenceIndex:store.sequenceIndex,
+shouldAnimate:store.shouldAnimate,
 state:store};
 
 };
@@ -94085,7 +94087,7 @@ Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);var _this=babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
 props));
 _this.handleClick=_this.handleClick.bind(_this);return _this;
-}babelHelpers.createClass(Options,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps()
+}babelHelpers.createClass(Options,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps(
 
 
 
@@ -94098,8 +94100,10 @@ _this.handleClick=_this.handleClick.bind(_this);return _this;
 
 
 
-{
+nextProps){
+if(nextProps.shouldAnimate){
 this.refs.mainContainer.bounceInDown(1000);
+}
 }},{key:'getImageSrc',value:function getImageSrc(
 
 visualProp){
@@ -96320,7 +96324,8 @@ manualTestIndex:null,
 lingSoundCount:3,
 testSequence:[0,1,2,3,4,5],
 date:Date.now(),
-sequenceIndex:0};
+sequenceIndex:0,
+shouldAnimate:true};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
@@ -99349,7 +99354,8 @@ case'QUESTIONS_NEW':
 return babelHelpers.extends({},
 state,{
 correctSoundIndex:action.payload.answerIndex,
-displayedSounds:action.payload.shuffledArray});
+displayedSounds:action.payload.shuffledArray,
+shouldAnimate:true});
 
 case'NEW_STUDENT':
 return babelHelpers.extends({},
@@ -99374,7 +99380,8 @@ id:action.student.id}});
 
 case'QUESTIONS_REDO':
 return babelHelpers.extends({},
-state);
+state,{
+shouldAnimate:false});
 
 case'SET_LING_SOUND_COUNT':
 return babelHelpers.extends({},
