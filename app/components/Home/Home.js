@@ -22,29 +22,31 @@ import SettingsList from '../Settings/Settings';
 class Home extends Component {
     constructor(props, context) {
         super(props, context);
+
         this._navigateStudents = this._navigateStudents.bind(this);
         this._navigateSettings = this._navigateSettings.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
+        this.answerSelected = this.answerSelected.bind(this);
     }
 
-    spring() {
-        this.springValue.setValue(0.3)
-        Animated.spring(
-        this.springValue,
-        {
-            toValue: 1,
-            friction: 1,
-            tension: 1
-        }
-        ).start()
-    }
+    // spring() {
+    //     this.springValue.setValue(0.3)
+    //     Animated.spring(
+    //         this.springValue,
+    //         {
+    //             toValue: 1,
+    //             friction: 1,
+    //             tension: 1
+    //         }
+    //     ).start()
+    // }
 
     answerSelected(sound) {
         let props = this.props;
 
-        // if (props.correctSoundIndex === sound) {
-        //     this.soundStuff();
-        // }
+        if (props.correctSoundIndex === sound) {
+            // this.spring();
+        }
 
         props.dispatch(selection(sound));
         props.dispatch({
@@ -85,6 +87,7 @@ class Home extends Component {
                     onSelected={this.answerSelected}
                     visualProp={this.props.visualProp[sound]}
                     sound={sound}
+                    springValue={this.springValue}
                     key={i}
                     accessibilityLabel="Symbol select"/>
             });
