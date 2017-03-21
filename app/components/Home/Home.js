@@ -87,7 +87,7 @@ class Home extends Component {
                     onSelected={this.answerSelected}
                     visualProp={this.props.visualProp[sound]}
                     sound={sound}
-                    springValue={this.springValue}
+                    correctSound={this.props.visualProp[this.props.correctSoundIndex]}
                     key={i}
                     accessibilityLabel="Symbol select"/>
             });

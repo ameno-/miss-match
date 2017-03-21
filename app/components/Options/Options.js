@@ -33,18 +33,24 @@ class Options extends Component {
         }
     }
 
-    handleClick(visualProp) {
-    this.refs[visualProp]
-        .bounce(800)
-        .then((endState) => console.log(endState.finished? 'bounce finished': 'bounce cancelled'));
+    handleClick(visualProp, sound) {
+        if (visualProp === this.props.correctSound) {
+            this.refs[visualProp]
+                .bounce(2000)
+                .then((endState) => console.log(endState.finished? 'pulse finished': 'pulse cancelled'));
+        } else {
+            this.refs[visualProp]
+                .shake(500)
+                .then((endState) => console.log(endState.finished? 'bounce finished': 'bounce cancelled'));
+        }
     }
 
     render() {
         let src = this.getImageSrc(this.props.visualProp);
         return (
-            <Animatable.View style={styles.container}>
+            <Animatable.View ref="mainContainer" style={styles.container} animation="bounceInDown" duration={1000} easing="ease-out">
                 <TouchableOpacity
-                    onPress={() => this.handleClick(this.props.visualProp)}
+                    onPress={() => this.handleClick(this.props.visualProp, this.props.sound)}
                     soundIndex={this.props.sound}
                     key={this.props.sound}
                     color="#841584"
@@ -53,12 +59,7 @@ class Options extends Component {
                     <Animatable.Image
                         ref={this.props.visualProp}
                         source={src}
-                        style={{
-                        width: 180,
-                        height: 140,
-                        flex: 1,
-                        flexWrap: 'wrap',
-                    }}
+                        style={styles.imageButton}
                         resizeMode={"contain"}/>
                 </TouchableOpacity>
             </Animatable.View>
@@ -80,11 +81,6 @@ const styles = StyleSheet.create({
         height: 140,
         flex: 1,
         flexWrap: 'wrap',
-        transform: [
-            {
-                scale: this.springValue
-            }
-        ]
     },
     button: {
         paddingLeft: 50,
