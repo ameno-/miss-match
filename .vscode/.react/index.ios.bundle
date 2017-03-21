@@ -70311,10 +70311,11 @@ var _reactNative=require(79 /* react-native */);
 
 var _Ionicons=require(439 /* react-native-vector-icons/Ionicons */);var _Ionicons2=babelHelpers.interopRequireDefault(_Ionicons);
 
+
 var _Students=require(594 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
 var _actions=require(600 /* ../../actions */);
 var _Options=require(601 /* ../Options/Options */);var _Options2=babelHelpers.interopRequireDefault(_Options);
-var _Settings=require(608 /* ../Settings/Settings */);var _Settings2=babelHelpers.interopRequireDefault(_Settings);var
+var _Settings=require(608 /* ../Settings/Settings */);var _Settings2=babelHelpers.interopRequireDefault(_Settings);var Sound=require(653 /* react-native-sound */);var
 
 Home=function(_Component){babelHelpers.inherits(Home,_Component);
 function Home(props,context){babelHelpers.classCallCheck(this,Home);var _this=babelHelpers.possibleConstructorReturn(this,(Home.__proto__||Object.getPrototypeOf(Home)).call(this,
@@ -70322,10 +70323,67 @@ props,context));
 _this._navigateStudents=_this._navigateStudents.bind(_this);
 _this._navigateSettings=_this._navigateSettings.bind(_this);
 _this.answerSelected=_this.answerSelected.bind(_this);return _this;
-}babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
+}babelHelpers.createClass(Home,[{key:'soundStuff',value:function soundStuff()
+
+{
+Sound.setCategory('Playback');
+
+
+var whoosh=new Sound('correctAnswer.mp3',Sound.MAIN_BUNDLE,function(error){
+if(error){
+console.log('failed to load the sound',error);
+return;
+}
+
+console.log('duration in seconds: '+whoosh.getDuration()+'number of channels: '+whoosh.getNumberOfChannels());
+});
+
+
+whoosh.play(function(success){
+if(success){
+console.log('successfully finished playing');
+}else{
+console.log('playback failed due to audio decoding errors');
+}
+});
+
+
+
+
+
+
+
+
+whoosh.setNumberOfLoops(1);
+
+
+console.log('volume: '+whoosh.getVolume());
+console.log('pan: '+whoosh.getPan());
+console.log('loops: '+whoosh.getNumberOfLoops());
+
+
+
+
+
+whoosh.getCurrentTime(function(seconds){return console.log('at '+seconds);});
+
+
+
+
+
+whoosh.stop();
+
+
+whoosh.release();
+}},{key:'answerSelected',value:function answerSelected(
 
 sound){
 var props=this.props;
+
+if(props.correctSoundIndex===sound){
+this.soundStuff();
+}
+
 props.dispatch((0,_actions.selection)(sound));
 props.dispatch({
 type:"SUBMIT",
@@ -75968,6 +76026,191 @@ __d(/* react-native-vector-icons/glyphmaps/Ionicons.json */function(global, requ
 "md-wine":62377,
 "md-woman":62378};
 }, 593, null, "react-native-vector-icons/glyphmaps/Ionicons.json");
+__d(/* react-native-sound/sound.js */function(global, require, module, exports) {'use strict';
+
+var RNSound=require(79 /* react-native */).NativeModules.RNSound;
+var IsAndroid=RNSound.IsAndroid;
+var resolveAssetSource=require(207 /* react-native/Libraries/Image/resolveAssetSource */);
+var nextKey=0;
+
+function isRelativePath(path){
+return!/^\//.test(path);
+}
+
+function Sound(filename,basePath,onError){var _this=this;
+var asset=resolveAssetSource(filename);
+if(asset){
+this._filename=asset.uri;
+onError=basePath;
+}else{
+this._filename=basePath?basePath+'/'+filename:filename;
+
+if(IsAndroid&&!basePath&&isRelativePath(filename)){
+this._filename=filename.toLowerCase().replace(/\.[^.]+$/,'');
+}
+}
+
+this._loaded=false;
+this._key=nextKey++;
+this._duration=-1;
+this._numberOfChannels=-1;
+this._volume=1;
+this._pan=0;
+this._numberOfLoops=0;
+this._speed=1;
+RNSound.prepare(this._filename,this._key,function(error,props){
+if(props){
+if(typeof props.duration==='number'){
+_this._duration=props.duration;
+}
+if(typeof props.numberOfChannels==='number'){
+_this._numberOfChannels=props.numberOfChannels;
+}
+}
+if(error===null){
+_this._loaded=true;
+}
+onError&&onError(error);
+});
+}
+
+Sound.prototype.isLoaded=function(){
+return this._loaded;
+};
+
+Sound.prototype.play=function(onEnd){
+if(this._loaded){
+RNSound.play(this._key,function(successfully){return onEnd&&onEnd(successfully);});
+}
+return this;
+};
+
+Sound.prototype.pause=function(){
+if(this._loaded){
+RNSound.pause(this._key);
+}
+return this;
+};
+
+Sound.prototype.stop=function(){
+if(this._loaded){
+RNSound.stop(this._key);
+}
+return this;
+};
+
+Sound.prototype.release=function(){
+if(this._loaded){
+RNSound.release(this._key);
+}
+return this;
+};
+
+Sound.prototype.getDuration=function(){
+return this._duration;
+};
+
+Sound.prototype.getNumberOfChannels=function(){
+return this._numberOfChannels;
+};
+
+Sound.prototype.getVolume=function(){
+return this._volume;
+};
+
+Sound.prototype.setVolume=function(value){
+this._volume=value;
+if(this._loaded){
+if(IsAndroid){
+RNSound.setVolume(this._key,value,value);
+}else{
+RNSound.setVolume(this._key,value);
+}
+}
+return this;
+};
+
+Sound.prototype.getPan=function(){
+return this._pan;
+};
+
+Sound.prototype.setPan=function(value){
+if(this._loaded){
+RNSound.setPan(this._key,this._pan=value);
+}
+return this;
+};
+
+Sound.prototype.getNumberOfLoops=function(){
+return this._numberOfLoops;
+};
+
+Sound.prototype.setNumberOfLoops=function(value){
+this._numberOfLoops=value;
+if(this._loaded){
+if(IsAndroid){
+RNSound.setLooping(this._key,!!value);
+}else{
+RNSound.setNumberOfLoops(this._key,value);
+}
+}
+return this;
+};
+
+Sound.prototype.setSpeed=function(value){
+this._setSpeed=value;
+if(this._loaded){
+if(!IsAndroid){
+RNSound.setSpeed(this._key,value);
+}
+}
+return this;
+};
+
+Sound.prototype.getCurrentTime=function(callback){
+if(this._loaded){
+RNSound.getCurrentTime(this._key,callback);
+}
+};
+
+Sound.prototype.setCurrentTime=function(value){
+if(this._loaded){
+RNSound.setCurrentTime(this._key,value);
+}
+return this;
+};
+
+
+
+
+
+Sound.prototype.setCategory=function(value){
+Sound.setCategory(value,false);
+};
+
+Sound.enable=function(enabled){
+RNSound.enable(enabled);
+};
+
+Sound.enableInSilenceMode=function(enabled){
+if(!IsAndroid){
+RNSound.enableInSilenceMode(enabled);
+}
+};
+
+Sound.setCategory=function(value){var mixWithOthers=arguments.length>1&&arguments[1]!==undefined?arguments[1]:false;
+if(!IsAndroid){
+RNSound.setCategory(value,mixWithOthers);
+}
+};
+
+Sound.MAIN_BUNDLE=RNSound.MainBundlePath;
+Sound.DOCUMENT=RNSound.NSDocumentDirectory;
+Sound.LIBRARY=RNSound.NSLibraryDirectory;
+Sound.CACHES=RNSound.NSCachesDirectory;
+
+module.exports=Sound;
+}, 653, null, "react-native-sound/sound.js");
 __d(/* msMatch/app/components/Students/Students.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactNative=require(79 /* react-native */);
 
