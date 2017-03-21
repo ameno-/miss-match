@@ -16,6 +16,21 @@ class Options extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (this) {
+    //         console.log(this);
+    //         console.log(nextState);
+    //         this.refs.mainContainer.bounceInDown(1000);
+    //         return false;
+    //     }
+        
+    //     return true;
+    // }
+
+    componentWillReceiveProps(){
+        this.refs.mainContainer.bounceInDown(1000);
+    }
+
     getImageSrc(visualProp) {
         switch (visualProp) {
             case "baby":
@@ -36,19 +51,23 @@ class Options extends Component {
     handleClick(visualProp, sound) {
         if (visualProp === this.props.correctSound) {
             this.refs[visualProp]
-                .bounce(2000)
-                .then((endState) => console.log(endState.finished? 'pulse finished': 'pulse cancelled'));
+                .bounce(1000)
+                .then((endState) => {
+                    endState.finished ? this.props.onSelected(sound) : 'correct answer animation cancelled';
+                });
         } else {
             this.refs[visualProp]
                 .shake(500)
-                .then((endState) => console.log(endState.finished? 'bounce finished': 'bounce cancelled'));
+                .then((endState) => {
+                    endState.finished ? this.props.onSelected(sound) : 'wrong answer animation cancelled';
+                });
         }
     }
 
     render() {
         let src = this.getImageSrc(this.props.visualProp);
         return (
-            <Animatable.View ref="mainContainer" style={styles.container} animation="bounceInDown" duration={1000} easing="ease-out">
+            <Animatable.View ref="mainContainer" style={styles.container}>
                 <TouchableOpacity
                     onPress={() => this.handleClick(this.props.visualProp, this.props.sound)}
                     soundIndex={this.props.sound}
