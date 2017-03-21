@@ -13,23 +13,7 @@ import * as Animatable from 'react-native-animatable';
 class Options extends Component {
     constructor(props) {
         super(props);
-        this.springValue = new Animated.Value(1);
-        this.spring = this
-            .spring
-            .bind(this);
-        this.handleClick = this
-            .handleClick
-            .bind(this);
-    }
-
-    spring() {
-        Animated
-            .spring(this.springValue, {
-            toValue: 1.5,
-            friction: 1,
-            tension: 1
-        })
-            .start()
+        this.handleClick = this.handleClick.bind(this);
     }
 
     getImageSrc(visualProp) {

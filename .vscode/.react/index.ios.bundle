@@ -94084,24 +94084,8 @@ var _reactNativeAnimatable=require(654 /* react-native-animatable */);var Animat
 Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);var _this=babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
 props));
-_this.springValue=new _reactNative.Animated.Value(1);
-_this.spring=_this.
-spring.
-bind(_this);
-_this.handleClick=_this.
-handleClick.
-bind(_this);return _this;
-}babelHelpers.createClass(Options,[{key:'spring',value:function spring()
-
-{
-_reactNative.Animated.
-spring(this.springValue,{
-toValue:1.5,
-friction:1,
-tension:1}).
-
-start();
-}},{key:'getImageSrc',value:function getImageSrc(
+_this.handleClick=_this.handleClick.bind(_this);return _this;
+}babelHelpers.createClass(Options,[{key:'getImageSrc',value:function getImageSrc(
 
 visualProp){
 switch(visualProp){
