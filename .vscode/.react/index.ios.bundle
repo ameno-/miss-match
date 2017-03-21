@@ -94102,7 +94102,7 @@ _this.handleClick=_this.handleClick.bind(_this);return _this;
 
 nextProps){
 if(nextProps.shouldAnimate){
-this.refs.mainContainer.bounceInDown(1000);
+this.refs.mainContainer.bounceInDown(700);
 }
 }},{key:'getImageSrc',value:function getImageSrc(
 
@@ -94126,13 +94126,13 @@ return require(607 /* ../../../assets/snake.png */);}
 visualProp,sound){var _this2=this;
 if(visualProp===this.props.correctSound){
 this.refs[visualProp].
-bounce(500).
+bounce(800).
 then(function(endState){
 endState.finished?_this2.props.onSelected(sound):'correct answer animation cancelled';
 });
 }else{
 this.refs[visualProp].
-shake(500).
+shake(300).
 then(function(endState){
 endState.finished?_this2.props.onSelected(sound):'wrong answer animation cancelled';
 });

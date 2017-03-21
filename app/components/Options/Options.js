@@ -29,7 +29,7 @@ class Options extends Component {
 
     componentWillReceiveProps(nextProps){
         if (nextProps.shouldAnimate) {
-            this.refs.mainContainer.bounceInDown(1000);
+            this.refs.mainContainer.bounceInDown(700);
         }
     }
 
@@ -53,13 +53,13 @@ class Options extends Component {
     handleClick(visualProp, sound) {
         if (visualProp === this.props.correctSound) {
             this.refs[visualProp]
-                .bounce(500)
+                .bounce(800)
                 .then((endState) => {
                     endState.finished ? this.props.onSelected(sound) : 'correct answer animation cancelled';
                 });
         } else {
             this.refs[visualProp]
-                .shake(500)
+                .shake(300)
                 .then((endState) => {
                     endState.finished ? this.props.onSelected(sound) : 'wrong answer animation cancelled';
                 });
