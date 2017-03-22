@@ -49,17 +49,11 @@ class Home extends Component {
     }
 
     _navigateStudents() {
-        this
-            .props
-            .navigator
-            .push({component: Students, navigationBarHidden: true})
+        this.props.navigator.push({component: Students, navigationBarHidden: true})
     }
 
     _navigateSettings() {
-        this
-            .props
-            .navigator
-            .push({component: SettingsList, title: "Settings", navigationBarHidden: false})
+        this.props.navigator.push({component: SettingsList, title: "Settings", navigationBarHidden: false})
     }
 
     render() {

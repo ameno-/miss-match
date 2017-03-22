@@ -83,15 +83,9 @@ class LandingPage extends Component {
     }
 
     _navigateStudents() {
-        this
-            .props
-            .navigator
-            .replace({component: Home, title: "Home", navigationBarHidden: true})
-
-        this
-            .props
-            .navigator
-            .push({component: Students, title: "Students", navigationBarHidden: true})
+        //remove landing page from stack
+        this.props.navigator.replace({component: Home, title: "Home", navigationBarHidden: true})
+        this.props.navigator.push({component: Students, title: "Students", navigationBarHidden: true})
     }
 
     render() {

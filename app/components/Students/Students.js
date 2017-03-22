@@ -34,8 +34,6 @@ class Students extends Component {
   
     _navigateHome() {
         this.props.navigator.pop();
-        //this.props.navigator.resetTo({component: Home, title: "home", navigationBarHidden: true})
-        console.log(Home);
     }
 
     _navigateHistory() {

@@ -70348,17 +70348,11 @@ sequenceIndex:props.sequenceIndex});
 }},{key:'_navigateStudents',value:function _navigateStudents()
 
 {
-this.
-props.
-navigator.
-push({component:_Students2.default,navigationBarHidden:true});
+this.props.navigator.push({component:_Students2.default,navigationBarHidden:true});
 }},{key:'_navigateSettings',value:function _navigateSettings()
 
 {
-this.
-props.
-navigator.
-push({component:_Settings2.default,title:"Settings",navigationBarHidden:false});
+this.props.navigator.push({component:_Settings2.default,title:"Settings",navigationBarHidden:false});
 }},{key:'render',value:function render()
 
 {var _this2=this;
@@ -76019,8 +76013,6 @@ teacherName:""};return _this;
 
 {
 this.props.navigator.pop();
-
-console.log(_Home2.default);
 }},{key:'_navigateHistory',value:function _navigateHistory()
 
 {
@@ -96364,15 +96356,9 @@ push({component:_Home2.default,title:"Home",navigationBarHidden:true});
 }},{key:'_navigateStudents',value:function _navigateStudents()
 
 {
-this.
-props.
-navigator.
-replace({component:_Home2.default,title:"Home",navigationBarHidden:true});
 
-this.
-props.
-navigator.
-push({component:_Students2.default,title:"Students",navigationBarHidden:true});
+this.props.navigator.replace({component:_Home2.default,title:"Home",navigationBarHidden:true});
+this.props.navigator.push({component:_Students2.default,title:"Students",navigationBarHidden:true});
 }},{key:'render',value:function render()
 
 {var _this3=this;
@@ -96471,7 +96457,7 @@ lingSoundCount:3,
 testSequence:[0,1,2,3,4,5],
 date:Date.now(),
 sequenceIndex:0,
-shouldAnimate:true};
+shouldAnimate:false};
 
 
 var configureStore=exports.configureStore=function configureStore(){var initialState=arguments.length>0&&arguments[0]!==undefined?arguments[0]:defaultState;
@@ -99552,7 +99538,6 @@ state,{
 sequenceIndex:action.payload});
 
 case'BUILD_NEW_SEQUENCE':
-console.log(action);
 return babelHelpers.extends({},
 state,{
 sequenceIndex:action.sequenceIndex,

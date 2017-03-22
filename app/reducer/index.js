@@ -61,7 +61,6 @@ module.exports = (state={}, action) => {
                 sequenceIndex: action.payload
             }
         case 'BUILD_NEW_SEQUENCE':
-            console.log(action)
             return {
                 ...state,
                 sequenceIndex: action.sequenceIndex,
