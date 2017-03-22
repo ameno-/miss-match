@@ -70421,12 +70421,14 @@ alignItems:'stretch'},
 
 topBar:{
 padding:16,
-paddingTop:28,
+paddingTop:50,
 paddingBottom:8,
 flexDirection:'row',
 justifyContent:'space-between',
 alignItems:'center',
-backgroundColor:'#3DC64F'},
+backgroundColor:'#7CC6FE',
+borderBottomWidth:6,
+borderBottomColor:'#5DFDCB'},
 
 topBarRight:{
 flex:1,
@@ -70470,13 +70472,18 @@ flexDirection:'row',
 alignSelf:'stretch',
 justifyContent:'space-between',
 padding:10,
-backgroundColor:'#3DC64F'},
+paddingTop:20,
+backgroundColor:'#7CC6FE',
+borderTopWidth:3,
+borderTopColor:'#5DFDCB'},
 
 footerContentLeft:{
-color:'white'},
+color:'white',
+fontSize:16},
 
 footerContentRight:{
-color:'#FFE74C'}});
+color:'white',
+fontSize:24}});
 
 
 
