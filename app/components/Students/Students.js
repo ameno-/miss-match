@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
     },
     topBar: {
         padding: 16,
-        paddingTop: 28,
+        paddingTop: 50,
         paddingBottom: 8,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#3DC64F'
+        backgroundColor: '#7CC6FE',
     },
     topBarRight: {
         flex: 1,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         padding: 8,
         paddingTop: 10,
-        backgroundColor: '#2ecc71'
+        backgroundColor: '#5DFDCB'
     },
     input: {
         height: 30,

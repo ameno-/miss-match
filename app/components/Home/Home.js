@@ -77,8 +77,8 @@ class Home extends Component {
                     accessibilityLabel="Symbol select"/>
             });
 
-        const peopleIcon = (<Icon name="ios-people-outline" size={30} color="white"/>)
-        const settingsIcon = (<Icon name="ios-settings-outline" size={30} color="white"/>)
+        const peopleIcon = (<Icon name="ios-people-outline" size={35} color="white"/>)
+        const settingsIcon = (<Icon name="ios-settings-outline" size={35} color="white"/>)
 
         return (
             <View style={styles.container}>
