@@ -76048,6 +76048,7 @@ studentName:selected.studentName,
 teacherName:selected.teacherName,
 id:selected.id}));
 
+
 props.
 navigator.
 pop();
@@ -96281,7 +96282,7 @@ marginTop:40}});exports.default=
 
 List;
 }, 638, null, "msMatch/app/components/Settings/List.js");
-__d(/* msMatch/app/components/Landing/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
+__d(/* msMatch/app/components/Landing/index.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactRedux=require(42 /* react-redux */);
 var _reactNative=require(79 /* react-native */);
 
@@ -96293,6 +96294,8 @@ var _reactNative=require(79 /* react-native */);
 
 
 var _reactNativeAnimatable=require(608 /* react-native-animatable */);var Animatable=babelHelpers.interopRequireWildcard(_reactNativeAnimatable);
+
+var _actions=require(606 /* ../../actions */);
 
 var _Home=require(438 /* ../Home/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
 
@@ -96334,9 +96337,28 @@ this.interval=setInterval(function(){return _this2.tick();},500);
 
 {
 clearInterval(this.interval);
-}},{key:'_navigateHome',value:function _navigateHome()
+}},{key:'_navigateDemoMode',value:function _navigateDemoMode()
 
 {
+
+var demoStudent=this.props.students.filter(function(student){
+return student.studentName==='demo';
+})[0];
+
+if(!demoStudent){
+this.props.dispatch({type:"ADD_STUDENT",
+studentName:"demo",
+teacherName:"demo",
+id:'0'});
+
+}
+
+this.props.dispatch((0,_actions.setStudent)({
+studentName:"demo",
+teacherName:"demo",
+id:'0'}));
+
+
 this.
 props.
 navigator.
@@ -96348,7 +96370,7 @@ return(
 _react2.default.createElement(_reactNative.Image,{source:backgroundImage,style:styles.container},
 _react2.default.createElement(_reactNative.Image,{source:logo,style:styles.logoStyle,resizeMode:"contain"}),
 _react2.default.createElement(Animatable.Image,{source:this.state.images[this.state.imageIndex],style:styles.imageStyle,resizeMode:"contain"}),
-_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3._navigateHome();}},
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3._navigateDemoMode();}},
 _react2.default.createElement(_reactNative.View,{style:styles.button},
 _react2.default.createElement(_reactNative.Text,{style:styles.buttonText},'Demo'))),
 
@@ -96398,12 +96420,18 @@ justifyContent:'flex-start'},
 
 logoStyle:{
 alignSelf:'center',
-marginBottom:80}});exports.default=
+marginBottom:80}});
 
 
 
+var mapStateToProps=function mapStateToProps(store){
+return{
+students:store.students,
+currentStudent:store.currentStudent};
 
-LandingPage;
+};
+
+module.exports=(0,_reactRedux.connect)(mapStateToProps)(LandingPage);
 }, 639, null, "msMatch/app/components/Landing/index.js");
 __d(/* msMatch/assets/background.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":783,"height":779,"scales":[1],"hash":"64cbd6da6a288b4cdf6f4cc7e383370b","name":"background","type":"png"});
 }, 674, null, "msMatch/assets/background.png");

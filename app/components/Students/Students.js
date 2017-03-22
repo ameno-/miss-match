@@ -61,7 +61,8 @@ selectStudent(selected) {
     props.dispatch(setStudent({
         studentName: selected.studentName, 
         teacherName: selected.teacherName, 
-        id: selected.id}));
+        id: selected.id
+    }));
 
     props
         .navigator

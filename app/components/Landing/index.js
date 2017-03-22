@@ -11,6 +11,8 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 
+import { setStudent } from '../../actions';
+
 import Home from '../Home/Home';
 
 const babyImage = require('../../../assets/cryingBaby.png');
@@ -53,7 +55,26 @@ class LandingPage extends Component {
         clearInterval(this.interval);
     }
 
-     _navigateHome() {
+     _navigateDemoMode() {
+
+        let demoStudent = this.props.students.filter(function ( student ) {
+            return student.studentName === 'demo';
+        })[0];
+
+        if (!demoStudent) {
+            this.props.dispatch({type: "ADD_STUDENT",
+                    studentName: "demo",
+                    teacherName: "demo",
+                    id: '0'
+            });
+        }
+
+        this.props.dispatch(setStudent({
+            studentName: "demo", 
+            teacherName: "demo", 
+            id: '0'
+        }));
+
         this
             .props
             .navigator
@@ -65,7 +86,7 @@ class LandingPage extends Component {
             <Image source={backgroundImage} style={styles.container}>
                 <Image source={logo} style={styles.logoStyle} resizeMode={"contain"}/>
                 <Animatable.Image source={this.state.images[this.state.imageIndex]} style={styles.imageStyle} resizeMode={"contain"}/>
-                <TouchableOpacity onPress={()=> this._navigateHome()}>
+                <TouchableOpacity onPress={()=> this._navigateDemoMode()}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Demo</Text>
                     </View>
@@ -119,5 +140,11 @@ const styles = StyleSheet.create({
     }
 })
 
+const mapStateToProps = (store) => {
+   return { 
+       students: store.students,
+       currentStudent: store.currentStudent
+   }
+}
 
-export default LandingPage;
+module.exports = connect(mapStateToProps)(LandingPage);
