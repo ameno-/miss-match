@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 
 import Home from './app/components/Home/Home';
+import Landing from './app/components/Landing';
 import { configureStore } from './app/store';
 
 export default class msMatch extends Component {
@@ -32,8 +33,8 @@ export default class msMatch extends Component {
         <View style={styles.container}>
           <NavigatorIOS
           initialRoute= {{
-            component: Home,
-            title: 'Home',
+            component: Landing,
+            title: 'Landing page',
             navigationBarHidden: true
           }}
           style={{flex: 1}}
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF',
-  }
+  },
 });
 
 AppRegistry.registerComponent('msMatch', () => msMatch);

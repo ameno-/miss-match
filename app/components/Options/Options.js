@@ -5,7 +5,6 @@ import {
     Image,
     StyleSheet,
     View,
-    Animated
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
@@ -15,7 +14,7 @@ class Options extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-    
+
     componentWillReceiveProps(nextProps){
         if (nextProps.shouldAnimate) {
             this.refs.mainContainer.bounceInDown(700);
