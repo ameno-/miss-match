@@ -14,6 +14,7 @@ import * as Animatable from 'react-native-animatable';
 import { setStudent } from '../../actions';
 
 import Home from '../Home/Home';
+import Students from '../Students/Students';
 
 const babyImage = require('../../../assets/cryingBaby.png');
 const mouse = require('../../../assets/mouse.png');
@@ -74,11 +75,23 @@ class LandingPage extends Component {
             teacherName: "demo", 
             id: '0'
         }));
-
+    
         this
             .props
             .navigator
             .push({component: Home, title: "Home", navigationBarHidden: true})
+    }
+
+    _navigateStudents() {
+        this
+            .props
+            .navigator
+            .replace({component: Home, title: "Home", navigationBarHidden: true})
+
+        this
+            .props
+            .navigator
+            .push({component: Students, title: "Students", navigationBarHidden: true})
     }
 
     render() {
@@ -92,7 +105,7 @@ class LandingPage extends Component {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=> this._navigateStudents()}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Work with Student</Text>
                     </View>

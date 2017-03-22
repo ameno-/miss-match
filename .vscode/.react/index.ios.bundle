@@ -75996,11 +75996,10 @@ var _reactNative=require(79 /* react-native */);
 
 
 var _reactRedux=require(42 /* react-redux */);
-
 var _SimpleLineIcons=require(595 /* react-native-vector-icons/SimpleLineIcons */);var _SimpleLineIcons2=babelHelpers.interopRequireDefault(_SimpleLineIcons);
 
 var _StudentItem=require(597 /* ./StudentItem */);var _StudentItem2=babelHelpers.interopRequireDefault(_StudentItem);
-
+var _Home=require(438 /* ../Home/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
 var _History=require(598 /* ./History/ */);var _History2=babelHelpers.interopRequireDefault(_History);
 
 var _actions=require(606 /* ../../actions */);var
@@ -76020,6 +76019,8 @@ teacherName:""};return _this;
 
 {
 this.props.navigator.pop();
+
+console.log(_Home2.default);
 }},{key:'_navigateHistory',value:function _navigateHistory()
 
 {
@@ -76041,17 +76042,13 @@ studentName:""});
 }},{key:'selectStudent',value:function selectStudent(
 
 selected){
-var props=this.props;
-
-props.dispatch((0,_actions.setStudent)({
+this.props.dispatch((0,_actions.setStudent)({
 studentName:selected.studentName,
 teacherName:selected.teacherName,
 id:selected.id}));
 
 
-props.
-navigator.
-pop();
+this._navigateHome();
 }},{key:'render',value:function render()
 {var _this2=this;
 var renderStudens=function renderStudens(){
@@ -96298,6 +96295,7 @@ var _reactNativeAnimatable=require(608 /* react-native-animatable */);var Animat
 var _actions=require(606 /* ../../actions */);
 
 var _Home=require(438 /* ../Home/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
+var _Students=require(594 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
 
 var babyImage=require(629 /* ../../../assets/cryingBaby.png */);
 var mouse=require(630 /* ../../../assets/mouse.png */);
@@ -96363,6 +96361,18 @@ this.
 props.
 navigator.
 push({component:_Home2.default,title:"Home",navigationBarHidden:true});
+}},{key:'_navigateStudents',value:function _navigateStudents()
+
+{
+this.
+props.
+navigator.
+replace({component:_Home2.default,title:"Home",navigationBarHidden:true});
+
+this.
+props.
+navigator.
+push({component:_Students2.default,title:"Students",navigationBarHidden:true});
 }},{key:'render',value:function render()
 
 {var _this3=this;
@@ -96376,7 +96386,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.buttonText},'Demo'
 
 
 
-_react2.default.createElement(_reactNative.TouchableOpacity,null,
+_react2.default.createElement(_reactNative.TouchableOpacity,{onPress:function onPress(){return _this3._navigateStudents();}},
 _react2.default.createElement(_reactNative.View,{style:styles.button},
 _react2.default.createElement(_reactNative.Text,{style:styles.buttonText},'Work with Student')))));
 

@@ -11,11 +11,10 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import StudentItem from './StudentItem';
-
+import Home from '../Home/Home';
 import HistoryList from './History/';
 
 import { setStudent } from '../../actions';
@@ -35,6 +34,8 @@ class Students extends Component {
   
     _navigateHome() {
         this.props.navigator.pop();
+        //this.props.navigator.resetTo({component: Home, title: "home", navigationBarHidden: true})
+        console.log(Home);
     }
 
     _navigateHistory() {
@@ -55,18 +56,14 @@ class Students extends Component {
         }
     }
 
-selectStudent(selected) {
-    let props = this.props;
-    
-    props.dispatch(setStudent({
+selectStudent(selected) {   
+    this.props.dispatch(setStudent({
         studentName: selected.studentName, 
         teacherName: selected.teacherName, 
         id: selected.id
     }));
 
-    props
-        .navigator
-        .pop();
+    this._navigateHome();
 }
     render() {
         const renderStudens = () => {
