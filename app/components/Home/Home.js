@@ -43,7 +43,7 @@ class Home extends Component {
             displayedSounds: props.displayedSounds,
             lingSoundCount: props.lingSoundCount,
             date: props.date,
-            sequence: props.testSequence,
+            sequence: props.sequence,
             sequenceIndex: props.sequenceIndex
         });
     }
@@ -56,6 +56,10 @@ class Home extends Component {
         this.props.navigator.push({component: SettingsList, title: "Settings", navigationBarHidden: false})
     }
 
+    humanifyArrayNumbers(geekArray) {
+        return geekArray.map(item => item + 1)
+    }
+
     render() {
         let optionsList = this
             .props
@@ -65,7 +69,7 @@ class Home extends Component {
                     onSelected={this.answerSelected}
                     visualProp={this.props.visualProp[sound]}
                     sound={sound}
-                    correctSound={this.props.visualProp[this.props.correctSoundIndex]}
+                    correctSound={this.props.visualProp[this.props.sequenceIndex]}
                     shouldAnimate={this.props.shouldAnimate}
                     key={i}
                     accessibilityLabel="Symbol select"/>
@@ -91,16 +95,15 @@ class Home extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={styles.buttonsContainer}>
                     {optionsList}
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContentLeft}>
-                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
+                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}, Current Sequence: {this.humanifyArrayNumbers(this.props.sequence)},
                     </Text>
                     <Text style={styles.footerContentRight}>
-                        {this.props.correctSoundIndex + 1}
+                        {this.props.sequenceIndex + 1}
                     </Text>
                 </View>
             </View>
@@ -156,6 +159,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         flex: 1
     },
+    sequenceTitleContainer: {
+        justifyContent: 'flex-start',
+    },
+    sequenceText: {
+        fontSize: 16,
+    },
     instructions: {
         textAlign: 'center',
         color: '#333333',
@@ -197,7 +206,7 @@ const mapStateToProps = (store) => {
         manualTestIndex: store.manualTestIndex,
         lingSoundCount: store.lingSoundCount,
         date: store.date,
-        testSequence: store.testSequence,
+        sequence: store.sequence,
         sequenceIndex: store.sequenceIndex,
         shouldAnimate: store.shouldAnimate,
         state: store

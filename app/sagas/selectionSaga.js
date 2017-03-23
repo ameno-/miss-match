@@ -4,10 +4,13 @@ import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
   try {
-    if (action.selectedSoundIndex === action.correctSoundIndex) {
+    if (action.selectedSoundIndex === action.sequenceIndex) {
       let nextIndex = action.sequenceIndex + 1;
+      
+      console.log("sequence index")
+      console.log(action.sequenceIndex)
 
-      if (action.manualTestIndex != null) {
+      if (action.manualTestIndex == null) {
         if (nextIndex >= 6) {
           yield put({
             type: "BUILD_NEW_SEQUENCE",
@@ -23,12 +26,14 @@ function * selectionChanged(action) {
           payload: getRandomCollection(action.sequence[nextIndex], action.lingSoundCount)
         })
 
-      }
+      } else {
 
       yield put({
         type: "QUESTIONS_NEW",
         payload: getRandomCollection(action.manualTestIndex, action.lingSoundCount)
       });
+
+    }
 
       console.log("end of saga: ", nextIndex)
     } else {

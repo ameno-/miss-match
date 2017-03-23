@@ -19,7 +19,7 @@ const defaultState = {
     currentStudent: {},
     manualTestIndex: null,
     lingSoundCount: 3,
-    testSequence: [0, 1, 2, 3, 4, 5],
+    sequence: [0, 1, 2, 3, 4, 5],
     date: Date.now(),
     sequenceIndex: 0,
     shouldAnimate: false

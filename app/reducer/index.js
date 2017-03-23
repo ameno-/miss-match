@@ -64,7 +64,7 @@ module.exports = (state={}, action) => {
             return {
                 ...state,
                 sequenceIndex: action.sequenceIndex,
-                sequence: action.sequence,
+                testSequence: action.sequence,
             }
         default:
             return state;
