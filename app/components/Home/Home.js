@@ -13,11 +13,14 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as Animatable from 'react-native-animatable';
 
 import Students from '../Students/Students';
 import {selection} from '../../actions';
 import Options from '../Options/Options';
 import SettingsList from '../Settings/Settings';
+
+const stars = require('../../../assets/stars.png');
 
 class Home extends Component {
     constructor(props, context) {
@@ -27,10 +30,24 @@ class Home extends Component {
         this._navigateSettings = this._navigateSettings.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
+        this.animateStars = this.animateStars.bind(this);
     }
 
     answerSelected(sound) {
         let props = this.props;
+
+        this.animateStars();
+
+        let aIn = this.refs.topStarsLeft.zoomInDown(1200);
+        let aOut = this.refs.topStarsLeft.fadeOutUpBig(2000);
+        let bIn = this.refs.topStarsRight.zoomInDown(2200);
+        let bOut = this.refs.topStarsRight.fadeOutUpBig();
+        let cIn = this.refs.bottomStarsLeft.zoomInDown(1200);
+        let cOut = this.refs.bottomStarsLeft.fadeOutUpBig(2000);
+        let dIn = this.refs.bottomStarsRight.zoomInUp(2200);
+        let dOut = this.refs.bottomStarsRight.fadeOutUpBig();
+         
+        Promise.all([aIn, bIn, cIn, aOut, , bOut, dIn, cOut, dOut]).then(() => {
 
         props.dispatch(selection(sound));
         props.dispatch({
@@ -46,6 +63,11 @@ class Home extends Component {
             sequence: props.sequence,
             sequenceIndex: props.sequenceIndex
         });
+        })
+    }
+
+    animateStars() {
+        
     }
 
     _navigateStudents() {
@@ -97,8 +119,16 @@ class Home extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <View style={styles.starsContainer}>
+                    <Animatable.Image source={stars} ref="topStarsLeft" style={styles.starImageStyle} resizeMode={"contain"} />
+                    <Animatable.Image source={stars} ref="topStarsRight" style={styles.starImageStyle} resizeMode={"contain"} />
+                </View>
                 <View style={styles.buttonsContainer}>
                     {optionsList}
+                </View>
+                <View style={styles.starsContainer}>
+                    <Animatable.Image source={stars} ref="bottomStarsLeft" style={styles.starImageStyle} resizeMode={"contain"} />
+                    <Animatable.Image source={stars} ref="bottomStarsRight" style={styles.starImageStyle} resizeMode={"contain"} />
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContentLeft}>
@@ -190,6 +220,17 @@ const styles = StyleSheet.create({
     footerContentRight: {
         color: 'white',
         fontSize: 24
+    },
+    starsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    starImageStyle: {
+        width: 220,
+        height: 140,
+        marginTop: 120,
+        opacity: 0
     }
 });
 
