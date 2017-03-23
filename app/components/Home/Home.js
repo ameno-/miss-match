@@ -102,10 +102,10 @@ class Home extends Component {
                 </View>
                 <View style={styles.footer}>
                     <Text style={styles.footerContentLeft}>
-                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}, Current Sequence: {this.humanifyArrayNumbers(this.props.sequence)},
+                        Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
                     </Text>
                     <Text style={styles.footerContentRight}>
-                        {this.props.sequence[this.props.sequenceIndex] + 1}
+                        {this.props.correctSoundIndex + 1}
                     </Text>
                 </View>
             </View>

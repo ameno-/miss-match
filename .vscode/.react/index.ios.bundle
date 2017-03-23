@@ -70401,10 +70401,10 @@ optionsList),
 
 _react2.default.createElement(_reactNative.View,{style:styles.footer},
 _react2.default.createElement(_reactNative.Text,{style:styles.footerContentLeft},'Current student: ',
-this.props.currentStudent.studentName,', Current teacher: ',this.props.currentStudent.teacherName,', Current Sequence: ',this.humanifyArrayNumbers(this.props.sequence),','),
+this.props.currentStudent.studentName,', Current teacher: ',this.props.currentStudent.teacherName),
 
 _react2.default.createElement(_reactNative.Text,{style:styles.footerContentRight},
-this.props.sequence[this.props.sequenceIndex]+1))));
+this.props.correctSoundIndex+1))));
 
 
 
