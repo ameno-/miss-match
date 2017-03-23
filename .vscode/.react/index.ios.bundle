@@ -70334,7 +70334,7 @@ var props=this.props;
 props.dispatch((0,_actions.selection)(sound));
 props.dispatch({
 type:"SUBMIT",
-correctSoundIndex:props.correctSoundIndex,
+correctSoundIndex:this.props.sequence[this.props.sequenceIndex],
 selectedSoundIndex:sound,
 manualTestIndex:props.manualTestIndex,
 currentStudent:props.currentStudent,
@@ -70360,6 +70360,11 @@ return geekArray.map(function(item){return item+1;});
 }},{key:'render',value:function render()
 
 {var _this2=this;
+console.log(this.props.visualProp[this.props.sequence[this.props.sequenceIndex]]);
+console.log("props and seq");
+console.log(this.props.sequence[this.props.sequenceIndex]);
+console.log(this.props.sequence);
+console.log(this.props.sequenceIndex);
 var optionsList=this.
 props.
 displayedSounds.
@@ -70368,7 +70373,7 @@ return _react2.default.createElement(_Options2.default,{
 onSelected:_this2.answerSelected,
 visualProp:_this2.props.visualProp[sound],
 sound:sound,
-correctSound:_this2.props.visualProp[_this2.props.sequenceIndex],
+correctSound:_this2.props.visualProp[_this2.props.sequence[_this2.props.sequenceIndex]],
 shouldAnimate:_this2.props.shouldAnimate,
 key:i,
 accessibilityLabel:'Symbol select'});
@@ -70402,7 +70407,7 @@ _react2.default.createElement(_reactNative.Text,{style:styles.footerContentLeft}
 this.props.currentStudent.studentName,', Current teacher: ',this.props.currentStudent.teacherName,', Current Sequence: ',this.humanifyArrayNumbers(this.props.sequence),','),
 
 _react2.default.createElement(_reactNative.Text,{style:styles.footerContentRight},
-this.props.sequenceIndex+1))));
+this.props.sequence[this.props.sequenceIndex]+1))));
 
 
 
@@ -96440,7 +96445,7 @@ module.exports=(0,_reactRedux.connect)(mapStateToProps)(LandingPage);
 }, 639, null, "msMatch/app/components/Landing/index.js");
 __d(/* msMatch/assets/background.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":783,"height":779,"scales":[1],"hash":"64cbd6da6a288b4cdf6f4cc7e383370b","name":"background","type":"png"});
 }, 674, null, "msMatch/assets/background.png");
-__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"5976a975e34cb451f644a489c4df8d26","name":"logo","type":"png"});
+__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"8ba53c436537daad9421b42afc9704f3","name":"logo","type":"png"});
 }, 675, null, "msMatch/assets/logo.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
@@ -99621,7 +99626,7 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;if(!(action.selectedSoundIndex===action.sequenceIndex)){_context.next=22;break;}nextIndex=action.sequenceIndex+1;console.log("sequence index");console.log(action.sequenceIndex);if(!(action.manualTestIndex==null)){_context.next=17;break;}if(!(nextIndex>=6)){_context.next=11;break;}_context.next=9;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 9:_context.next=13;break;case 11:_context.next=13;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 13:_context.next=15;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 15:_context.next=19;break;case 17:_context.next=19;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.manualTestIndex,action.lingSoundCount)});case 19:console.log("end of saga: ",nextIndex);_context.next=24;break;case 22:_context.next=24;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 24:_context.next=26;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 26:_context.next=34;break;case 28:_context.prev=28;_context.t0=_context['catch'](0);_context.next=32;return console.log("done fucked up");case 32:_context.next=34;return console.log(_context.t0);case 34:case'end':return _context.stop();}}},_marked[0],this,[[0,28]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=22;break;}nextIndex=action.sequenceIndex+1;console.log("sequence index");if(!(action.manualTestIndex==null)){_context.next=17;break;}if(!(nextIndex>=6)){_context.next=11;break;}_context.next=9;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 9:_context.next=13;break;case 11:_context.next=13;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 13:_context.next=15;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 15:_context.next=19;break;case 17:_context.next=19;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.manualTestIndex,action.lingSoundCount)});case 19:console.log("end of saga: ",nextIndex);_context.next=24;break;case 22:_context.next=24;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 24:_context.next=26;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 26:_context.next=34;break;case 28:_context.prev=28;_context.t0=_context['catch'](0);_context.next=32;return console.log("done fucked up");case 32:_context.next=34;return console.log(_context.t0);case 34:case'end':return _context.stop();}}},_marked[0],this,[[0,28]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

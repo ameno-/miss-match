@@ -4,11 +4,11 @@ import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
   try {
-    if (action.selectedSoundIndex === action.sequenceIndex) {
+    console.log(action);
+    if (action.selectedSoundIndex === action.correctSoundIndex) {
       let nextIndex = action.sequenceIndex + 1;
       
       console.log("sequence index")
-      console.log(action.sequenceIndex)
 
       if (action.manualTestIndex == null) {
         if (nextIndex >= 6) {

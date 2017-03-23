@@ -35,7 +35,7 @@ class Home extends Component {
         props.dispatch(selection(sound));
         props.dispatch({
             type: "SUBMIT",
-            correctSoundIndex: props.correctSoundIndex,
+            correctSoundIndex: this.props.sequence[this.props.sequenceIndex],
             selectedSoundIndex: sound,
             manualTestIndex: props.manualTestIndex,
             currentStudent: props.currentStudent,
@@ -61,6 +61,11 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.props.visualProp[this.props.correctSoundIndex]);
+        console.log("props and seq");
+        console.log(this.props.sequence[this.props.sequenceIndex]);
+        console.log(this.props.sequence);
+        console.log(this.props.sequenceIndex);
         let optionsList = this
             .props
             .displayedSounds
@@ -69,7 +74,7 @@ class Home extends Component {
                     onSelected={this.answerSelected}
                     visualProp={this.props.visualProp[sound]}
                     sound={sound}
-                    correctSound={this.props.visualProp[this.props.sequenceIndex]}
+                    correctSound={this.props.visualProp[this.props.correctSoundIndex]}
                     shouldAnimate={this.props.shouldAnimate}
                     key={i}
                     accessibilityLabel="Symbol select"/>
@@ -103,7 +108,7 @@ class Home extends Component {
                         Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}, Current Sequence: {this.humanifyArrayNumbers(this.props.sequence)},
                     </Text>
                     <Text style={styles.footerContentRight}>
-                        {this.props.sequenceIndex + 1}
+                        {this.props.sequence[this.props.sequenceIndex] + 1}
                     </Text>
                 </View>
             </View>
