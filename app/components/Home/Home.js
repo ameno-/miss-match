@@ -35,7 +35,7 @@ class Home extends Component {
         props.dispatch(selection(sound));
         props.dispatch({
             type: "SUBMIT",
-            correctSoundIndex: this.props.sequence[this.props.sequenceIndex],
+            correctSoundIndex: this.props.correctSoundIndex,
             selectedSoundIndex: sound,
             manualTestIndex: props.manualTestIndex,
             currentStudent: props.currentStudent,
@@ -61,11 +61,8 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.visualProp[this.props.correctSoundIndex]);
-        console.log("props and seq");
-        console.log(this.props.sequence[this.props.sequenceIndex]);
-        console.log(this.props.sequence);
-        console.log(this.props.sequenceIndex);
+        console.log(this.props.displayedSounds)
+        console.log(this.props.correctSoundIndex)
         let optionsList = this
             .props
             .displayedSounds

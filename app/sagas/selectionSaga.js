@@ -35,7 +35,7 @@ function * selectionChanged(action) {
 
     }
 
-      console.log("end of saga: ", nextIndex)
+      console.log("end of saga correct answer: ", nextIndex)
     } else {
       yield put({type: "QUESTIONS_REDO"})
     }

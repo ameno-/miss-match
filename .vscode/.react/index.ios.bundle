@@ -70334,7 +70334,7 @@ var props=this.props;
 props.dispatch((0,_actions.selection)(sound));
 props.dispatch({
 type:"SUBMIT",
-correctSoundIndex:this.props.sequence[this.props.sequenceIndex],
+correctSoundIndex:this.props.correctSoundIndex,
 selectedSoundIndex:sound,
 manualTestIndex:props.manualTestIndex,
 currentStudent:props.currentStudent,
@@ -70360,11 +70360,8 @@ return geekArray.map(function(item){return item+1;});
 }},{key:'render',value:function render()
 
 {var _this2=this;
-console.log(this.props.visualProp[this.props.sequence[this.props.sequenceIndex]]);
-console.log("props and seq");
-console.log(this.props.sequence[this.props.sequenceIndex]);
-console.log(this.props.sequence);
-console.log(this.props.sequenceIndex);
+console.log(this.props.displayedSounds);
+console.log(this.props.correctSoundIndex);
 var optionsList=this.
 props.
 displayedSounds.
@@ -70373,7 +70370,7 @@ return _react2.default.createElement(_Options2.default,{
 onSelected:_this2.answerSelected,
 visualProp:_this2.props.visualProp[sound],
 sound:sound,
-correctSound:_this2.props.visualProp[_this2.props.sequence[_this2.props.sequenceIndex]],
+correctSound:_this2.props.visualProp[_this2.props.correctSoundIndex],
 shouldAnimate:_this2.props.shouldAnimate,
 key:i,
 accessibilityLabel:'Symbol select'});
@@ -94082,18 +94079,18 @@ Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);var _this=babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
 props));
 _this.handleClick=_this.handleClick.bind(_this);return _this;
-}babelHelpers.createClass(Options,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps(
+}babelHelpers.createClass(Options,[{key:'getImageSrc',value:function getImageSrc(
 
-nextProps){
-if(nextProps.shouldAnimate){
-this.refs.mainContainer.bounceInDown(700);
-}
-}},{key:'getImageSrc',value:function getImageSrc(
+
+
+
+
+
 
 visualProp){
 switch(visualProp){
 case"baby":
-return require(629 /* ../../../assets/cryingBaby.png */);
+return require(678 /* ../../../assets/baby.png */);
 case"mouse":
 return require(630 /* ../../../assets/mouse.png */);
 case"train":
@@ -94103,7 +94100,7 @@ return require(632 /* ../../../assets/pizza.png */);
 case"airplane":
 return require(633 /* ../../../assets/airplane.png */);
 case"snake":
-return require(634 /* ../../../assets/snake.png */);}
+return require(677 /* ../../../assets/snake2.png */);}
 
 }},{key:'handleClick',value:function handleClick(
 
@@ -95722,8 +95719,8 @@ var zoomOutLeft=exports.zoomOutLeft=makeZoomOutTranslation('translateX',10);
 
 var zoomOutRight=exports.zoomOutRight=makeZoomOutTranslation('translateX',-10);
 }, 628, null, "react-native-animatable/definitions/zooming-exits.js");
-__d(/* msMatch/assets/cryingBaby.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":600,"height":550,"scales":[1],"hash":"2a473b3b2efb0ca59802269ac7b75ebf","name":"cryingBaby","type":"png"});
-}, 629, null, "msMatch/assets/cryingBaby.png");
+__d(/* msMatch/assets/baby.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":600,"height":600,"scales":[1],"hash":"55503d7aa9b5d239aefa2cddd0a7327f","name":"baby","type":"png"});
+}, 678, null, "msMatch/assets/baby.png");
 __d(/* msMatch/assets/mouse.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":2834,"height":2150,"scales":[1],"hash":"fa72ecf71e17ec0b6982eb1f53a46fd1","name":"mouse","type":"png"});
 }, 630, null, "msMatch/assets/mouse.png");
 __d(/* msMatch/assets/train.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":1600,"height":783,"scales":[1],"hash":"1e622df4013d149b3369dc4d74238c8f","name":"train","type":"png"});
@@ -95732,8 +95729,8 @@ __d(/* msMatch/assets/pizza.png */function(global, require, module, exports) {mo
 }, 632, null, "msMatch/assets/pizza.png");
 __d(/* msMatch/assets/airplane.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":1600,"height":1200,"scales":[1],"hash":"28ca2b39b1a3aedbd9a2c18d37e21d76","name":"airplane","type":"png"});
 }, 633, null, "msMatch/assets/airplane.png");
-__d(/* msMatch/assets/snake.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":555,"height":392,"scales":[1],"hash":"8152c6fd8fa4ff2a6a04957f35f3cf52","name":"snake","type":"png"});
-}, 634, null, "msMatch/assets/snake.png");
+__d(/* msMatch/assets/snake2.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":400,"height":400,"scales":[1],"hash":"f03895022bc87c1b8637831238e19db3","name":"snake2","type":"png"});
+}, 677, null, "msMatch/assets/snake2.png");
 __d(/* msMatch/app/components/Settings/Settings.js */function(global, require, module, exports) {var _react=require(12 /* react */);var _react2=babelHelpers.interopRequireDefault(_react);
 var _reactRedux=require(42 /* react-redux */);
 var _reactNative=require(79 /* react-native */);
@@ -96303,12 +96300,12 @@ var _actions=require(606 /* ../../actions */);
 var _Home=require(438 /* ../Home/Home */);var _Home2=babelHelpers.interopRequireDefault(_Home);
 var _Students=require(594 /* ../Students/Students */);var _Students2=babelHelpers.interopRequireDefault(_Students);
 
-var babyImage=require(629 /* ../../../assets/cryingBaby.png */);
+var babyImage=require(678 /* ../../../assets/baby.png */);
 var mouse=require(630 /* ../../../assets/mouse.png */);
 var train=require(631 /* ../../../assets/train.png */);
 var pizza=require(632 /* ../../../assets/pizza.png */);
 var airplane=require(633 /* ../../../assets/airplane.png */);
-var snake=require(634 /* ../../../assets/snake.png */);
+var snake=require(677 /* ../../../assets/snake2.png */);
 var backgroundImage=require(674 /* ../../../assets/background.png */);
 var logo=require(675 /* ../../../assets/logo.png */);var
 
@@ -96407,14 +96404,15 @@ button:{
 height:64,
 flexDirection:'row',
 alignItems:'center',
-borderWidth:0,
+borderWidth:0.5,
 borderRadius:80,
 marginBottom:20,
 alignSelf:'center',
 paddingLeft:50,
 paddingRight:50,
 justifyContent:'center',
-backgroundColor:'#5CC8FF'},
+backgroundColor:'#7CC6FE',
+borderColor:'#5DFDCB'},
 
 buttonText:{
 color:'white',
@@ -96445,7 +96443,7 @@ module.exports=(0,_reactRedux.connect)(mapStateToProps)(LandingPage);
 }, 639, null, "msMatch/app/components/Landing/index.js");
 __d(/* msMatch/assets/background.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":783,"height":779,"scales":[1],"hash":"64cbd6da6a288b4cdf6f4cc7e383370b","name":"background","type":"png"});
 }, 674, null, "msMatch/assets/background.png");
-__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"8ba53c436537daad9421b42afc9704f3","name":"logo","type":"png"});
+__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"a0909ad1921855b2dd5a8a39338d2c7c","name":"logo","type":"png"});
 }, 675, null, "msMatch/assets/logo.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);
@@ -99626,7 +99624,7 @@ selectionChanged,
 
 
 
-selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=22;break;}nextIndex=action.sequenceIndex+1;console.log("sequence index");if(!(action.manualTestIndex==null)){_context.next=17;break;}if(!(nextIndex>=6)){_context.next=11;break;}_context.next=9;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 9:_context.next=13;break;case 11:_context.next=13;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 13:_context.next=15;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 15:_context.next=19;break;case 17:_context.next=19;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.manualTestIndex,action.lingSoundCount)});case 19:console.log("end of saga: ",nextIndex);_context.next=24;break;case 22:_context.next=24;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 24:_context.next=26;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 26:_context.next=34;break;case 28:_context.prev=28;_context.t0=_context['catch'](0);_context.next=32;return console.log("done fucked up");case 32:_context.next=34;return console.log(_context.t0);case 34:case'end':return _context.stop();}}},_marked[0],this,[[0,28]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
+selectionSaga].map(regeneratorRuntime.mark);function selectionChanged(action){var nextIndex;return regeneratorRuntime.wrap(function selectionChanged$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;console.log(action);if(!(action.selectedSoundIndex===action.correctSoundIndex)){_context.next=22;break;}nextIndex=action.sequenceIndex+1;console.log("sequence index");if(!(action.manualTestIndex==null)){_context.next=17;break;}if(!(nextIndex>=6)){_context.next=11;break;}_context.next=9;return(0,_effects.put)({type:"BUILD_NEW_SEQUENCE",sequenceIndex:0,sequence:(0,_helper.shuffle)(action.sequence)});case 9:_context.next=13;break;case 11:_context.next=13;return(0,_effects.put)({type:"INCREMENT_SEQUENCE_INDEX",payload:nextIndex});case 13:_context.next=15;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.sequence[nextIndex],action.lingSoundCount)});case 15:_context.next=19;break;case 17:_context.next=19;return(0,_effects.put)({type:"QUESTIONS_NEW",payload:(0,_helper.getRandomCollection)(action.manualTestIndex,action.lingSoundCount)});case 19:console.log("end of saga correct answer: ",nextIndex);_context.next=24;break;case 22:_context.next=24;return(0,_effects.put)({type:"QUESTIONS_REDO"});case 24:_context.next=26;return(0,_db.updateStudentDataAsync)(action.currentStudent,action.visualProp,action.displayedSounds,action.selectedSoundIndex,action.correctSoundIndex,Date.now());case 26:_context.next=34;break;case 28:_context.prev=28;_context.t0=_context['catch'](0);_context.next=32;return console.log("done fucked up");case 32:_context.next=34;return console.log(_context.t0);case 34:case'end':return _context.stop();}}},_marked[0],this,[[0,28]]);}function selectionSaga(){return regeneratorRuntime.wrap(function selectionSaga$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.next=2;return(
 (0,_effects.takeEvery)("SUBMIT",selectionChanged));case 2:case'end':return _context2.stop();}}},_marked[1],this);}exports.default=
 
 

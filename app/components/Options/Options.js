@@ -15,16 +15,16 @@ class Options extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-        if (nextProps.shouldAnimate) {
-            this.refs.mainContainer.bounceInDown(700);
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     if (nextProps.shouldAnimate) {
+    //         this.refs.mainContainer.bounceInDown(700);
+    //     }
+    // }
 
     getImageSrc(visualProp) {
         switch (visualProp) {
             case "baby":
-                return require('../../../assets/cryingBaby.png');
+                return require('../../../assets/baby.png');
             case "mouse":
                 return require('../../../assets/mouse.png');
             case "train":
@@ -34,7 +34,7 @@ class Options extends Component {
             case "airplane":
                 return require('../../../assets/airplane.png');
             case "snake":
-                return require('../../../assets/snake.png');
+                return require('../../../assets/snake2.png');
         }
     }
 

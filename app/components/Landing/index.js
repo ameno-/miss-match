@@ -16,12 +16,12 @@ import { setStudent } from '../../actions';
 import Home from '../Home/Home';
 import Students from '../Students/Students';
 
-const babyImage = require('../../../assets/cryingBaby.png');
+const babyImage = require('../../../assets/baby.png');
 const mouse = require('../../../assets/mouse.png');
 const train = require('../../../assets/train.png');
 const pizza = require('../../../assets/pizza.png');
 const airplane = require('../../../assets/airplane.png');
-const snake = require('../../../assets/snake.png');
+const snake = require('../../../assets/snake2.png');
 const backgroundImage = require('../../../assets/background.png');
 const logo = require('../../../assets/logo.png');
 
@@ -120,14 +120,15 @@ const styles = StyleSheet.create({
         height: 64,
         flexDirection: 'row',
         alignItems: 'center',
-        borderWidth: 0,
+        borderWidth: 0.5,
         borderRadius: 80,
         marginBottom: 20,
         alignSelf: 'center',
         paddingLeft: 50,
         paddingRight: 50,
         justifyContent: 'center',
-        backgroundColor: '#5CC8FF'
+        backgroundColor: '#7CC6FE',
+        borderColor: '#5DFDCB'
     },
     buttonText: {
         color: 'white',
