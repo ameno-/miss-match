@@ -30,25 +30,23 @@ class Home extends Component {
         this._navigateSettings = this._navigateSettings.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
         this.answerSelected = this.answerSelected.bind(this);
-        this.animateStars = this.animateStars.bind(this);
+        this.dispatchAnswer = this.dispatchAnswer.bind(this);
     }
 
     answerSelected(sound) {
-        let props = this.props;
-
-        this.animateStars();
-
-        let aIn = this.refs.topStarsLeft.zoomInDown(1200);
-        let aOut = this.refs.topStarsLeft.fadeOutUpBig(2000);
-        let bIn = this.refs.topStarsRight.zoomInDown(2200);
-        let bOut = this.refs.topStarsRight.fadeOutUpBig();
-        let cIn = this.refs.bottomStarsLeft.zoomInDown(1200);
-        let cOut = this.refs.bottomStarsLeft.fadeOutUpBig(2000);
-        let dIn = this.refs.bottomStarsRight.zoomInUp(2200);
-        let dOut = this.refs.bottomStarsRight.fadeOutUpBig();
+        let {topStarsLeft, topStarsRight, bottomStarsLeft, bottomStarsRight} = this.refs;
          
-        Promise.all([aIn, bIn, cIn, aOut, , bOut, dIn, cOut, dOut]).then(() => {
+        Promise.all([topStarsLeft.zoomIn(800), topStarsRight.zoomIn(800), bottomStarsLeft.zoomIn(800), bottomStarsRight.zoomIn(800)]).then(() => {
+            // Promise.all([topStarsLeft.rotate(800), topStarsRight.rotate(800), bottomStarsLeft.rotate(800), bottomStarsRight.rotate(800)]).then(() => {
+                Promise.all([topStarsLeft.zoomOut(), topStarsRight.zoomOut(), bottomStarsLeft.zoomOut(), bottomStarsRight.zoomOut()]).then(() => {
+                    this.dispatchAnswer(sound);
+                })     
+            // })
+        })
+    }
 
+    dispatchAnswer(sound) {
+        let props = this.props;
         props.dispatch(selection(sound));
         props.dispatch({
             type: "SUBMIT",
@@ -63,11 +61,6 @@ class Home extends Component {
             sequence: props.sequence,
             sequenceIndex: props.sequenceIndex
         });
-        })
-    }
-
-    animateStars() {
-        
     }
 
     _navigateStudents() {
@@ -227,8 +220,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     starImageStyle: {
-        width: 220,
-        height: 140,
+        width: 320,
+        height: 240,
         marginTop: 120,
         opacity: 0
     }

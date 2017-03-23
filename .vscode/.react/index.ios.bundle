@@ -70329,29 +70329,27 @@ _this._navigateStudents=_this._navigateStudents.bind(_this);
 _this._navigateSettings=_this._navigateSettings.bind(_this);
 _this.answerSelected=_this.answerSelected.bind(_this);
 _this.answerSelected=_this.answerSelected.bind(_this);
-_this.animateStars=_this.animateStars.bind(_this);return _this;
+_this.dispatchAnswer=_this.dispatchAnswer.bind(_this);return _this;
 }babelHelpers.createClass(Home,[{key:'answerSelected',value:function answerSelected(
 
-sound){var _this2=this;
+sound){var _this2=this;var _refs=
+this.refs,topStarsLeft=_refs.topStarsLeft,topStarsRight=_refs.topStarsRight,bottomStarsLeft=_refs.bottomStarsLeft,bottomStarsRight=_refs.bottomStarsRight;
+
+Promise.all([topStarsLeft.zoomIn(800),topStarsRight.zoomIn(800),bottomStarsLeft.zoomIn(800),bottomStarsRight.zoomIn(800)]).then(function(){
+
+Promise.all([topStarsLeft.zoomOut(),topStarsRight.zoomOut(),bottomStarsLeft.zoomOut(),bottomStarsRight.zoomOut()]).then(function(){
+_this2.dispatchAnswer(sound);
+});
+
+});
+}},{key:'dispatchAnswer',value:function dispatchAnswer(
+
+sound){
 var props=this.props;
-
-this.animateStars();
-
-var aIn=this.refs.topStarsLeft.zoomInDown(1200);
-var aOut=this.refs.topStarsLeft.fadeOutUpBig(2000);
-var bIn=this.refs.topStarsRight.zoomInDown(2200);
-var bOut=this.refs.topStarsRight.fadeOutUpBig();
-var cIn=this.refs.bottomStarsLeft.zoomInDown(1200);
-var cOut=this.refs.bottomStarsLeft.fadeOutUpBig(2000);
-var dIn=this.refs.bottomStarsRight.zoomInUp(2200);
-var dOut=this.refs.bottomStarsRight.fadeOutUpBig();
-
-Promise.all([aIn,bIn,cIn,aOut,,bOut,dIn,cOut,dOut]).then(function(){
-
 props.dispatch((0,_actions.selection)(sound));
 props.dispatch({
 type:"SUBMIT",
-correctSoundIndex:_this2.props.correctSoundIndex,
+correctSoundIndex:this.props.correctSoundIndex,
 selectedSoundIndex:sound,
 manualTestIndex:props.manualTestIndex,
 currentStudent:props.currentStudent,
@@ -70361,11 +70359,6 @@ lingSoundCount:props.lingSoundCount,
 date:props.date,
 sequence:props.sequence,
 sequenceIndex:props.sequenceIndex});
-
-});
-}},{key:'animateStars',value:function animateStars()
-
-{
 
 }},{key:'_navigateStudents',value:function _navigateStudents()
 
@@ -70526,8 +70519,8 @@ justifyContent:'space-between',
 alignItems:'center'},
 
 starImageStyle:{
-width:220,
-height:140,
+width:320,
+height:240,
 marginTop:120,
 opacity:0}});
 
@@ -95674,13 +95667,13 @@ Options=function(_Component){babelHelpers.inherits(Options,_Component);
 function Options(props){babelHelpers.classCallCheck(this,Options);var _this=babelHelpers.possibleConstructorReturn(this,(Options.__proto__||Object.getPrototypeOf(Options)).call(this,
 props));
 _this.handleClick=_this.handleClick.bind(_this);return _this;
-}babelHelpers.createClass(Options,[{key:'getImageSrc',value:function getImageSrc(
+}babelHelpers.createClass(Options,[{key:'componentWillReceiveProps',value:function componentWillReceiveProps(
 
-
-
-
-
-
+nextProps){
+if(nextProps.shouldAnimate){
+this.refs.mainContainer.bounceInDown(700);
+}
+}},{key:'getImageSrc',value:function getImageSrc(
 
 visualProp){
 switch(visualProp){

@@ -15,11 +15,11 @@ class Options extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     if (nextProps.shouldAnimate) {
-    //         this.refs.mainContainer.bounceInDown(700);
-    //     }
-    // }
+    componentWillReceiveProps(nextProps){
+        if (nextProps.shouldAnimate) {
+            this.refs.mainContainer.bounceInDown(700);
+        }
+    }
 
     getImageSrc(visualProp) {
         switch (visualProp) {
