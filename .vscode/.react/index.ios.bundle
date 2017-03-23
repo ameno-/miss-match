@@ -96423,7 +96423,7 @@ width:220,
 height:120,
 alignSelf:'center',
 flexWrap:'wrap',
-marginBottom:100,
+marginBottom:160,
 justifyContent:'flex-start'},
 
 logoStyle:{
@@ -96443,7 +96443,7 @@ module.exports=(0,_reactRedux.connect)(mapStateToProps)(LandingPage);
 }, 639, null, "msMatch/app/components/Landing/index.js");
 __d(/* msMatch/assets/background.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":783,"height":779,"scales":[1],"hash":"64cbd6da6a288b4cdf6f4cc7e383370b","name":"background","type":"png"});
 }, 674, null, "msMatch/assets/background.png");
-__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"a0909ad1921855b2dd5a8a39338d2c7c","name":"logo","type":"png"});
+__d(/* msMatch/assets/logo.png */function(global, require, module, exports) {module.exports = require(208 /* react-native/Libraries/Image/AssetRegistry */).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/assets","width":500,"height":170,"scales":[1],"hash":"567d378862be8231f34414d1ccc3c719","name":"logo","type":"png"});
 }, 675, null, "msMatch/assets/logo.png");
 __d(/* msMatch/app/store/index.js */function(global, require, module, exports) {Object.defineProperty(exports,"__esModule",{value:true});exports.configureStore=undefined;var _redux=require(53 /* redux */);
 var _reactNative=require(79 /* react-native */);

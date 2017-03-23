@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         height: 120,
         alignSelf: 'center',
         flexWrap: 'wrap',
-        marginBottom: 100,
+        marginBottom: 160,
         justifyContent: 'flex-start',
     },
     logoStyle: {
