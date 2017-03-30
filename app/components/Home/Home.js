@@ -35,14 +35,17 @@ class Home extends Component {
 
     answerSelected(sound) {
         let {topStarsLeft, topStarsRight, bottomStarsLeft, bottomStarsRight} = this.refs;
-         
-        Promise.all([topStarsLeft.zoomIn(800), topStarsRight.zoomIn(800), bottomStarsLeft.zoomIn(800), bottomStarsRight.zoomIn(800)]).then(() => {
-            // Promise.all([topStarsLeft.rotate(800), topStarsRight.rotate(800), bottomStarsLeft.rotate(800), bottomStarsRight.rotate(800)]).then(() => {
-                Promise.all([topStarsLeft.zoomOut(), topStarsRight.zoomOut(), bottomStarsLeft.zoomOut(), bottomStarsRight.zoomOut()]).then(() => {
-                    this.dispatchAnswer(sound);
-                })     
-            // })
-        })
+
+        if (sound === this.props.correctSoundIndex) {
+            
+            Promise.all([topStarsLeft.zoomIn(1000), topStarsRight.zoomIn(1000), bottomStarsLeft.zoomIn(1000), bottomStarsRight.zoomIn(1000)]).then(() => {
+                // Promise.all([topStarsLeft.rotate(800), topStarsRight.rotate(800), bottomStarsLeft.rotate(800), bottomStarsRight.rotate(800)]).then(() => {
+                    Promise.all([topStarsLeft.zoomOut(), topStarsRight.zoomOut(), bottomStarsLeft.zoomOut(), bottomStarsRight.zoomOut()]).then(() => {
+                        this.dispatchAnswer(sound);
+                    })     
+                // })
+            })
+        }
     }
 
     dispatchAnswer(sound) {
