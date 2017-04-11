@@ -63,7 +63,7 @@ module.exports = (state={}, action) => {
         case 'BUILD_NEW_SEQUENCE':
             return {
                 ...state,
-                sequenceIndex: action.sequenceIndex,
+                sequenceIndex: action.sequence[0],
                 testSequence: action.sequence,
             }
         default:

@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { AsyncStorage } from 'react-native';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import {getRandomCollection, shuffle} from '../../utils/helper';
 import createSagaMiddleware from 'redux-saga'
 import reducer from '../reducer'
 import Sagas from '../sagas';
@@ -19,7 +20,7 @@ const defaultState = {
     currentStudent: {},
     manualTestIndex: null,
     lingSoundCount: 3,
-    sequence: [0, 1, 2, 3, 4, 5],
+    sequence: shuffle([0, 1, 2, 3, 4, 5]),
     date: Date.now(),
     sequenceIndex: 0,
     shouldAnimate: false

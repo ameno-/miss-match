@@ -39,11 +39,10 @@ class Home extends Component {
         if (sound === this.props.correctSoundIndex) {
             
             Promise.all([topStarsLeft.zoomIn(1000), topStarsRight.zoomIn(1000), bottomStarsLeft.zoomIn(1000), bottomStarsRight.zoomIn(1000)]).then(() => {
-                // Promise.all([topStarsLeft.rotate(800), topStarsRight.rotate(800), bottomStarsLeft.rotate(800), bottomStarsRight.rotate(800)]).then(() => {
+                
                     Promise.all([topStarsLeft.zoomOut(), topStarsRight.zoomOut(), bottomStarsLeft.zoomOut(), bottomStarsRight.zoomOut()]).then(() => {
                         this.dispatchAnswer(sound);
-                    })     
-                // })
+                    })
             })
         }
     }
@@ -131,7 +130,10 @@ class Home extends Component {
                         Current student: {this.props.currentStudent.studentName}, Current teacher: {this.props.currentStudent.teacherName}
                     </Text>
                     <Text style={styles.footerContentRight}>
-                        {this.props.correctSoundIndex + 1}
+                        Sound: {this.props.correctSoundIndex + 1}
+                    </Text>
+                    <Text style={styles.footerContentRight}>
+                        Sequence: {this.humanifyArrayNumbers(this.props.sequence)}
                     </Text>
                 </View>
             </View>
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
     },
     footerContentRight: {
         color: 'white',
-        fontSize: 24
+        fontSize: 16
     },
     starsContainer: {
         flexDirection: 'row',
