@@ -55,7 +55,6 @@ module.exports = (state={}, action) => {
                 lingSoundCount: 3
             }
         case 'INCREMENT_SEQUENCE_INDEX':
-            console.log(action)
             return {
                 ...state,
                 sequenceIndex: action.payload
@@ -63,7 +62,7 @@ module.exports = (state={}, action) => {
         case 'BUILD_NEW_SEQUENCE':
             return {
                 ...state,
-                sequenceIndex: action.sequence[0],
+                sequenceIndex: 0,
                 testSequence: action.sequence,
             }
         default:

@@ -52,7 +52,7 @@ class Home extends Component {
         props.dispatch(selection(sound));
         props.dispatch({
             type: "SUBMIT",
-            correctSoundIndex: this.props.correctSoundIndex,
+            correctSoundIndex: props.correctSoundIndex,
             selectedSoundIndex: sound,
             manualTestIndex: props.manualTestIndex,
             currentStudent: props.currentStudent,

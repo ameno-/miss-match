@@ -4,26 +4,32 @@ import {updateStudentDataAsync} from '../db';
 
 function * selectionChanged(action) {
   try {
-    console.log(action);
     if (action.selectedSoundIndex === action.correctSoundIndex) {
       let nextIndex = action.sequenceIndex + 1;
-      
-      console.log("sequence index")
 
       if (action.manualTestIndex == null) {
-        if (nextIndex >= 6) {
+        if (nextIndex > 5) {
+          nextIndex = 0;
+          let newSequence = shuffle(action.sequence);
+
           yield put({
             type: "BUILD_NEW_SEQUENCE",
-            sequence: shuffle(action.sequence)
-          })
-        } else {
-          yield put({type: "INCREMENT_SEQUENCE_INDEX", payload: nextIndex});
-        }
+            sequence: newSequence
+          });
 
-        yield put({
-          type: "QUESTIONS_NEW",
-          payload: getRandomCollection(action.sequence[nextIndex], action.lingSoundCount)
-        })
+          yield put({
+            type: "QUESTIONS_NEW",
+            payload: getRandomCollection(newSequence[nextIndex], action.lingSoundCount)
+          });
+        } else {
+
+          yield put({type: "INCREMENT_SEQUENCE_INDEX", payload: nextIndex});
+
+          yield put({
+            type: "QUESTIONS_NEW",
+            payload: getRandomCollection(action.sequence[nextIndex], action.lingSoundCount)
+          });
+        }
 
       } else {
 

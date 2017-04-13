@@ -12,7 +12,7 @@ const defaultState = {
     sounds: ["ah", "ee", "oo", "m", "s", "sh"],
     visualProp: ["airplane", "mouse", "train", "pizza", "snake", "baby"],
     correctSoundIndex: 0,
-    selectedSoundIndex: 0,
+    selectedSoundIndex: null,
     displayedSounds: [0, 1, 2],
     minIndex: 0,
     maxIndex: 5,
@@ -26,8 +26,10 @@ const defaultState = {
     shouldAnimate: false
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export const configureStore = (initialState = defaultState) => {
-    let store = createStore(reducer, initialState, compose(
+    let store = createStore(reducer, initialState, composeEnhancers(
         autoRehydrate(),
         applyMiddleware(sagaMiddleware)
     ));
