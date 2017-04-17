@@ -38,9 +38,8 @@ class Home extends Component {
 
         if (sound === this.props.correctSoundIndex) {
             
-            Promise.all([topStarsLeft.zoomIn(1000), topStarsRight.zoomIn(1000), bottomStarsLeft.zoomIn(1000), bottomStarsRight.zoomIn(1000)]).then(() => {
-                
-                    Promise.all([topStarsLeft.zoomOut(), topStarsRight.zoomOut(), bottomStarsLeft.zoomOut(), bottomStarsRight.zoomOut()]).then(() => {
+            Promise.all([topStarsLeft.zoomIn(500), topStarsRight.zoomIn(500), bottomStarsLeft.zoomIn(500), bottomStarsRight.zoomIn(500)]).then(() => {
+                    Promise.all([topStarsLeft.zoomOut(800), topStarsRight.zoomOut(800), bottomStarsLeft.zoomOut(800), bottomStarsRight.zoomOut(800)]).then(() => {
                         this.dispatchAnswer(sound);
                     })
             })
